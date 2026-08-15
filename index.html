@@ -1,990 +1,1848 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexaCore Digital — Tailor-Made Systems & Web Solutions</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            slate: { 850: '#0F172A', 900: '#0B1221', 950: '#070B14' },
-            cyan: { 400: '#22D3EE', 500: '#06B6D4', glow: 'rgba(6,182,212,0.4)' },
-            indigo: { 400: '#818CF8', 500: '#6366F1', glow: 'rgba(99,102,241,0.4)' }
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Inter', 'system-ui', 'sans-serif']
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScaleUp Digital | Own Your Digital Infrastructure</title>
+    <meta name="description" content="Stop renting your business presence. Own your digital infrastructure with high-converting websites and tailor-fit business systems.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0A0C10',
+                        'obsidian-light': '#111318',
+                        'obsidian-card': '#161922',
+                        cyan: '#00F2FE',
+                        violet: '#7F00FF',
+                        'muted-gray': '#6B7280',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
         }
-      }
-    }
-  </script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #070B14; color: #E2E8F0; overflow-x: hidden; }
-    
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0B1221; }
-    ::-webkit-scrollbar-thumb { background: #06B6D4; border-radius: 3px; }
-    
-    /* Glassmorphism */
-    .glass { background: rgba(15,23,42,0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(6,182,212,0.1); }
-    .glass-card { background: rgba(15,23,42,0.6); backdrop-filter: blur(16px); border: 1px solid rgba(99,102,241,0.15); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
-    .glass-card:hover { border-color: rgba(6,182,212,0.4); box-shadow: 0 0 30px rgba(6,182,212,0.1), 0 0 60px rgba(99,102,241,0.05); transform: translateY(-4px); }
-    
-    /* Neon Glows */
-    .neon-text { text-shadow: 0 0 20px rgba(6,182,212,0.5), 0 0 40px rgba(99,102,241,0.3); }
-    .neon-border { box-shadow: 0 0 15px rgba(6,182,212,0.3), inset 0 0 15px rgba(6,182,212,0.1); }
-    .glow-cyan { box-shadow: 0 0 20px rgba(6,182,212,0.4), 0 0 40px rgba(6,182,212,0.2); }
-    .glow-indigo { box-shadow: 0 0 20px rgba(99,102,241,0.4), 0 0 40px rgba(99,102,241,0.2); }
-    
-    /* Mesh Canvas */
-    #meshCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.6; }
-    
-    /* Grid Background */
-    .grid-bg { background-image: linear-gradient(rgba(6,182,212,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.03) 1px, transparent 1px); background-size: 60px 60px; }
-    
-    /* 3D Tilt Card */
-    .tilt-card { transform-style: preserve-3d; perspective: 1000px; }
-    .tilt-card-inner { transition: transform 0.3s ease; transform-style: preserve-3d; }
-    
-    /* Button Shine */
-    .btn-shine { position: relative; overflow: hidden; }
-    .btn-shine::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); transform: rotate(45deg) translateX(-100%); transition: transform 0.6s; }
-    .btn-shine:hover::after { transform: rotate(45deg) translateX(100%); }
-    
-    /* Input Focus */
-    .input-glow:focus { box-shadow: 0 0 0 2px rgba(6,182,212,0.3), 0 0 20px rgba(6,182,212,0.1); border-color: #06B6D4; }
-    
-    /* Dashboard Mockup */
-    .dash-mockup { background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(11,18,33,0.95)); border: 1px solid rgba(99,102,241,0.2); }
-    .dash-card { background: rgba(30,41,59,0.5); border: 1px solid rgba(99,102,241,0.1); }
-    
-    /* Animated Gradient Border */
-    .gradient-border { position: relative; }
-    .gradient-border::before { content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, #06B6D4, #6366F1, #06B6D4); background-size: 200% 200%; animation: gradientShift 3s ease infinite; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
-    @keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-    
-    /* Pulse Ring */
-    .pulse-ring { animation: pulseRing 2s ease-out infinite; }
-    @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
-    
-    /* Floating */
-    .float { animation: float 6s ease-in-out infinite; }
-    @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-    
-    /* Reveal */
-    .reveal { opacity: 0; transform: translateY(40px); }
-    
-    /* Range Slider */
-    input[type=range] { -webkit-appearance: none; background: transparent; }
-    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #06B6D4; cursor: pointer; box-shadow: 0 0 10px rgba(6,182,212,0.5); margin-top: -8px; }
-    input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: rgba(99,102,241,0.3); border-radius: 2px; }
-    
-    /* Mobile Menu */
-    .mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
-    .mobile-menu.open { transform: translateX(0); }
-    
-    /* Typing Cursor */
-    .typing-cursor::after { content: '|'; animation: blink 1s step-end infinite; color: #06B6D4; }
-    @keyframes blink { 50% { opacity: 0; } }
-  </style>
+    </script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+
+        body {
+            background-color: #0A0C10;
+            color: #ffffff;
+            font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        @media (pointer: coarse) {
+            body { cursor: auto; }
+            .custom-cursor, .mouse-spotlight { display: none !important; }
+        }
+
+        ::selection {
+            background: rgba(0, 242, 254, 0.3);
+            color: #ffffff;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0A0C10; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00F2FE, #7F00FF);
+            border-radius: 3px;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00F2FE;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1), 
+                        height 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+                        background 0.3s ease,
+                        border-color 0.3s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+        .custom-cursor.hover {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 242, 254, 0.08);
+            border-color: #7F00FF;
+        }
+        .custom-cursor.click {
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        .mouse-spotlight {
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(0,242,254,0.06) 0%, rgba(127,0,255,0.03) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+        }
+
+        .glass {
+            background: rgba(22, 25, 34, 0.55);
+            backdrop-filter: blur(24px) saturate(1.2);
+            -webkit-backdrop-filter: blur(24px) saturate(1.2);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .glass-strong {
+            background: rgba(22, 25, 34, 0.75);
+            backdrop-filter: blur(32px) saturate(1.4);
+            -webkit-backdrop-filter: blur(32px) saturate(1.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #00F2FE 0%, #7F00FF 50%, #00F2FE 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        .glow-border {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0,242,254,0.6), rgba(127,0,255,0.6));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .glow-border:hover::before { opacity: 1; }
+        .glow-border:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(0, 242, 254, 0.1), 0 0 60px -20px rgba(127, 0, 255, 0.1);
+        }
+
+        .mesh-gradient {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+            transition: transform 0.3s ease-out;
+        }
+        .mesh-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.35;
+            animation: meshFloat 20s infinite ease-in-out;
+        }
+        .mesh-blob:nth-child(1) {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, #00F2FE 0%, transparent 70%);
+            top: -10%; left: -5%;
+            animation-delay: 0s;
+        }
+        .mesh-blob:nth-child(2) {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, #7F00FF 0%, transparent 70%);
+            bottom: -15%; right: -10%;
+            animation-delay: -7s;
+        }
+        .mesh-blob:nth-child(3) {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, #00F2FE 0%, transparent 70%);
+            top: 40%; left: 50%;
+            animation-delay: -14s;
+            opacity: 0.2;
+        }
+        @keyframes meshFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(40px, -60px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.95); }
+            75% { transform: translate(20px, 40px) scale(1.05); }
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .magnetic-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .magnetic-btn::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #00F2FE, #7F00FF);
+            opacity: 0;
+            z-index: -1;
+            filter: blur(12px);
+            transition: opacity 0.4s ease;
+        }
+        .magnetic-btn:hover::after { opacity: 0.4; }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #1f2937;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00F2FE, #7F00FF);
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.6);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00F2FE, #7F00FF);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+        }
+
+        .feature-chip span {
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .feature-chip input:checked + span {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+        }
+
+        .comparison-toggle {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .comparison-toggle::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #00F2FE, #7F00FF);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+        .comparison-toggle.active::before { opacity: 1; }
+        .comparison-toggle.active {
+            color: #0A0C10;
+            font-weight: 700;
+        }
+
+        .niche-tab {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .niche-tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00F2FE, #7F00FF);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateX(-50%);
+        }
+        .niche-tab.active::after { width: 80%; }
+
+        .system-card {
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .system-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateZ(20px);
+        }
+
+        #scrollProgress {
+            transition: width 0.1s linear;
+        }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .hero-word {
+            display: inline-block;
+            overflow: hidden;
+        }
+        .hero-word-inner {
+            display: inline-block;
+            transform: translateY(100%);
+        }
+
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .float-1 { animation: floatY 6s ease-in-out infinite; }
+        .float-2 { animation: floatY 8s ease-in-out infinite 1s; }
+        .float-3 { animation: floatY 7s ease-in-out infinite 2s; }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 242, 254, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(0, 242, 254, 0.4); }
+        }
+        .pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .mobile-menu.open { transform: translateX(0); }
+
+        input:focus, textarea:focus {
+            box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero-headline { font-size: 2.5rem !important; line-height: 1.1 !important; }
+        }
+    </style>
+<base target="_blank">
 </head>
-<body class="antialiased">
+<body class="bg-obsidian text-white antialiased">
+    <div class="noise-overlay"></div>
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="mouse-spotlight" id="spotlight"></div>
+    <div class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-cyan via-violet to-cyan z-[60]" id="scrollProgress" style="width: 0%"></div>
 
-  <!-- Navigation -->
-  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        <!-- Logo -->
-        <a href="#" class="flex items-center gap-3 group">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-500 flex items-center justify-center glow-cyan group-hover:scale-110 transition-transform">
-            <i data-lucide="hexagon" class="w-6 h-6 text-white"></i>
-          </div>
-          <span class="text-xl font-bold text-white tracking-tight">Nexa<span class="text-cyan-400">Core</span></span>
-        </a>
-        
-        <!-- Desktop Links -->
-        <div class="hidden md:flex items-center gap-8">
-          <a href="#services" class="text-sm text-slate-300 hover:text-cyan-400 transition-colors relative group">
-            Services
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all group-hover:w-full"></span>
-          </a>
-          <a href="#showcase" class="text-sm text-slate-300 hover:text-cyan-400 transition-colors relative group">
-            Showcase
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all group-hover:w-full"></span>
-          </a>
-          <a href="#why-us" class="text-sm text-slate-300 hover:text-cyan-400 transition-colors relative group">
-            Why Us
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all group-hover:w-full"></span>
-          </a>
-          <a href="#calculator" class="text-sm text-slate-300 hover:text-cyan-400 transition-colors relative group">
-            Pricing
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all group-hover:w-full"></span>
-          </a>
-          <a href="#contact" class="text-sm text-slate-300 hover:text-cyan-400 transition-colors relative group">
-            Contact
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all group-hover:w-full"></span>
-          </a>
-        </div>
-        
-        <!-- CTA -->
-        <div class="hidden md:block">
-          <a href="#contact" class="btn-shine px-6 py-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 text-white text-sm font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all glow-cyan">
-            Book a Call
-          </a>
-        </div>
-        
-        <!-- Mobile Toggle -->
-        <button id="menuToggle" class="md:hidden text-white p-2">
-          <i data-lucide="menu" class="w-6 h-6"></i>
-        </button>
-      </div>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-72 h-full glass z-50 p-8 md:hidden">
-      <button id="menuClose" class="absolute top-6 right-6 text-slate-400 hover:text-white">
-        <i data-lucide="x" class="w-6 h-6"></i>
-      </button>
-      <div class="flex flex-col gap-6 mt-16">
-        <a href="#services" class="text-lg text-slate-300 hover:text-cyan-400 transition-colors">Services</a>
-        <a href="#showcase" class="text-lg text-slate-300 hover:text-cyan-400 transition-colors">Showcase</a>
-        <a href="#why-us" class="text-lg text-slate-300 hover:text-cyan-400 transition-colors">Why Us</a>
-        <a href="#calculator" class="text-lg text-slate-300 hover:text-cyan-400 transition-colors">Pricing</a>
-        <a href="#contact" class="text-lg text-slate-300 hover:text-cyan-400 transition-colors">Contact</a>
-        <a href="#contact" class="mt-4 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 text-white text-center font-semibold glow-cyan">Book a Call</a>
-      </div>
-    </div>
-  </nav>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-4 transition-all duration-500" id="navbar">
+        <div class="max-w-7xl mx-auto glass-strong rounded-2xl px-6 py-3 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-tight magnetic-btn">
+                <span class="text-gradient">ScaleUp</span> Digital
+            </a>
 
-  <!-- Hero Section -->
-  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg">
-    <canvas id="meshCanvas"></canvas>
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950 z-1"></div>
-    
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 reveal">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 pulse-ring"></span>
-        <span class="text-sm text-cyan-400 font-medium">Now Accepting New Projects for Q4 2026</span>
-      </div>
-      
-      <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 reveal">
-        Transforming Businesses Through<br>
-        <span class="bg-gradient-to-r from-cyan-400 via-indigo-400 to-cyan-400 bg-clip-text text-transparent neon-text">Tailor-Made Digital Systems</span>
-        <br>& High-Impact Websites
-      </h1>
-      
-      <p class="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed reveal">
-        We architect <span class="text-cyan-400 font-semibold">custom web experiences</span>, build 
-        <span class="text-indigo-400 font-semibold">intelligent business systems</span> (CRM, Booking, Inventory, POS), 
-        and deploy <span class="text-cyan-400 font-semibold">performance-driven digital marketing</span> 
-        that scales with your ambition.
-      </p>
-      
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
-        <a href="#services" class="btn-shine px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-cyan-500/30 transition-all glow-cyan flex items-center gap-2">
-          <span>Explore Services</span>
-          <i data-lucide="arrow-right" class="w-5 h-5"></i>
-        </a>
-        <a href="#contact" class="px-8 py-4 rounded-full border border-slate-600 text-slate-300 font-semibold text-lg hover:border-cyan-400 hover:text-cyan-400 transition-all flex items-center gap-2 glass">
-          <i data-lucide="calendar" class="w-5 h-5"></i>
-          <span>Get Free Consultation</span>
-        </a>
-      </div>
-      
-      <!-- Stats -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto reveal">
-        <div class="text-center">
-          <div class="text-3xl md:text-4xl font-bold text-white counter" data-target="150">0</div>
-          <div class="text-sm text-slate-500 mt-1">Projects Delivered</div>
-        </div>
-        <div class="text-center">
-          <div class="text-3xl md:text-4xl font-bold text-white counter" data-target="98">0</div>
-          <div class="text-sm text-slate-500 mt-1">Client Satisfaction %</div>
-        </div>
-        <div class="text-center">
-          <div class="text-3xl md:text-4xl font-bold text-white counter" data-target="12">0</div>
-          <div class="text-sm text-slate-500 mt-1">Years Experience</div>
-        </div>
-        <div class="text-center">
-          <div class="text-3xl md:text-4xl font-bold text-white counter" data-target="24">0</div>
-          <div class="text-sm text-slate-500 mt-1">/7 Support Hours</div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
-      <span class="text-xs text-slate-500 uppercase tracking-widest">Scroll</span>
-      <div class="w-6 h-10 rounded-full border-2 border-slate-600 flex justify-center pt-2">
-        <div class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce"></div>
-      </div>
-    </div>
-  </section>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#comparison" class="nav-link text-sm text-gray-400 hover:text-white transition-colors duration-300 relative group">
+                    Why Own
+                    <span class="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-cyan to-violet transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#niches" class="nav-link text-sm text-gray-400 hover:text-white transition-colors duration-300 relative group">
+                    Solutions
+                    <span class="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-cyan to-violet transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#calculator" class="nav-link text-sm text-gray-400 hover:text-white transition-colors duration-300 relative group">
+                    ROI
+                    <span class="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-cyan to-violet transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#systems" class="nav-link text-sm text-gray-400 hover:text-white transition-colors duration-300 relative group">
+                    Systems
+                    <span class="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-cyan to-violet transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
 
-  <!-- Services Section -->
-  <section id="services" class="py-24 relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16 reveal">
-        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-widest">What We Do</span>
-        <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 mb-6">End-to-End Digital <span class="text-indigo-400">Solutions</span></h2>
-        <p class="text-slate-400 max-w-2xl mx-auto">From pixel-perfect interfaces to complex backend architectures, we engineer systems that drive real business outcomes.</p>
-      </div>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Service 1 -->
-        <div class="tilt-card glass-card rounded-2xl p-8 reveal group cursor-pointer" data-tilt>
-          <div class="tilt-card-inner">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-cyan-500/30">
-              <i data-lucide="layout" class="w-7 h-7 text-cyan-400"></i>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">Custom Web Design & UI/UX</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">Bespoke, conversion-optimized websites with immersive user experiences and responsive design systems.</p>
-            <div class="flex items-center gap-2 text-cyan-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-              <span>Learn more</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Service 2 -->
-        <div class="tilt-card glass-card rounded-2xl p-8 reveal group cursor-pointer" data-tilt>
-          <div class="tilt-card-inner">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500/20 to-cyan-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-indigo-500/30">
-              <i data-lucide="cpu" class="w-7 h-7 text-indigo-400"></i>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">Tailor-Made Business Systems</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">Custom CRM, Booking, Inventory, POS, and ERP solutions built to match your exact operational workflow.</p>
-            <div class="flex items-center gap-2 text-indigo-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-              <span>Learn more</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Service 3 -->
-        <div class="tilt-card glass-card rounded-2xl p-8 reveal group cursor-pointer" data-tilt>
-          <div class="tilt-card-inner">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-cyan-500/30">
-              <i data-lucide="trending-up" class="w-7 h-7 text-cyan-400"></i>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">Performance Marketing & SEO</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">Data-driven digital marketing, search optimization, and paid media strategies that maximize ROI.</p>
-            <div class="flex items-center gap-2 text-cyan-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-              <span>Learn more</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Service 4 -->
-        <div class="tilt-card glass-card rounded-2xl p-8 reveal group cursor-pointer" data-tilt>
-          <div class="tilt-card-inner">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500/20 to-cyan-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-indigo-500/30">
-              <i data-lucide="cloud" class="w-7 h-7 text-indigo-400"></i>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">Cloud Infrastructure & Maintenance</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">Scalable cloud architecture, DevOps automation, security hardening, and 24/7 system monitoring.</p>
-            <div class="flex items-center gap-2 text-indigo-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-              <span>Learn more</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+            <a href="#discovery" class="magnetic-btn hidden md:inline-flex items-center gap-2 px-6 py-2.5 bg-white text-obsidian rounded-full text-sm font-bold hover:bg-cyan transition-colors duration-300">
+                Start Building
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
 
-  <!-- Interactive Showcase -->
-  <section id="showcase" class="py-24 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/5 rounded-full blur-3xl"></div>
-    
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16 reveal">
-        <span class="text-indigo-400 text-sm font-semibold uppercase tracking-widest">System Preview</span>
-        <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 mb-6">See Your <span class="text-cyan-400">Future Dashboard</span></h2>
-        <p class="text-slate-400 max-w-2xl mx-auto">A glimpse into the modular, real-time systems we build for our clients — fully customizable to your business logic.</p>
-      </div>
-      
-      <!-- Dashboard Mockup -->
-      <div class="dash-mockup rounded-2xl p-1 reveal gradient-border max-w-5xl mx-auto">
-        <div class="bg-slate-950 rounded-xl overflow-hidden">
-          <!-- Browser Chrome -->
-          <div class="flex items-center gap-2 px-4 py-3 bg-slate-900 border-b border-slate-800">
-            <div class="flex gap-1.5">
-              <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-              <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-            </div>
-            <div class="flex-1 mx-4">
-              <div class="bg-slate-800 rounded-md px-3 py-1 text-xs text-slate-500 flex items-center gap-2">
-                <i data-lucide="lock" class="w-3 h-3"></i>
-                app.yourbusiness.com/dashboard
-              </div>
-            </div>
-          </div>
-          
-          <!-- Dashboard Content -->
-          <div class="p-6 grid grid-cols-1 lg:grid-cols-4 gap-4">
-            <!-- Sidebar -->
-            <div class="hidden lg:block dash-card rounded-xl p-4">
-              <div class="flex items-center gap-3 mb-6">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-indigo-500"></div>
-                <span class="text-white font-semibold text-sm">NexaDash</span>
-              </div>
-              <div class="space-y-2">
-                <div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-cyan-500/10 text-cyan-400 text-sm">
-                  <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                  <span>Analytics</span>
-                </div>
-                <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 text-sm hover:bg-slate-800 transition-colors">
-                  <i data-lucide="users" class="w-4 h-4"></i>
-                  <span>CRM</span>
-                </div>
-                <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 text-sm hover:bg-slate-800 transition-colors">
-                  <i data-lucide="package" class="w-4 h-4"></i>
-                  <span>Inventory</span>
-                </div>
-                <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 text-sm hover:bg-slate-800 transition-colors">
-                  <i data-lucide="calendar-days" class="w-4 h-4"></i>
-                  <span>Bookings</span>
-                </div>
-                <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 text-sm hover:bg-slate-800 transition-colors">
-                  <i data-lucide="settings" class="w-4 h-4"></i>
-                  <span>Settings</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Main Content -->
-            <div class="lg:col-span-3 space-y-4">
-              <!-- Top Stats -->
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div class="dash-card rounded-xl p-4">
-                  <div class="text-slate-500 text-xs mb-1">Revenue</div>
-                  <div class="text-white font-bold text-lg">$48,250</div>
-                  <div class="text-emerald-400 text-xs flex items-center gap-1 mt-1">
-                    <i data-lucide="trending-up" class="w-3 h-3"></i>
-                    +12.5%
-                  </div>
-                </div>
-                <div class="dash-card rounded-xl p-4">
-                  <div class="text-slate-500 text-xs mb-1">Active Users</div>
-                  <div class="text-white font-bold text-lg">2,847</div>
-                  <div class="text-emerald-400 text-xs flex items-center gap-1 mt-1">
-                    <i data-lucide="trending-up" class="w-3 h-3"></i>
-                    +8.2%
-                  </div>
-                </div>
-                <div class="dash-card rounded-xl p-4">
-                  <div class="text-slate-500 text-xs mb-1">Bookings</div>
-                  <div class="text-white font-bold text-lg">156</div>
-                  <div class="text-emerald-400 text-xs flex items-center gap-1 mt-1">
-                    <i data-lucide="trending-up" class="w-3 h-3"></i>
-                    +24.1%
-                  </div>
-                </div>
-                <div class="dash-card rounded-xl p-4">
-                  <div class="text-slate-500 text-xs mb-1">System Uptime</div>
-                  <div class="text-white font-bold text-lg">99.9%</div>
-                  <div class="text-cyan-400 text-xs flex items-center gap-1 mt-1">
-                    <i data-lucide="check-circle" class="w-3 h-3"></i>
-                    Healthy
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Chart Area -->
-              <div class="dash-card rounded-xl p-4">
-                <div class="flex items-center justify-between mb-4">
-                  <span class="text-white font-semibold text-sm">Revenue Analytics</span>
-                  <div class="flex gap-2">
-                    <span class="text-xs px-2 py-1 rounded bg-cyan-500/10 text-cyan-400">Live</span>
-                    <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">Week</span>
-                  </div>
-                </div>
-                <div class="h-32 flex items-end gap-2">
-                  <div class="flex-1 bg-gradient-to-t from-cyan-500/40 to-cyan-500/10 rounded-t-sm" style="height: 45%"></div>
-                  <div class="flex-1 bg-gradient-to-t from-cyan-500/40 to-cyan-500/10 rounded-t-sm" style="height: 65%"></div>
-                  <div class="flex-1 bg-gradient-to-t from-cyan-500/40 to-cyan-500/10 rounded-t-sm" style="height: 55%"></div>
-                  <div class="flex-1 bg-gradient-to-t from-cyan-500/40 to-cyan-500/10 rounded-t-sm" style="height: 80%"></div>
-                  <div class="flex-1 bg-gradient-to-t from-cyan-500/40 to-cyan-500/10 rounded-t-sm" style="height: 70%"></div>
-                  <div class="flex-1 bg-gradient-to-t from-indigo-500/40 to-indigo-500/10 rounded-t-sm" style="height: 90%"></div>
-                  <div class="flex-1 bg-gradient-to-t from-indigo-500/40 to-indigo-500/10 rounded-t-sm" style="height: 85%"></div>
-                </div>
-                <div class="flex justify-between mt-2 text-xs text-slate-500">
-                  <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-                </div>
-              </div>
-              
-              <!-- Recent Activity -->
-              <div class="dash-card rounded-xl p-4">
-                <span class="text-white font-semibold text-sm">Recent System Events</span>
-                <div class="mt-3 space-y-2">
-                  <div class="flex items-center gap-3 text-sm">
-                    <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
-                    <span class="text-slate-300">New booking received</span>
-                    <span class="text-slate-600 text-xs ml-auto">2m ago</span>
-                  </div>
-                  <div class="flex items-center gap-3 text-sm">
-                    <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
-                    <span class="text-slate-300">Inventory sync completed</span>
-                    <span class="text-slate-600 text-xs ml-auto">15m ago</span>
-                  </div>
-                  <div class="flex items-center gap-3 text-sm">
-                    <div class="w-2 h-2 rounded-full bg-indigo-400"></div>
-                    <span class="text-slate-300">CRM lead auto-assigned</span>
-                    <span class="text-slate-600 text-xs ml-auto">1h ago</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Work With Us -->
-  <section id="why-us" class="py-24 relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16 reveal">
-        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-widest">Our Edge</span>
-        <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 mb-6">Why Work With <span class="text-indigo-400">NexaCore</span></h2>
-      </div>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="glass-card rounded-2xl p-8 text-center reveal group hover:border-cyan-400/40 transition-all">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border border-cyan-500/20">
-            <i data-lucide="layers" class="w-8 h-8 text-cyan-400"></i>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-3">Custom Architecture</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">No templates. Every system is architected from scratch to match your unique business logic and growth trajectory.</p>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-8 text-center reveal group hover:border-indigo-400/40 transition-all">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-indigo-500/5 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border border-indigo-500/20">
-            <i data-lucide="zap" class="w-8 h-8 text-indigo-400"></i>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-3">High Performance</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Sub-100ms API responses, optimized database queries, and CDN-powered global delivery for blazing speed.</p>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-8 text-center reveal group hover:border-cyan-400/40 transition-all">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border border-cyan-500/20">
-            <i data-lucide="maximize-2" class="w-8 h-8 text-cyan-400"></i>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-3">Scalable Logic</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Microservices-ready architecture that scales horizontally. From 10 users to 10 million without a rewrite.</p>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-8 text-center reveal group hover:border-indigo-400/40 transition-all">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-indigo-500/5 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border border-indigo-500/20">
-            <i data-lucide="headphones" class="w-8 h-8 text-indigo-400"></i>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-3">Dedicated Support</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">24/7 priority support with a dedicated account engineer. Average response time under 15 minutes.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Project Cost Calculator -->
-  <section id="calculator" class="py-24 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
-    <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
-    
-    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16 reveal">
-        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-widest">Instant Quote</span>
-        <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 mb-6">Project Cost <span class="text-indigo-400">Calculator</span></h2>
-        <p class="text-slate-400 max-w-2xl mx-auto">Get a ballpark estimate in seconds. Final quotes are provided after a free consultation.</p>
-      </div>
-      
-      <div class="glass-card rounded-2xl p-8 md:p-12 reveal gradient-border">
-        <div class="space-y-8">
-          <!-- Service Type -->
-          <div>
-            <label class="block text-white font-semibold mb-4">Project Type</label>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <button class="calc-type px-6 py-4 rounded-xl border border-slate-700 text-slate-300 hover:border-cyan-400 hover:text-cyan-400 transition-all text-left flex items-center gap-3 active" data-type="website" data-base="5000">
-                <i data-lucide="globe" class="w-5 h-5"></i>
-                <div>
-                  <div class="font-semibold">Website</div>
-                  <div class="text-xs text-slate-500">From $5,000</div>
-                </div>
-              </button>
-              <button class="calc-type px-6 py-4 rounded-xl border border-slate-700 text-slate-300 hover:border-cyan-400 hover:text-cyan-400 transition-all text-left flex items-center gap-3" data-type="system" data-base="15000">
-                <i data-lucide="database" class="w-5 h-5"></i>
-                <div>
-                  <div class="font-semibold">Business System</div>
-                  <div class="text-xs text-slate-500">From $15,000</div>
-                </div>
-              </button>
-              <button class="calc-type px-6 py-4 rounded-xl border border-slate-700 text-slate-300 hover:border-cyan-400 hover:text-cyan-400 transition-all text-left flex items-center gap-3" data-type="marketing" data-base="3000">
-                <i data-lucide="megaphone" class="w-5 h-5"></i>
-                <div>
-                  <div class="font-semibold">Marketing</div>
-                  <div class="text-xs text-slate-500">From $3,000/mo</div>
-                </div>
-              </button>
-            </div>
-          </div>
-          
-          <!-- Complexity -->
-          <div>
-            <div class="flex justify-between mb-3">
-              <label class="text-white font-semibold">Complexity Level</label>
-              <span id="complexityLabel" class="text-cyan-400 font-medium">Standard</span>
-            </div>
-            <input type="range" id="complexity" min="1" max="4" value="1" class="w-full">
-            <div class="flex justify-between text-xs text-slate-500 mt-2">
-              <span>Standard</span>
-              <span>Advanced</span>
-              <span>Enterprise</span>
-              <span>Complex</span>
-            </div>
-          </div>
-          
-          <!-- Features -->
-          <div>
-            <label class="block text-white font-semibold mb-4">Add-On Features</label>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-700/50 hover:border-cyan-400/30 cursor-pointer transition-colors">
-                <input type="checkbox" class="calc-feature w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-800" data-value="2000">
-                <span class="text-slate-300 text-sm">Custom Admin Dashboard</span>
-              </label>
-              <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-700/50 hover:border-cyan-400/30 cursor-pointer transition-colors">
-                <input type="checkbox" class="calc-feature w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-800" data-value="1500">
-                <span class="text-slate-300 text-sm">Third-Party API Integration</span>
-              </label>
-              <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-700/50 hover:border-cyan-400/30 cursor-pointer transition-colors">
-                <input type="checkbox" class="calc-feature w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-800" data-value="3000">
-                <span class="text-slate-300 text-sm">Advanced Analytics & Reporting</span>
-              </label>
-              <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-700/50 hover:border-cyan-400/30 cursor-pointer transition-colors">
-                <input type="checkbox" class="calc-feature w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-800" data-value="2500">
-                <span class="text-slate-300 text-sm">Multi-Language Support</span>
-              </label>
-              <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-700/50 hover:border-cyan-400/30 cursor-pointer transition-colors">
-                <input type="checkbox" class="calc-feature w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-800" data-value="4000">
-                <span class="text-slate-300 text-sm">AI / Automation Features</span>
-              </label>
-              <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-700/50 hover:border-cyan-400/30 cursor-pointer transition-colors">
-                <input type="checkbox" class="calc-feature w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-800" data-value="1800">
-                <span class="text-slate-300 text-sm">Mobile App Companion</span>
-              </label>
-            </div>
-          </div>
-          
-          <!-- Estimate -->
-          <div class="border-t border-slate-700/50 pt-8">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div>
-                <div class="text-slate-400 text-sm mb-1">Estimated Investment</div>
-                <div class="text-4xl md:text-5xl font-bold text-white">
-                  $<span id="totalPrice">5,000</span>
-                </div>
-                <div class="text-slate-500 text-sm mt-1">Timeline: <span id="timeline" class="text-cyan-400">2-4 weeks</span></div>
-              </div>
-              <a href="#contact" class="btn-shine px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 text-white font-semibold hover:shadow-xl hover:shadow-cyan-500/30 transition-all glow-cyan whitespace-nowrap">
-                Get Detailed Quote
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-24 relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-12 items-start">
-        <div class="reveal">
-          <span class="text-cyan-400 text-sm font-semibold uppercase tracking-widest">Get Started</span>
-          <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 mb-6">Let's Build Something <span class="text-indigo-400">Extraordinary</span></h2>
-          <p class="text-slate-400 mb-8 leading-relaxed">Ready to transform your digital presence? Book a free 30-minute consultation with our senior engineers. No sales pitch — just technical insights and a clear roadmap.</p>
-          
-          <div class="space-y-6">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20">
-                <i data-lucide="mail" class="w-5 h-5 text-cyan-400"></i>
-              </div>
-              <div>
-                <div class="text-slate-500 text-sm">Email</div>
-                <div class="text-white font-medium">hello@nexacore.digital</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
-                <i data-lucide="phone" class="w-5 h-5 text-indigo-400"></i>
-              </div>
-              <div>
-                <div class="text-slate-500 text-sm">Phone</div>
-                <div class="text-white font-medium">+1 (555) 234-5678</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20">
-                <i data-lucide="map-pin" class="w-5 h-5 text-cyan-400"></i>
-              </div>
-              <div>
-                <div class="text-slate-500 text-sm">Location</div>
-                <div class="text-white font-medium">San Francisco, CA / Remote Worldwide</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-8 reveal gradient-border">
-          <form id="contactForm" class="space-y-6">
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label class="block text-white text-sm font-medium mb-2">Full Name</label>
-                <input type="text" required class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 input-glow transition-all outline-none" placeholder="John Doe">
-              </div>
-              <div>
-                <label class="block text-white text-sm font-medium mb-2">Email</label>
-                <input type="email" required class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 input-glow transition-all outline-none" placeholder="john@company.com">
-              </div>
-            </div>
-            <div>
-              <label class="block text-white text-sm font-medium mb-2">Company</label>
-              <input type="text" class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 input-glow transition-all outline-none" placeholder="Acme Inc.">
-            </div>
-            <div>
-              <label class="block text-white text-sm font-medium mb-2">Project Type</label>
-              <select class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white input-glow transition-all outline-none">
-                <option value="">Select a service...</option>
-                <option value="web">Custom Website</option>
-                <option value="system">Business System (CRM/Booking/Inventory)</option>
-                <option value="marketing">Digital Marketing & SEO</option>
-                <option value="cloud">Cloud Infrastructure</option>
-                <option value="other">Other / Not Sure</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-white text-sm font-medium mb-2">Project Details</label>
-              <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 input-glow transition-all outline-none resize-none" placeholder="Tell us about your project, goals, and timeline..."></textarea>
-            </div>
-            <button type="submit" class="btn-shine w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-cyan-500/30 transition-all glow-cyan flex items-center justify-center gap-2">
-              <span>Send Message</span>
-              <i data-lucide="send" class="w-5 h-5"></i>
+            <button class="md:hidden magnetic-btn p-2" id="mobileMenuBtn" aria-label="Open menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
-          </form>
-          
-          <!-- Success Message -->
-          <div id="formSuccess" class="hidden text-center py-12">
-            <div class="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
-              <i data-lucide="check" class="w-8 h-8 text-emerald-400"></i>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-2">Message Sent!</h3>
-            <p class="text-slate-400">We'll get back to you within 24 hours.</p>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- Footer -->
-  <footer class="relative py-16 border-t border-slate-800/50">
-    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-cyan-500"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-4 gap-12 mb-12">
-        <div class="md:col-span-2">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-500 flex items-center justify-center">
-              <i data-lucide="hexagon" class="w-6 h-6 text-white"></i>
-            </div>
-            <span class="text-xl font-bold text-white">Nexa<span class="text-cyan-400">Core</span></span>
-          </div>
-          <p class="text-slate-400 text-sm leading-relaxed max-w-sm">Architecting digital futures through custom systems, high-performance websites, and data-driven marketing strategies.</p>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-4">Services</h4>
-          <ul class="space-y-2">
-            <li><a href="#services" class="text-slate-400 text-sm hover:text-cyan-400 transition-colors">Web Design</a></li>
-            <li><a href="#services" class="text-slate-400 text-sm hover:text-cyan-400 transition-colors">Business Systems</a></li>
-            <li><a href="#services" class="text-slate-400 text-sm hover:text-cyan-400 transition-colors">Digital Marketing</a></li>
-            <li><a href="#services" class="text-slate-400 text-sm hover:text-cyan-400 transition-colors">Cloud Infrastructure</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-4">Company</h4>
-          <ul class="space-y-2">
-            <li><a href="#why-us" class="text-slate-400 text-sm hover:text-cyan-400 transition-colors">About Us</a></li>
-            <li><a href="#showcase" class="text-slate-400 text-sm hover:text-cyan-400 transition-colors">Case Studies</a></li>
-            <li><a href="#calculator" class="text-slate-400 text-sm hover:text-cyan-400 transition-colors">Pricing</a></li>
-            <li><a href="#contact" class="text-slate-400 text-sm hover:text-cyan-400 transition-colors">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-slate-800/50">
-        <p class="text-slate-500 text-sm">© 2026 NexaCore Digital. All rights reserved.</p>
-        <div class="flex items-center gap-4 mt-4 md:mt-0">
-          <a href="#" class="w-10 h-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition-all">
-            <i data-lucide="twitter" class="w-4 h-4"></i>
-          </a>
-          <a href="#" class="w-10 h-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition-all">
-            <i data-lucide="linkedin" class="w-4 h-4"></i>
-          </a>
-          <a href="#" class="w-10 h-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition-all">
-            <i data-lucide="github" class="w-4 h-4"></i>
-          </a>
-          <a href="#" class="w-10 h-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition-all">
-            <i data-lucide="instagram" class="w-4 h-4"></i>
-          </a>
-        </div>
-      </div>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu fixed inset-0 z-[55] bg-obsidian/98 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-8" id="mobileMenu">
+        <button class="absolute top-6 right-6 p-2" id="mobileMenuClose" aria-label="Close menu">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="#comparison" class="text-2xl font-bold hover:text-cyan transition-colors mobile-link">Why Own</a>
+        <a href="#niches" class="text-2xl font-bold hover:text-cyan transition-colors mobile-link">Solutions</a>
+        <a href="#calculator" class="text-2xl font-bold hover:text-cyan transition-colors mobile-link">ROI</a>
+        <a href="#systems" class="text-2xl font-bold hover:text-cyan transition-colors mobile-link">Systems</a>
+        <a href="#discovery" class="mt-4 px-8 py-3 bg-gradient-to-r from-cyan to-violet rounded-full text-obsidian font-bold mobile-link">Start Building</a>
     </div>
-  </footer>
 
-  <script>
-    // Initialize Lucide Icons
-    lucide.createIcons();
-    
-    // Register GSAP Plugins
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Navbar Scroll Effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('glass');
-      } else {
-        navbar.classList.remove('glass');
-      }
-    });
-    
-    // Mobile Menu
-    const menuToggle = document.getElementById('menuToggle');
-    const menuClose = document.getElementById('menuClose');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
-    menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
-    menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    document.querySelectorAll('#mobileMenu a').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    });
-    
-    // Mesh Canvas Animation
-    const canvas = document.getElementById('meshCanvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let particles = [];
-    let mouse = { x: 0, y: 0 };
-    
-    function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    
-    class Particle {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.radius = Math.random() * 2 + 1;
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-        
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          this.x -= dx * 0.01;
-          this.y -= dy * 0.01;
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 grid-pattern">
+        <div class="mesh-gradient" id="heroMesh">
+            <div class="mesh-blob"></div>
+            <div class="mesh-blob"></div>
+            <div class="mesh-blob"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 glass rounded-full text-xs font-semibold text-cyan border border-cyan/20 reveal-scale" id="heroBadge">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan"></span>
+                        </span>
+                        Digital Infrastructure Architects
+                    </div>
+
+                    <h1 class="hero-headline text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[0.95] tracking-tight" id="heroHeadline">
+                        <span class="hero-word"><span class="hero-word-inner">Stop</span></span>
+                        <span class="hero-word"><span class="hero-word-inner">Renting</span></span>
+                        <span class="hero-word"><span class="hero-word-inner">Your</span></span><br>
+                        <span class="hero-word"><span class="hero-word-inner">Business</span></span>
+                        <span class="hero-word"><span class="hero-word-inner">Presence.</span></span><br>
+                        <span class="text-gradient hero-word"><span class="hero-word-inner">Own</span></span>
+                        <span class="text-gradient hero-word"><span class="hero-word-inner">Your</span></span>
+                        <span class="text-gradient hero-word"><span class="hero-word-inner">Digital</span></span><br>
+                        <span class="text-gradient hero-word"><span class="hero-word-inner">Infrastructure.</span></span>
+                    </h1>
+
+                    <p class="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed reveal-up" id="heroSubheadline">
+                        High-converting websites, tailor-fit business systems, and automated lead funnels that work 24/7. Stop building on borrowed land.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 reveal-up" id="heroButtons">
+                        <a href="#discovery" class="magnetic-btn inline-flex items-center gap-3 px-8 py-4 bg-white text-obsidian rounded-full font-bold hover:bg-cyan transition-all duration-300 group">
+                            Start Your Project
+                            <i data-lucide="arrow-up-right" class="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+                        </a>
+                        <a href="#comparison" class="magnetic-btn inline-flex items-center gap-3 px-8 py-4 glass rounded-full font-semibold hover:border-cyan/30 transition-all duration-300">
+                            See the Difference
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-4 reveal-up" id="trustIndicators">
+                        <div class="flex -space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan to-blue-500 border-2 border-obsidian flex items-center justify-center text-xs font-bold">JD</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet to-pink-500 border-2 border-obsidian flex items-center justify-center text-xs font-bold">MK</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 border-2 border-obsidian flex items-center justify-center text-xs font-bold">AL</div>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1 text-yellow-400 text-sm">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <span class="text-white font-semibold ml-1">4.9</span>
+                            </div>
+                            <p class="text-xs text-gray-500">from 120+ projects</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative hidden lg:block h-[650px]">
+                    <div class="absolute top-0 right-0 w-80 glass rounded-2xl p-6 float-1 glow-border transform rotate-3 hover:rotate-0 transition-all duration-700" id="floatCard1">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan to-violet flex items-center justify-center">
+                                    <i data-lucide="trending-up" class="w-5 h-5 text-obsidian"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold">Conversion Rate</p>
+                                    <p class="text-xs text-gray-500">+340% average</p>
+                                </div>
+                            </div>
+                            <span class="text-cyan text-sm font-bold">+12.5%</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-xs text-gray-500 mb-1">
+                                <span>Baseline</span>
+                                <span>Optimized</span>
+                            </div>
+                            <div class="h-3 bg-obsidian-light rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyan to-violet w-[85%] rounded-full"></div>
+                            </div>
+                            <div class="h-3 bg-obsidian-light rounded-full overflow-hidden">
+                                <div class="h-full bg-gray-700 w-[25%] rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute top-[45%] left-0 w-72 glass rounded-2xl p-6 float-2 glow-border transform -rotate-2 hover:rotate-0 transition-all duration-700" id="floatCard2">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="zap" class="w-5 h-5 text-cyan"></i>
+                            <span class="text-sm font-bold">Performance</span>
+                        </div>
+                        <div class="flex items-end gap-2 mb-2">
+                            <p class="text-5xl font-bold text-gradient">0.8s</p>
+                            <span class="text-sm text-gray-500 mb-1">load</span>
+                        </div>
+                        <div class="flex gap-2 mt-4">
+                            <div class="flex-1 h-12 bg-gradient-to-t from-cyan/20 to-transparent rounded-lg flex items-end justify-center pb-2">
+                                <div class="w-4 bg-cyan rounded-t" style="height: 40%"></div>
+                            </div>
+                            <div class="flex-1 h-12 bg-gradient-to-t from-violet/20 to-transparent rounded-lg flex items-end justify-center pb-2">
+                                <div class="w-4 bg-violet rounded-t" style="height: 70%"></div>
+                            </div>
+                            <div class="flex-1 h-12 bg-gradient-to-t from-cyan/20 to-transparent rounded-lg flex items-end justify-center pb-2">
+                                <div class="w-4 bg-cyan rounded-t" style="height: 55%"></div>
+                            </div>
+                            <div class="flex-1 h-12 bg-gradient-to-t from-violet/20 to-transparent rounded-lg flex items-end justify-center pb-2">
+                                <div class="w-4 bg-violet rounded-t" style="height: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute bottom-10 right-10 w-80 glass rounded-2xl p-6 float-3 glow-border transform rotate-1 hover:rotate-0 transition-all duration-700" id="floatCard3">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm font-bold">Active Leads</span>
+                            <span class="text-xs text-cyan font-semibold flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 bg-cyan rounded-full animate-pulse"></span>
+                                Live
+                            </span>
+                        </div>
+                        <p class="text-4xl font-bold text-gradient mb-4">1,284</p>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan to-blue-400 flex items-center justify-center text-[10px] font-bold">JD</div>
+                                <div class="flex-1">
+                                    <div class="h-2 bg-obsidian-light rounded-full overflow-hidden">
+                                        <div class="h-full bg-gradient-to-r from-cyan to-violet w-3/4 rounded-full"></div>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500">Hot</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet to-pink-400 flex items-center justify-center text-[10px] font-bold">MK</div>
+                                <div class="flex-1">
+                                    <div class="h-2 bg-obsidian-light rounded-full overflow-hidden">
+                                        <div class="h-full bg-gradient-to-r from-cyan to-violet w-1/2 rounded-full"></div>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500">Warm</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-red-400 flex items-center justify-center text-[10px] font-bold">AL</div>
+                                <div class="flex-1">
+                                    <div class="h-2 bg-obsidian-light rounded-full overflow-hidden">
+                                        <div class="h-full bg-gradient-to-r from-cyan to-violet w-[90%] rounded-full"></div>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500">Hot</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 text-gray-500 z-10">
+            <span class="text-[10px] uppercase tracking-[0.3em] font-medium">Explore</span>
+            <div class="w-px h-16 bg-gradient-to-b from-cyan via-violet to-transparent relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white to-transparent animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rented vs Owned Section -->
+    <section id="comparison" class="py-32 relative">
+        <div class="absolute inset-0 grid-pattern opacity-50"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-20">
+                <p class="text-cyan text-sm font-semibold tracking-widest uppercase mb-4 reveal-up">The Hard Truth</p>
+                <h2 class="text-4xl md:text-6xl font-extrabold mb-6 reveal-up">The Platform Paradox</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal-up">Social media rents you space. We build you a fortress that compounds value over time.</p>
+            </div>
+
+            <div class="flex justify-center mb-16 reveal-up">
+                <div class="glass rounded-full p-1.5 flex gap-1 relative">
+                    <div class="absolute inset-1.5 bg-gradient-to-r from-cyan to-violet rounded-full transition-all duration-500" id="toggleIndicator" style="width: calc(50% - 6px); left: 6px;"></div>
+                    <button class="comparison-toggle relative z-10 px-8 py-3 rounded-full text-sm font-semibold transition-all duration-500 text-obsidian active" data-side="rented" id="toggleRented">
+                        Social-Only
+                    </button>
+                    <button class="comparison-toggle relative z-10 px-8 py-3 rounded-full text-sm font-semibold transition-all duration-500 text-gray-400" data-side="owned" id="toggleOwned">
+                        ScaleUp Platform
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 relative" id="comparisonGrid">
+                <div class="comparison-side space-y-6" id="rentedSide" data-active="true">
+                    <div class="glass rounded-2xl p-8 border-l-4 border-red-500/50 glow-border reveal-left">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="alert-triangle" class="w-6 h-6 text-red-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-red-400 mb-2">Algorithm Dependence</h3>
+                                <p class="text-gray-400 leading-relaxed">Your reach is controlled by opaque algorithms that change overnight without warning. One update can destroy 90% of your visibility.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass rounded-2xl p-8 border-l-4 border-red-500/50 glow-border reveal-left" style="transition-delay: 0.1s">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="search-x" class="w-6 h-6 text-red-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-red-400 mb-2">Zero Search Visibility</h3>
+                                <p class="text-gray-400 leading-relaxed">Social content is nearly invisible to Google. You are missing 93% of organic discovery potential and high-intent traffic.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass rounded-2xl p-8 border-l-4 border-red-500/50 glow-border reveal-left" style="transition-delay: 0.2s">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield-alert" class="w-6 h-6 text-red-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-red-400 mb-2">Low Trust Signals</h3>
+                                <p class="text-gray-400 leading-relaxed">Consumers trust dedicated websites 3x more than social media pages for purchases. You are leaving credibility on the table.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-side space-y-6" id="ownedSide" data-active="false">
+                    <div class="glass rounded-2xl p-8 border-l-4 border-cyan/50 glow-border reveal-right">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="crown" class="w-6 h-6 text-cyan"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-cyan mb-2">Full Brand Ownership</h3>
+                                <p class="text-gray-400 leading-relaxed">You control every pixel, every message, and every user interaction. No algorithm gatekeepers. No platform risk.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass rounded-2xl p-8 border-l-4 border-cyan/50 glow-border reveal-right" style="transition-delay: 0.1s">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="funnel" class="w-6 h-6 text-cyan"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-cyan mb-2">Automated Lead Funnels</h3>
+                                <p class="text-gray-400 leading-relaxed">Capture, nurture, and convert leads automatically while you sleep with intelligent systems and behavioral triggers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass rounded-2xl p-8 border-l-4 border-cyan/50 glow-border reveal-right" style="transition-delay: 0.2s">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="clock" class="w-6 h-6 text-cyan"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-cyan mb-2">24/7 Sales Engine</h3>
+                                <p class="text-gray-400 leading-relaxed">Your website never sleeps, never takes a break, and never misses an opportunity. It works weekends and holidays.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 glass-strong rounded-full flex items-center justify-center border border-white/10 z-10 hidden md:flex pulse-glow">
+                    <span class="text-lg font-black text-gradient">VS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Niche Switcher Section -->
+    <section id="niches" class="py-32 relative bg-obsidian-light/40">
+        <div class="absolute inset-0 grid-pattern opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 mb-16">
+                <div class="lg:col-span-8">
+                    <p class="text-cyan text-sm font-semibold tracking-widest uppercase mb-4 reveal-up">Industry Solutions</p>
+                    <h2 class="text-4xl md:text-6xl font-extrabold mb-6 reveal-up">Tailored By Industry</h2>
+                    <p class="text-gray-400 text-lg max-w-2xl reveal-up">Different verticals require different digital strategies. Select your industry to see your custom growth blueprint.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3 mb-12 reveal-up" id="nicheTabs">
+                <button class="niche-tab active px-6 py-3 rounded-full text-sm font-semibold border border-cyan/30 bg-cyan/5 text-cyan" data-niche="ecommerce">E-Commerce & Retail</button>
+                <button class="niche-tab px-6 py-3 rounded-full text-sm font-semibold border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-all" data-niche="b2b">B2B & Professional Services</button>
+                <button class="niche-tab px-6 py-3 rounded-full text-sm font-semibold border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-all" data-niche="creative">Creative & Agency Portfolios</button>
+                <button class="niche-tab px-6 py-3 rounded-full text-sm font-semibold border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-all" data-niche="realestate">Real Estate & Bookings</button>
+            </div>
+
+            <div class="niche-content relative" id="nicheContent">
+                <div class="niche-panel active" data-niche="ecommerce">
+                    <div class="grid lg:grid-cols-12 gap-8">
+                        <div class="lg:col-span-4 space-y-6">
+                            <div class="glass rounded-2xl p-6 glow-border reveal-up">
+                                <p class="text-gray-500 text-sm mb-2">Average ROI</p>
+                                <p class="text-5xl font-extrabold text-gradient">420%</p>
+                                <div class="mt-4 h-2 bg-obsidian-light rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyan to-violet w-[90%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-2xl p-6 glow-border reveal-up" style="transition-delay: 0.1s">
+                                <p class="text-gray-500 text-sm mb-2">Cart Abandonment Fix</p>
+                                <p class="text-5xl font-extrabold text-gradient">-65%</p>
+                                <p class="text-xs text-gray-600 mt-2">With smart recovery flows</p>
+                            </div>
+                            <div class="glass rounded-2xl p-6 glow-border reveal-up" style="transition-delay: 0.2s">
+                                <p class="text-gray-500 text-sm mb-2">Load Speed Impact</p>
+                                <p class="text-5xl font-extrabold text-gradient">+25%</p>
+                                <p class="text-xs text-gray-600 mt-2">Revenue per 100ms improvement</p>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-8 glass rounded-3xl p-8 md:p-10 reveal-right">
+                            <h3 class="text-2xl font-bold mb-8">E-Commerce System Architecture</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-cyan/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="users" class="w-6 h-6 text-cyan"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Traffic</p>
+                                    <p class="text-xs text-gray-500 mt-1">SEO + Ads</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-violet/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-violet/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="filter" class="w-6 h-6 text-violet"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Smart Filter</p>
+                                    <p class="text-xs text-gray-500 mt-1">AI Recommendations</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-cyan/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="credit-card" class="w-6 h-6 text-cyan"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Checkout</p>
+                                    <p class="text-xs text-gray-500 mt-1">1-Click Buy</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-violet/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-violet/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="repeat" class="w-6 h-6 text-violet"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Retention</p>
+                                    <p class="text-xs text-gray-500 mt-1">Loyalty Loop</p>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="p-5 rounded-xl border border-cyan/10 bg-cyan/[0.02] hover:border-cyan/30 transition-all group">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i data-lucide="package" class="w-5 h-5 text-cyan"></i>
+                                        <p class="font-semibold">Inventory Sync</p>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Real-time stock across all channels with automated low-stock alerts.</p>
+                                </div>
+                                <div class="p-5 rounded-xl border border-violet/10 bg-violet/[0.02] hover:border-violet/30 transition-all group">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i data-lucide="truck" class="w-5 h-5 text-violet"></i>
+                                        <p class="font-semibold">Smart Shipping</p>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Automated carrier selection based on cost, speed, and reliability.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="niche-panel" data-niche="b2b" style="display: none;">
+                    <div class="grid lg:grid-cols-12 gap-8">
+                        <div class="lg:col-span-4 space-y-6">
+                            <div class="glass rounded-2xl p-6 glow-border">
+                                <p class="text-gray-500 text-sm mb-2">Lead Quality Multiplier</p>
+                                <p class="text-5xl font-extrabold text-gradient">3.2x</p>
+                                <div class="mt-4 h-2 bg-obsidian-light rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyan to-violet w-[85%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-2xl p-6 glow-border">
+                                <p class="text-gray-500 text-sm mb-2">Sales Cycle Reduction</p>
+                                <p class="text-5xl font-extrabold text-gradient">-40%</p>
+                                <p class="text-xs text-gray-600 mt-2">With automated qualification</p>
+                            </div>
+                            <div class="glass rounded-2xl p-6 glow-border">
+                                <p class="text-gray-500 text-sm mb-2">Proposal Win Rate</p>
+                                <p class="text-5xl font-extrabold text-gradient">+68%</p>
+                                <p class="text-xs text-gray-600 mt-2">With interactive proposals</p>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-8 glass rounded-3xl p-8 md:p-10">
+                            <h3 class="text-2xl font-bold mb-8">B2B Growth System</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-cyan/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="mail" class="w-6 h-6 text-cyan"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Inbound</p>
+                                    <p class="text-xs text-gray-500 mt-1">Content + SEO</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-violet/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-violet/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="check-circle" class="w-6 h-6 text-violet"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Qualification</p>
+                                    <p class="text-xs text-gray-500 mt-1">Smart Forms</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-cyan/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="heart" class="w-6 h-6 text-cyan"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Nurture</p>
+                                    <p class="text-xs text-gray-500 mt-1">Drip Campaigns</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-violet/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-violet/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="handshake" class="w-6 h-6 text-violet"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Close</p>
+                                    <p class="text-xs text-gray-500 mt-1">E-Sign + Pay</p>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="p-5 rounded-xl border border-cyan/10 bg-cyan/[0.02] hover:border-cyan/30 transition-all group">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i data-lucide="file-text" class="w-5 h-5 text-cyan"></i>
+                                        <p class="font-semibold">Proposal Engine</p>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Dynamic pricing tables, contract generation, and e-signature workflows.</p>
+                                </div>
+                                <div class="p-5 rounded-xl border border-violet/10 bg-violet/[0.02] hover:border-violet/30 transition-all group">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i data-lucide="bar-chart-3" class="w-5 h-5 text-violet"></i>
+                                        <p class="font-semibold">Pipeline Dashboard</p>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Real-time deal tracking, forecasting, and team performance metrics.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="niche-panel" data-niche="creative" style="display: none;">
+                    <div class="grid lg:grid-cols-12 gap-8">
+                        <div class="lg:col-span-4 space-y-6">
+                            <div class="glass rounded-2xl p-6 glow-border">
+                                <p class="text-gray-500 text-sm mb-2">Portfolio Views</p>
+                                <p class="text-5xl font-extrabold text-gradient">+500%</p>
+                                <div class="mt-4 h-2 bg-obsidian-light rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyan to-violet w-[95%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-2xl p-6 glow-border">
+                                <p class="text-gray-500 text-sm mb-2">Inquiry Rate</p>
+                                <p class="text-5xl font-extrabold text-gradient">+180%</p>
+                                <p class="text-xs text-gray-600 mt-2">From immersive experiences</p>
+                            </div>
+                            <div class="glass rounded-2xl p-6 glow-border">
+                                <p class="text-gray-500 text-sm mb-2">Award Recognition</p>
+                                <p class="text-5xl font-extrabold text-gradient">12x</p>
+                                <p class="text-xs text-gray-600 mt-2">Featured on Awwwards</p>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-8 glass rounded-3xl p-8 md:p-10">
+                            <h3 class="text-2xl font-bold mb-8">Creative Showcase Engine</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-cyan/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="search" class="w-6 h-6 text-cyan"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Discovery</p>
+                                    <p class="text-xs text-gray-500 mt-1">SEO + Social</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-violet/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-violet/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="image" class="w-6 h-6 text-violet"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Showcase</p>
+                                    <p class="text-xs text-gray-500 mt-1">WebGL Galleries</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-cyan/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="message-circle" class="w-6 h-6 text-cyan"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Engage</p>
+                                    <p class="text-xs text-gray-500 mt-1">Live Chat</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-violet/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-violet/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="briefcase" class="w-6 h-6 text-violet"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Hire</p>
+                                    <p class="text-xs text-gray-500 mt-1">Booking</p>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="p-5 rounded-xl border border-cyan/10 bg-cyan/[0.02] hover:border-cyan/30 transition-all group">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i data-lucide="image" class="w-5 h-5 text-cyan"></i>
+                                        <p class="font-semibold">Dynamic Galleries</p>
+                                    </div>
+                                    <p class="text-sm text-gray-500">WebGL experiences, smooth scroll, and motion-driven portfolio layouts.</p>
+                                </div>
+                                <div class="p-5 rounded-xl border border-violet/10 bg-violet/[0.02] hover:border-violet/30 transition-all group">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i data-lucide="mouse-pointer" class="w-5 h-5 text-violet"></i>
+                                        <p class="font-semibold">Case Study Builder</p>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Interactive project stories with scroll-triggered animations and metrics.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="niche-panel" data-niche="realestate" style="display: none;">
+                    <div class="grid lg:grid-cols-12 gap-8">
+                        <div class="lg:col-span-4 space-y-6">
+                            <div class="glass rounded-2xl p-6 glow-border">
+                                <p class="text-gray-500 text-sm mb-2">Booking Rate Increase</p>
+                                <p class="text-5xl font-extrabold text-gradient">+220%</p>
+                                <div class="mt-4 h-2 bg-obsidian-light rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyan to-violet w-[88%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="glass rounded-2xl p-6 glow-border">
+                                <p class="text-gray-500 text-sm mb-2">Avg. Time on Site</p>
+                                <p class="text-5xl font-extrabold text-gradient">4.5m</p>
+                                <p class="text-xs text-gray-600 mt-2">With virtual tours</p>
+                            </div>
+                            <div class="glass rounded-2xl p-6 glow-border">
+                                <p class="text-gray-500 text-sm mb-2">Conversion vs Listings</p>
+                                <p class="text-5xl font-extrabold text-gradient">+95%</p>
+                                <p class="text-xs text-gray-600 mt-2">Direct vs third-party</p>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-8 glass rounded-3xl p-8 md:p-10">
+                            <h3 class="text-2xl font-bold mb-8">Property Experience Platform</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-cyan/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="search" class="w-6 h-6 text-cyan"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Search</p>
+                                    <p class="text-xs text-gray-500 mt-1">Smart Filters</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-violet/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-violet/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="video" class="w-6 h-6 text-violet"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Tour</p>
+                                    <p class="text-xs text-gray-500 mt-1">3D Walkthrough</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-cyan/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="calendar" class="w-6 h-6 text-cyan"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Book</p>
+                                    <p class="text-xs text-gray-500 mt-1">Instant Schedule</p>
+                                </div>
+                                <div class="text-center p-5 rounded-xl bg-obsidian-light/50 border border-white/5 hover:border-violet/20 transition-all group">
+                                    <div class="w-12 h-12 rounded-xl bg-violet/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <i data-lucide="settings" class="w-6 h-6 text-violet"></i>
+                                    </div>
+                                    <p class="text-sm font-semibold">Manage</p>
+                                    <p class="text-xs text-gray-500 mt-1">CRM + Docs</p>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="p-5 rounded-xl border border-cyan/10 bg-cyan/[0.02] hover:border-cyan/30 transition-all group">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i data-lucide="map" class="w-5 h-5 text-cyan"></i>
+                                        <p class="font-semibold">Interactive Maps</p>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Neighborhood insights, walk scores, school districts, and amenities.</p>
+                                </div>
+                                <div class="p-5 rounded-xl border border-violet/10 bg-violet/[0.02] hover:border-violet/30 transition-all group">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i data-lucide="key" class="w-5 h-5 text-violet"></i>
+                                        <p class="font-semibold">Smart Access</p>
+                                    </div>
+                                    <p class="text-sm text-gray-500">Automated check-in systems, digital lock integration, and guest management.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator Section -->
+    <section id="calculator" class="py-32 relative">
+        <div class="absolute inset-0 grid-pattern opacity-50"></div>
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <p class="text-cyan text-sm font-semibold tracking-widest uppercase mb-4 reveal-up">The Numbers</p>
+                <h2 class="text-4xl md:text-6xl font-extrabold mb-6 reveal-up">Revenue Calculator</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal-up">See what a high-performance website could mean for your bottom line. Adjust the sliders to match your business.</p>
+            </div>
+
+            <div class="glass-strong rounded-3xl p-8 md:p-12 border border-white/5 reveal-scale">
+                <div class="grid md:grid-cols-2 gap-12 mb-12">
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <label class="text-sm font-semibold text-gray-300">Current Monthly Leads</label>
+                                <span class="text-2xl font-bold text-cyan" id="leadsValue">100</span>
+                            </div>
+                            <input type="range" min="10" max="1000" value="100" class="w-full" id="leadsSlider">
+                            <div class="flex justify-between mt-2 text-xs text-gray-600">
+                                <span>10</span>
+                                <span>1000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <label class="text-sm font-semibold text-gray-300">Average Client Value ($)</label>
+                                <span class="text-2xl font-bold text-violet" id="valueValue">$1,000</span>
+                            </div>
+                            <input type="range" min="100" max="50000" value="1000" step="100" class="w-full" id="valueSlider">
+                            <div class="flex justify-between mt-2 text-xs text-gray-600">
+                                <span>$100</span>
+                                <span>$50k</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-white/10 pt-8 text-center">
+                    <p class="text-gray-500 text-sm mb-2">Estimated Annual Revenue Increase</p>
+                    <p class="text-6xl md:text-7xl font-extrabold text-gradient" id="roiResult">$240,000</p>
+                    <p class="text-sm text-gray-500 mt-4">Based on 2x conversion improvement and 40% lead capture increase</p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-white/5">
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-cyan">2.4x</p>
+                        <p class="text-xs text-gray-500 mt-1">Conversion Boost</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-violet">+40%</p>
+                        <p class="text-xs text-gray-500 mt-1">Lead Capture</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-white">12mo</p>
+                        <p class="text-xs text-gray-500 mt-1">Payback Period</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Systems Blueprint Section -->
+    <section id="systems" class="py-32 relative bg-obsidian-light/40">
+        <div class="absolute inset-0 grid-pattern opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 mb-16">
+                <div class="lg:col-span-7">
+                    <p class="text-cyan text-sm font-semibold tracking-widest uppercase mb-4 reveal-up">Modular Architecture</p>
+                    <h2 class="text-4xl md:text-6xl font-extrabold mb-6 reveal-up">Tailor-Fit Systems</h2>
+                    <p class="text-gray-400 text-lg max-w-2xl reveal-up">Modular architecture that grows with your business. Each component is designed to integrate seamlessly and scale independently.</p>
+                </div>
+                <div class="lg:col-span-5 flex items-end justify-start lg:justify-end">
+                    <a href="#discovery" class="magnetic-btn inline-flex items-center gap-2 px-6 py-3 glass rounded-full text-sm font-semibold hover:border-cyan/30 transition-all reveal-up">
+                        Build Your Stack
+                        <i data-lucide="layers" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" id="systemsGrid">
+                <div class="system-card glass rounded-2xl p-6 border border-white/5 hover:border-cyan/20 transition-all group cursor-pointer glow-border reveal-up">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan to-blue-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i data-lucide="calendar-check" class="w-7 h-7 text-obsidian"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Custom Booking Logic</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Complex scheduling rules, resource allocation, buffer times, and automated confirmations with calendar sync.</p>
+                    <div class="mt-6 flex items-center gap-2 text-cyan text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span>Learn more</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </div>
+
+                <div class="system-card glass rounded-2xl p-6 border border-white/5 hover:border-violet/20 transition-all group cursor-pointer glow-border reveal-up" style="transition-delay: 0.1s">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet to-pink-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i data-lucide="database" class="w-7 h-7 text-obsidian"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Inventory Sync</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Real-time synchronization across warehouses, POS systems, and online marketplaces with automated reordering.</p>
+                    <div class="mt-6 flex items-center gap-2 text-violet text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span>Learn more</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </div>
+
+                <div class="system-card glass rounded-2xl p-6 border border-white/5 hover:border-cyan/20 transition-all group cursor-pointer glow-border reveal-up" style="transition-delay: 0.2s">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan to-teal-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i data-lucide="users" class="w-7 h-7 text-obsidian"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Client Portals</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Secure document sharing, project tracking, approval workflows, and white-label client experiences.</p>
+                    <div class="mt-6 flex items-center gap-2 text-cyan text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span>Learn more</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </div>
+
+                <div class="system-card glass rounded-2xl p-6 border border-white/5 hover:border-violet/20 transition-all group cursor-pointer glow-border reveal-up" style="transition-delay: 0.3s">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet to-indigo-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i data-lucide="search" class="w-7 h-7 text-obsidian"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">SEO Dominance</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Technical SEO architecture, structured data, schema markup, and Core Web Vitals optimization out of the box.</p>
+                    <div class="mt-6 flex items-center gap-2 text-violet text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span>Learn more</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connecting Line Visual -->
+            <div class="hidden lg:block mt-12 relative h-px bg-gradient-to-r from-transparent via-white/10 to-transparent">
+                <div class="absolute top-1/2 left-1/4 w-3 h-3 bg-cyan rounded-full -translate-y-1/2 animate-pulse"></div>
+                <div class="absolute top-1/2 left-1/2 w-3 h-3 bg-violet rounded-full -translate-y-1/2 animate-pulse" style="animation-delay: 0.5s"></div>
+                <div class="absolute top-1/2 left-3/4 w-3 h-3 bg-cyan rounded-full -translate-y-1/2 animate-pulse" style="animation-delay: 1s"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discovery Form Section -->
+    <section id="discovery" class="py-32 relative">
+        <div class="absolute inset-0 grid-pattern opacity-50"></div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <p class="text-cyan text-sm font-semibold tracking-widest uppercase mb-4 reveal-up">Start Building</p>
+                <h2 class="text-4xl md:text-6xl font-extrabold mb-6 reveal-up">Project Discovery</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto reveal-up">Tell us what you need. We will map out your custom system architecture and provide a detailed scope within 24 hours.</p>
+            </div>
+
+            <div class="glass-strong rounded-3xl p-8 md:p-12 border border-white/5 reveal-scale">
+                <form id="discoveryForm" class="space-y-10">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-4">What do you need?</label>
+                        <div class="flex flex-wrap gap-3" id="featureTags">
+                            <label class="feature-chip cursor-pointer">
+                                <input type="checkbox" value="web-creation" class="hidden peer">
+                                <span class="px-5 py-2.5 rounded-full border border-white/10 text-sm peer-checked:bg-cyan peer-checked:text-obsidian peer-checked:border-cyan transition-all hover:border-cyan/50">Web Creation</span>
+                            </label>
+                            <label class="feature-chip cursor-pointer">
+                                <input type="checkbox" value="custom-system" class="hidden peer">
+                                <span class="px-5 py-2.5 rounded-full border border-white/10 text-sm peer-checked:bg-cyan peer-checked:text-obsidian peer-checked:border-cyan transition-all hover:border-cyan/50">Custom System Logic</span>
+                            </label>
+                            <label class="feature-chip cursor-pointer">
+                                <input type="checkbox" value="seo" class="hidden peer">
+                                <span class="px-5 py-2.5 rounded-full border border-white/10 text-sm peer-checked:bg-cyan peer-checked:text-obsidian peer-checked:border-cyan transition-all hover:border-cyan/50">SEO & Marketing</span>
+                            </label>
+                            <label class="feature-chip cursor-pointer">
+                                <input type="checkbox" value="ecommerce" class="hidden peer">
+                                <span class="px-5 py-2.5 rounded-full border border-white/10 text-sm peer-checked:bg-cyan peer-checked:text-obsidian peer-checked:border-cyan transition-all hover:border-cyan/50">E-Commerce</span>
+                            </label>
+                            <label class="feature-chip cursor-pointer">
+                                <input type="checkbox" value="booking" class="hidden peer">
+                                <span class="px-5 py-2.5 rounded-full border border-white/10 text-sm peer-checked:bg-cyan peer-checked:text-obsidian peer-checked:border-cyan transition-all hover:border-cyan/50">Booking System</span>
+                            </label>
+                            <label class="feature-chip cursor-pointer">
+                                <input type="checkbox" value="portal" class="hidden peer">
+                                <span class="px-5 py-2.5 rounded-full border border-white/10 text-sm peer-checked:bg-cyan peer-checked:text-obsidian peer-checked:border-cyan transition-all hover:border-cyan/50">Client Portal</span>
+                            </label>
+                            <label class="feature-chip cursor-pointer">
+                                <input type="checkbox" value="branding" class="hidden peer">
+                                <span class="px-5 py-2.5 rounded-full border border-white/10 text-sm peer-checked:bg-cyan peer-checked:text-obsidian peer-checked:border-cyan transition-all hover:border-cyan/50">Branding & UI</span>
+                            </label>
+                            <label class="feature-chip cursor-pointer">
+                                <input type="checkbox" value="migration" class="hidden peer">
+                                <span class="px-5 py-2.5 rounded-full border border-white/10 text-sm peer-checked:bg-cyan peer-checked:text-obsidian peer-checked:border-cyan transition-all hover:border-cyan/50">Platform Migration</span>
+                            </label>
+                        </div>
+
+                        <!-- Selected Preview -->
+                        <div class="mt-6 min-h-[40px]">
+                            <div id="selectedPreview" class="flex flex-wrap gap-2 opacity-0 transition-opacity duration-300">
+                                <span class="text-xs text-gray-500 mr-2">Selected:</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Name</label>
+                            <input type="text" class="w-full px-5 py-4 rounded-xl bg-obsidian-light border border-white/10 focus:border-cyan focus:outline-none transition-all duration-300 text-white placeholder-gray-600" placeholder="Your name" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Email</label>
+                            <input type="email" class="w-full px-5 py-4 rounded-xl bg-obsidian-light border border-white/10 focus:border-cyan focus:outline-none transition-all duration-300 text-white placeholder-gray-600" placeholder="you@company.com" required>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Company</label>
+                            <input type="text" class="w-full px-5 py-4 rounded-xl bg-obsidian-light border border-white/10 focus:border-cyan focus:outline-none transition-all duration-300 text-white placeholder-gray-600" placeholder="Company name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Budget Range</label>
+                            <select class="w-full px-5 py-4 rounded-xl bg-obsidian-light border border-white/10 focus:border-cyan focus:outline-none transition-all duration-300 text-white appearance-none cursor-pointer">
+                                <option value="" class="bg-obsidian-light">Select range...</option>
+                                <option value="5k-15k" class="bg-obsidian-light">$5,000 - $15,000</option>
+                                <option value="15k-50k" class="bg-obsidian-light">$15,000 - $50,000</option>
+                                <option value="50k-100k" class="bg-obsidian-light">$50,000 - $100,000</option>
+                                <option value="100k+" class="bg-obsidian-light">$100,000+</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Project Details</label>
+                        <textarea rows="5" class="w-full px-5 py-4 rounded-xl bg-obsidian-light border border-white/10 focus:border-cyan focus:outline-none transition-all duration-300 text-white placeholder-gray-600 resize-none" placeholder="Tell us about your vision, goals, and any specific requirements..."></textarea>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-6 pt-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-cyan/10 flex items-center justify-center">
+                                <span class="text-cyan font-bold" id="selectedCount">0</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Features Selected</p>
+                                <p class="text-xs text-gray-500">Average project: 3-4 features</p>
+                            </div>
+                        </div>
+                        <button type="submit" class="magnetic-btn px-10 py-4 bg-gradient-to-r from-cyan to-violet rounded-full font-bold text-obsidian hover:shadow-lg hover:shadow-cyan/20 transition-all flex items-center gap-3 text-lg" id="submitBtn">
+                            <span>Send Inquiry</span>
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative pt-24 pb-8 border-t border-white/5">
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan to-transparent"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-cyan to-violet blur-sm"></div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-12 mb-16">
+                <div class="md:col-span-5">
+                    <a href="#" class="text-2xl font-bold tracking-tight mb-6 inline-block">
+                        <span class="text-gradient">ScaleUp</span> Digital
+                    </a>
+                    <p class="text-gray-400 max-w-sm leading-relaxed">Building digital fortresses for businesses that refuse to rent their presence. Own your infrastructure, own your growth.</p>
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-cyan/30 transition-all group">
+                            <i data-lucide="twitter" class="w-4 h-4 text-gray-400 group-hover:text-cyan transition-colors"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-cyan/30 transition-all group">
+                            <i data-lucide="linkedin" class="w-4 h-4 text-gray-400 group-hover:text-cyan transition-colors"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-cyan/30 transition-all group">
+                            <i data-lucide="instagram" class="w-4 h-4 text-gray-400 group-hover:text-cyan transition-colors"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:border-cyan/30 transition-all group">
+                            <i data-lucide="dribbble" class="w-4 h-4 text-gray-400 group-hover:text-cyan transition-colors"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:col-span-2 md:col-start-7">
+                    <h4 class="font-bold mb-6 text-sm uppercase tracking-wider text-gray-300">Navigation</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#comparison" class="hover:text-cyan transition-colors duration-300">Why Own</a></li>
+                        <li><a href="#niches" class="hover:text-cyan transition-colors duration-300">Solutions</a></li>
+                        <li><a href="#calculator" class="hover:text-cyan transition-colors duration-300">ROI Calculator</a></li>
+                        <li><a href="#systems" class="hover:text-cyan transition-colors duration-300">Systems</a></li>
+                        <li><a href="#discovery" class="hover:text-cyan transition-colors duration-300">Start Project</a></li>
+                    </ul>
+                </div>
+                <div class="md:col-span-2">
+                    <h4 class="font-bold mb-6 text-sm uppercase tracking-wider text-gray-300">Services</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-cyan transition-colors duration-300">Web Development</a></li>
+                        <li><a href="#" class="hover:text-cyan transition-colors duration-300">Custom Systems</a></li>
+                        <li><a href="#" class="hover:text-cyan transition-colors duration-300">SEO Strategy</a></li>
+                        <li><a href="#" class="hover:text-cyan transition-colors duration-300">Brand Identity</a></li>
+                        <li><a href="#" class="hover:text-cyan transition-colors duration-300">Migration</a></li>
+                    </ul>
+                </div>
+                <div class="md:col-span-2">
+                    <h4 class="font-bold mb-6 text-sm uppercase tracking-wider text-gray-300">Company</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-cyan transition-colors duration-300">About</a></li>
+                        <li><a href="#" class="hover:text-cyan transition-colors duration-300">Careers</a></li>
+                        <li><a href="#" class="hover:text-cyan transition-colors duration-300">Blog</a></li>
+                        <li><a href="#" class="hover:text-cyan transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-sm text-gray-500">
+                <p id="footerYear"> ScaleUp Digital. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-gray-300 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">Terms</a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Dynamic year in footer
+        const yearSpan = document.getElementById('footerYear');
+        if (yearSpan) {
+            yearSpan.textContent = '© ' + new Date().getFullYear() + ' ScaleUp Digital. All rights reserved.';
         }
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(6,182,212,0.6)';
-        ctx.fill();
-      }
-    }
-    
-    for (let i = 0; i < 60; i++) particles.push(new Particle());
-    
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-    
-    function animateMesh() {
-      ctx.clearRect(0, 0, width, height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(6,182,212,${0.15 * (1 - dist/150)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(animateMesh);
-    }
-    animateMesh();
-    
-    // GSAP Scroll Animations
-    gsap.utils.toArray('.reveal').forEach(elem => {
-      gsap.to(elem, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: elem,
-          start: 'top 85%',
-          toggleActions: 'play none none none'
-        }
-      });
-    });
-    
-    // Counter Animation
-    gsap.utils.toArray('.counter').forEach(counter => {
-      const target = parseInt(counter.dataset.target);
-      gsap.to(counter, {
-        innerText: target,
-        duration: 2,
-        snap: { innerText: 1 },
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: counter,
-          start: 'top 85%'
-        }
-      });
-    });
-    
-    // 3D Tilt Effect
-    document.querySelectorAll('[data-tilt]').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-        card.querySelector('.tilt-card-inner').style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.querySelector('.tilt-card-inner').style.transform = 'rotateX(0) rotateY(0)';
-      });
-    });
-    
-    // Calculator Logic
-    const calcTypes = document.querySelectorAll('.calc-type');
-    const complexitySlider = document.getElementById('complexity');
-    const complexityLabel = document.getElementById('complexityLabel');
-    const calcFeatures = document.querySelectorAll('.calc-feature');
-    const totalPriceEl = document.getElementById('totalPrice');
-    const timelineEl = document.getElementById('timeline');
-    
-    let currentType = 'website';
-    let basePrice = 5000;
-    
-    const complexityMultipliers = [1, 1.5, 2.5, 4];
-    const complexityLabels = ['Standard', 'Advanced', 'Enterprise', 'Complex'];
-    const timelines = ['2-4 weeks', '4-8 weeks', '8-12 weeks', '12-20 weeks'];
-    
-    function updateCalculator() {
-      let total = basePrice * complexityMultipliers[complexitySlider.value - 1];
-      calcFeatures.forEach(f => {
-        if (f.checked) total += parseInt(f.dataset.value);
-      });
-      totalPriceEl.textContent = total.toLocaleString();
-      timelineEl.textContent = timelines[complexitySlider.value - 1];
-    }
-    
-    calcTypes.forEach(btn => {
-      btn.addEventListener('click', () => {
-        calcTypes.forEach(b => {
-          b.classList.remove('active', 'border-cyan-400', 'text-cyan-400', 'bg-cyan-500/10');
-          b.classList.add('border-slate-700', 'text-slate-300');
+
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
         });
-        btn.classList.add('active', 'border-cyan-400', 'text-cyan-400', 'bg-cyan-500/10');
-        btn.classList.remove('border-slate-700', 'text-slate-300');
-        currentType = btn.dataset.type;
-        basePrice = parseInt(btn.dataset.base);
-        updateCalculator();
-      });
-    });
-    
-    // Set initial active state
-    calcTypes[0].classList.add('border-cyan-400', 'text-cyan-400', 'bg-cyan-500/10');
-    calcTypes[0].classList.remove('border-slate-700', 'text-slate-300');
-    
-    complexitySlider.addEventListener('input', () => {
-      complexityLabel.textContent = complexityLabels[complexitySlider.value - 1];
-      updateCalculator();
-    });
-    calcFeatures.forEach(f => f.addEventListener('change', updateCalculator));
-    
-    // Contact Form
-    const contactForm = document.getElementById('contactForm');
-    const formSuccess = document.getElementById('formSuccess');
-    
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      contactForm.style.display = 'none';
-      formSuccess.classList.remove('hidden');
-      gsap.from(formSuccess, { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' });
-      lucide.createIcons();
-    });
-    
-    // Smooth Scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
         }
-      });
+        requestAnimationFrame(raf);
+
+        // GSAP ScrollTrigger integration with Lenis
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(function(time) {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const spotlight = document.getElementById('spotlight');
+
+        if (cursor && spotlight && window.matchMedia('(pointer: fine)').matches) {
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            let isMoving = false;
+            let moveTimeout;
+
+            document.addEventListener('mousemove', function(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                isMoving = true;
+                clearTimeout(moveTimeout);
+                moveTimeout = setTimeout(function() { isMoving = false; }, 100);
+            });
+
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.15;
+                cursorY += (mouseY - cursorY) * 0.15;
+
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                spotlight.style.left = cursorX + 'px';
+                spotlight.style.top = cursorY + 'px';
+
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // Hover effects
+            document.querySelectorAll('a, button, .system-card, .glass, input, textarea, select').forEach(function(el) {
+                el.addEventListener('mouseenter', function() { cursor.classList.add('hover'); });
+                el.addEventListener('mouseleave', function() { cursor.classList.remove('hover'); });
+            });
+
+            document.addEventListener('mousedown', function() { cursor.classList.add('click'); });
+            document.addEventListener('mouseup', function() { cursor.classList.remove('click'); });
+        }
+
+        // Magnetic Buttons
+        document.querySelectorAll('.magnetic-btn').forEach(function(btn) {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = 'translate(' + (x * 0.3) + 'px, ' + (y * 0.3) + 'px)';
+            });
+            btn.addEventListener('mouseleave', function() {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // Hero Mesh Mouse Tracking
+        const heroMesh = document.getElementById('heroMesh');
+        if (heroMesh) {
+            document.addEventListener('mousemove', function(e) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 40;
+                const y = (e.clientY / window.innerHeight - 0.5) * 40;
+                heroMesh.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+            });
+        }
+
+        // Hero Animations
+        const heroTl = gsap.timeline({ delay: 0.3 });
+
+        heroTl.to('.hero-word-inner', {
+            y: '0%',
+            duration: 1.2,
+            stagger: 0.08,
+            ease: 'power4.out'
+        })
+        .to('#heroSubheadline', {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'power3.out'
+        }, '-=0.6')
+        .to('#heroButtons', {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'power3.out'
+        }, '-=0.7')
+        .to('#trustIndicators', {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out'
+        }, '-=0.6')
+        .to('#heroBadge', {
+            scale: 1,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'back.out(1.7)'
+        }, '-=1');
+
+        // Floating cards parallax
+        if (document.getElementById('floatCard1')) {
+            gsap.to('#floatCard1', {
+                y: -80,
+                scrollTrigger: {
+                    trigger: '#floatCard1',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1.5
+                }
+            });
+            gsap.to('#floatCard2', {
+                y: -40,
+                scrollTrigger: {
+                    trigger: '#floatCard2',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1.2
+                }
+            });
+            gsap.to('#floatCard3', {
+                y: -100,
+                scrollTrigger: {
+                    trigger: '#floatCard3',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1.8
+                }
+            });
+        }
+
+        // Comparison Toggle
+        const toggleRented = document.getElementById('toggleRented');
+        const toggleOwned = document.getElementById('toggleOwned');
+        const toggleIndicator = document.getElementById('toggleIndicator');
+        const rentedSide = document.getElementById('rentedSide');
+        const ownedSide = document.getElementById('ownedSide');
+
+        function setComparisonSide(side) {
+            if (side === 'rented') {
+                toggleRented.classList.add('active');
+                toggleRented.classList.remove('text-gray-400');
+                toggleOwned.classList.remove('active');
+                toggleOwned.classList.add('text-gray-400');
+                toggleOwned.classList.remove('text-obsidian');
+                toggleIndicator.style.left = '6px';
+
+                gsap.to(ownedSide, { opacity: 0.25, filter: 'grayscale(0.9)', duration: 0.6, ease: 'power2.out' });
+                gsap.to(rentedSide, { opacity: 1, filter: 'grayscale(0)', duration: 0.6, ease: 'power2.out' });
+                rentedSide.setAttribute('data-active', 'true');
+                ownedSide.setAttribute('data-active', 'false');
+            } else {
+                toggleOwned.classList.add('active');
+                toggleOwned.classList.remove('text-gray-400');
+                toggleRented.classList.remove('active');
+                toggleRented.classList.add('text-gray-400');
+                toggleRented.classList.remove('text-obsidian');
+                toggleIndicator.style.left = 'calc(50% + 0px)';
+
+                gsap.to(rentedSide, { opacity: 0.25, filter: 'grayscale(0.9)', duration: 0.6, ease: 'power2.out' });
+                gsap.to(ownedSide, { opacity: 1, filter: 'grayscale(0)', duration: 0.6, ease: 'power2.out' });
+                rentedSide.setAttribute('data-active', 'false');
+                ownedSide.setAttribute('data-active', 'true');
+            }
+        }
+
+        if (toggleRented && toggleOwned) {
+            toggleRented.addEventListener('click', function() { setComparisonSide('rented'); });
+            toggleOwned.addEventListener('click', function() { setComparisonSide('owned'); });
+        }
+
+        // Niche Tabs
+        const nicheTabs = document.querySelectorAll('.niche-tab');
+        const nichePanels = document.querySelectorAll('.niche-panel');
+
+        nicheTabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                const niche = tab.getAttribute('data-niche');
+
+                nicheTabs.forEach(function(t) {
+                    t.classList.remove('active', 'bg-cyan/5', 'text-cyan', 'border-cyan/30');
+                    t.classList.add('text-gray-400', 'border-white/10');
+                });
+                tab.classList.add('active', 'bg-cyan/5', 'text-cyan', 'border-cyan/30');
+                tab.classList.remove('text-gray-400', 'border-white/10');
+
+                nichePanels.forEach(function(panel) {
+                    if (panel.getAttribute('data-niche') === niche) {
+                        panel.style.display = 'block';
+                        gsap.fromTo(panel, 
+                            { opacity: 0, y: 30 }, 
+                            { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }
+                        );
+                        panel.classList.add('active');
+                    } else {
+                        panel.classList.remove('active');
+                        panel.style.display = 'none';
+                    }
+                });
+
+                // Re-init icons for new panel
+                setTimeout(function() { lucide.createIcons(); }, 100);
+            });
+        });
+
+        // ROI Calculator
+        const leadsSlider = document.getElementById('leadsSlider');
+        const valueSlider = document.getElementById('valueSlider');
+        const leadsValue = document.getElementById('leadsValue');
+        const valueValue = document.getElementById('valueValue');
+        const roiResult = document.getElementById('roiResult');
+
+        function calculateROI() {
+            const leads = parseInt(leadsSlider.value);
+            const value = parseInt(valueSlider.value);
+
+            leadsValue.textContent = leads;
+            valueValue.textContent = '$' + value.toLocaleString();
+
+            // Formula: leads * 12 months * avg value * 40% improvement (conservative)
+            const currentAnnual = leads * 12 * value;
+            const improvement = currentAnnual * 0.4;
+
+            // Animate the number
+            const resultEl = document.getElementById('roiResult');
+            const currentDisplay = parseInt(resultEl.textContent.replace(/[^0-9]/g, '')) || 0;
+            const targetDisplay = Math.floor(improvement);
+
+            gsap.to({ val: currentDisplay }, {
+                val: targetDisplay,
+                duration: 0.8,
+                ease: 'power2.out',
+                onUpdate: function() {
+                    resultEl.textContent = '$' + Math.floor(this.targets()[0].val).toLocaleString();
+                }
+            });
+        }
+
+        if (leadsSlider && valueSlider) {
+            leadsSlider.addEventListener('input', calculateROI);
+            valueSlider.addEventListener('input', calculateROI);
+        }
+
+        // Feature counter and preview
+        const featureCheckboxes = document.querySelectorAll('#featureTags input[type="checkbox"]');
+        const selectedCount = document.getElementById('selectedCount');
+        const selectedPreview = document.getElementById('selectedPreview');
+        const featureLabels = {
+            'web-creation': 'Web Creation',
+            'custom-system': 'Custom System',
+            'seo': 'SEO & Marketing',
+            'ecommerce': 'E-Commerce',
+            'booking': 'Booking System',
+            'portal': 'Client Portal',
+            'branding': 'Branding & UI',
+            'migration': 'Migration'
+        };
+
+        function updateFeaturePreview() {
+            const checked = document.querySelectorAll('#featureTags input:checked');
+            const count = checked.length;
+
+            // Animate count
+            gsap.fromTo(selectedCount, { scale: 1.4 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' });
+            selectedCount.textContent = count;
+
+            // Update preview pills
+            selectedPreview.innerHTML = '<span class="text-xs text-gray-500 mr-2">Selected:</span>';
+            if (count > 0) {
+                selectedPreview.style.opacity = '1';
+                checked.forEach(function(cb) {
+                    const pill = document.createElement('span');
+                    pill.className = 'px-3 py-1 rounded-full bg-cyan/10 border border-cyan/20 text-cyan text-xs font-medium';
+                    pill.textContent = featureLabels[cb.value] || cb.value;
+                    selectedPreview.appendChild(pill);
+                });
+            } else {
+                selectedPreview.style.opacity = '0';
+            }
+        }
+
+        featureCheckboxes.forEach(function(cb) {
+            cb.addEventListener('change', updateFeaturePreview);
+        });
+
+        // Form submit
+        const discoveryForm = document.getElementById('discoveryForm');
+        if (discoveryForm) {
+            discoveryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const btn = document.getElementById('submitBtn');
+                const originalHTML = btn.innerHTML;
+
+                btn.innerHTML = '<span class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5"></i> Inquiry Sent!</span>';
+                btn.disabled = true;
+                btn.classList.add('opacity-75');
+                lucide.createIcons();
+
+                setTimeout(function() {
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-75');
+                    discoveryForm.reset();
+                    updateFeaturePreview();
+                    lucide.createIcons();
+                }, 3000);
+            });
+        }
+
+        // Scroll animations for sections
+        gsap.utils.toArray('.reveal-up').forEach(function(el) {
+            gsap.to(el, {
+                y: 0,
+                opacity: 1,
+                duration: 0.9,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        });
+
+        gsap.utils.toArray('.reveal-left').forEach(function(el) {
+            gsap.to(el, {
+                x: 0,
+                opacity: 1,
+                duration: 0.9,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        });
+
+        gsap.utils.toArray('.reveal-right').forEach(function(el) {
+            gsap.to(el, {
+                x: 0,
+                opacity: 1,
+                duration: 0.9,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        });
+
+        gsap.utils.toArray('.reveal-scale').forEach(function(el) {
+            gsap.to(el, {
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        });
+
+        // System cards stagger
+        gsap.from('.system-card', {
+            y: 60,
+            opacity: 0,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '#systemsGrid',
+                start: 'top 80%'
+            }
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 100) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // Scroll progress
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        }, { passive: true });
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+
+            mobileMenuClose.addEventListener('click', function() {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+
+            mobileLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    lenis.scrollTo(target, { offset: -80 });
+                }
+            });
+        });
+
+        // 3D tilt effect for system cards
+        document.querySelectorAll('.system-card').forEach(function(card) {
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 25;
+                const rotateY = (centerX - x) / 25;
+                card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateZ(20px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+
+        // Parallax for comparison section
+        gsap.to('#comparisonGrid', {
+            y: -30,
+            scrollTrigger: {
+                trigger: '#comparison',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+            }
+        });
+
+        // Initial calculation
+        calculateROI();
     });
-    
-    // Hero Parallax
-    gsap.to('#hero h1', {
-      y: -80,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
-    });
-  </script>
+    </script>
 </body>
 </html>
