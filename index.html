@@ -33,6 +33,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <link rel="stylesheet" href="css/styles.css">
 <base target="_blank">
@@ -139,9 +140,9 @@
 
           <!-- Lead Developer Showcase -->
           <div class="hero-animate dev-showcase mt-8">
-            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/20 transition-all duration-500">
-              <img src="images/developer.jpg" alt="Lead Developer Coding" class="dev-photo">
-              <div>
+            <div class="dev-card">
+              <img src="images/developer.jpg" alt="Lead Developer Coding">
+              <div class="dev-card-info">
                 <p class="text-xs text-orange font-semibold uppercase tracking-wider mb-1">Lead Developer</p>
                 <p class="text-white font-bold text-sm">Building your next digital product</p>
                 <p class="text-gray-500 text-xs mt-1">Clean code. Fast delivery. Zero compromise.</p>
@@ -245,7 +246,7 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="offering-card group p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500 hover:-translate-y-2">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i data-lucide="globe" class="w-7 h-7 text-orange"></i>
+            <i class="fa-solid fa-code text-xl text-orange"></i>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Website Creation</h3>
           <p class="text-gray-400 text-sm leading-relaxed">SEO-dominant, conversion-optimized builds that turn visitors into customers.</p>
@@ -253,7 +254,7 @@
 
         <div class="offering-card group p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500 hover:-translate-y-2">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i data-lucide="smartphone" class="w-7 h-7 text-orange"></i>
+            <i class="fa-solid fa-mobile-screen text-xl text-orange"></i>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">App Creation</h3>
           <p class="text-gray-400 text-sm leading-relaxed">Native & cross-platform mobile + PWA development for iOS and Android.</p>
@@ -261,7 +262,7 @@
 
         <div class="offering-card group p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500 hover:-translate-y-2">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i data-lucide="cpu" class="w-7 h-7 text-orange"></i>
+            <i class="fa-solid fa-gears text-xl text-orange"></i>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Tailor-Fit Systems</h3>
           <p class="text-gray-400 text-sm leading-relaxed">Custom booking, inventory sync, client portals — built for your workflow.</p>
@@ -269,7 +270,7 @@
 
         <div class="offering-card group p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500 hover:-translate-y-2">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i data-lucide="trending-up" class="w-7 h-7 text-orange"></i>
+            <i class="fa-solid fa-chart-line text-xl text-orange"></i>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Digital Marketing</h3>
           <p class="text-gray-400 text-sm leading-relaxed">SEO, paid acquisition, and CRO that scales with your business goals.</p>
