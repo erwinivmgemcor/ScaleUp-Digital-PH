@@ -1,5 +1,5 @@
 /* ============================================
-   ScaleUp Digital — Custom Styles
+   ScaleUp Digital — Complete Custom Styles
    ============================================ */
 
 /* CSS Variables */
@@ -10,10 +10,10 @@
   --orange-glow: #FF5500;
   --orange-dim: #E53E3E;
   --white: #ffffff;
-  --gray-100: #f3f4f6;
   --gray-400: #9ca3af;
   --gray-500: #6b7280;
 }
+
 /* ==========================================
    Force-Constrain ALL Logo Images
    ========================================== */
@@ -27,7 +27,6 @@ img[src*="logo"] {
   flex-shrink: 0 !important;
 }
 
-/* Navbar anchor wrapper — hard clip */
 #navbar a:has(> .nav-logo) {
   display: flex !important;
   align-items: center !important;
@@ -36,12 +35,10 @@ img[src*="logo"] {
   flex-shrink: 0 !important;
 }
 
-/* Navbar inner row — clip anything that breaks out */
 #navbar .flex.items-center.justify-between {
   overflow: hidden !important;
   max-width: 100% !important;
 }
-
 
 /* Base */
 * {
@@ -222,19 +219,17 @@ body:hover .mouse-spotlight {
   height: 64px;
 }
 
-/* Navbar inner container — clip any overflow */
-#navbar .max-w-7xl {
-  overflow: visible;
-}
-
-#navbar .flex.items-center.justify-between {
-  overflow: hidden;
-  max-width: 100%;
-}
-
 /* Comparison Toggle */
 .comparison-toggle {
   position: relative;
+}
+
+.comparison-card {
+  transition: opacity 0.5s ease, filter 0.5s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.comparison-card:hover {
+  transform: translateY(-4px);
 }
 
 /* Niche Tabs */
@@ -336,97 +331,27 @@ select option {
   pointer-events: auto;
 }
 
-/* Animation Classes */
+/* ==========================================
+   Scroll Reveal Animations
+   ========================================== */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+              transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.reveal.visible {
+.reveal.animate-in {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Magnetic Button Effect */
-.magnetic-btn {
-  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* Responsive Cursor Hide on Touch */
-@media (hover: none) and (pointer: coarse) {
-  body {
-    cursor: auto;
-  }
-  .cursor-dot,
-  .cursor-follower,
-  .mouse-spotlight {
-    display: none;
-  }
-}
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-
-/* ==========================================
-   Nav Logo
-   ========================================== */
-
-
-/* ==========================================
-   Developer Photo
-   ========================================== */
-.dev-photo {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 107, 0, 0.1);
-  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
-  flex-shrink: 0;
-}
-
-.dev-showcase:hover .dev-photo {
-  transform: scale(1.03);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 107, 0, 0.25);
-}
-
-.dev-showcase {
-  max-width: 400px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 640px) {
-  .nav-logo {
-    height: 32px;
-    max-width: 140px;
-  }
-
-  .dev-photo {
-    width: 64px;
-    height: 64px;
-  }
-
-  .dev-showcase {
-    max-width: 100%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .nav-logo {
-    height: 44px;
-  }
-}
+/* Stagger delays for grouped reveals */
+.reveal:nth-child(1) { transition-delay: 0ms; }
+.reveal:nth-child(2) { transition-delay: 80ms; }
+.reveal:nth-child(3) { transition-delay: 160ms; }
+.reveal:nth-child(4) { transition-delay: 240ms; }
+.reveal:nth-child(5) { transition-delay: 320ms; }
 
 /* ==========================================
    Developer Card Layout
@@ -458,9 +383,81 @@ select option {
 .dev-card-info {
   padding: 1.5rem;
   flex: 1;
+  min-width: 0;
 }
 
-/* Keep old dev-showcase wrapper behavior */
 .dev-showcase {
   max-width: 100%;
+}
+
+/* ==========================================
+   Card Hover Transitions
+   ========================================== */
+.offering-card {
+  transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+}
+
+.offering-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.process-card {
+  transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.process-card:hover {
+  transform: translateY(-4px);
+}
+
+.founder-card {
+  transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.founder-card:hover {
+  transform: translateY(-4px);
+}
+
+.feature-mini {
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.feature-mini:hover {
+  transform: translateY(-2px);
+}
+
+.infra-stats {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.infra-stats:hover {
+  transform: translateY(-4px);
+}
+
+/* Magnetic Button Effect */
+.magnetic-btn {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Responsive Cursor Hide on Touch */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+  .cursor-dot,
+  .cursor-follower,
+  .mouse-spotlight {
+    display: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
