@@ -3,11 +3,24 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Lucide icons
-  lucide.createIcons();
 
   // ==========================================
-  // Lenis Smooth Scroll
+  // 1. Intersection Observer — Scroll Reveals
+  // ==========================================
+  const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ==========================================
+  // 2. Lenis Smooth Scroll
   // ==========================================
   const lenis = new Lenis({
     duration: 1.2,
@@ -21,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   requestAnimationFrame(raf);
 
-  // Integrate with GSAP ScrollTrigger
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
@@ -29,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.ticker.lagSmoothing(0);
 
   // ==========================================
-  // Custom Cursor
+  // 3. Custom Cursor
   // ==========================================
   const cursor = document.getElementById('cursor');
   const follower = document.getElementById('cursor-follower');
@@ -40,13 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top = mouseY + 'px';
-    spotlight.style.left = mouseX + 'px';
-    spotlight.style.top = mouseY + 'px';
+    if (cursor) {
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    }
+    if (spotlight) {
+      spotlight.style.left = mouseX + 'px';
+      spotlight.style.top = mouseY + 'px';
+    }
   });
 
   function animateFollower() {
+    if (!follower) return;
     followerX += (mouseX - followerX) * 0.1;
     followerY += (mouseY - followerY) * 0.1;
     follower.style.left = followerX + 'px';
@@ -55,30 +72,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   animateFollower();
 
-  // Cursor hover effects
   const hoverElements = document.querySelectorAll('a, button, input, textarea, select, .feature-chip');
   hoverElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
-      cursor.style.width = '12px';
-      cursor.style.height = '12px';
-      follower.style.width = '48px';
-      follower.style.height = '48px';
-      follower.style.borderColor = 'rgba(255, 107, 0, 0.6)';
+      if (cursor) { cursor.style.width = '12px'; cursor.style.height = '12px'; }
+      if (follower) { follower.style.width = '48px'; follower.style.height = '48px'; follower.style.borderColor = 'rgba(255, 107, 0, 0.6)'; }
     });
     el.addEventListener('mouseleave', () => {
-      cursor.style.width = '8px';
-      cursor.style.height = '8px';
-      follower.style.width = '32px';
-      follower.style.height = '32px';
-      follower.style.borderColor = 'rgba(255, 107, 0, 0.4)';
+      if (cursor) { cursor.style.width = '8px'; cursor.style.height = '8px'; }
+      if (follower) { follower.style.width = '32px'; follower.style.height = '32px'; follower.style.borderColor = 'rgba(255, 107, 0, 0.4)'; }
     });
   });
 
   // ==========================================
-  // Scroll Progress Bar
+  // 4. Scroll Progress Bar
   // ==========================================
   const scrollProgress = document.getElementById('scroll-progress');
   window.addEventListener('scroll', () => {
+    if (!scrollProgress) return;
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = (scrollTop / docHeight) * 100;
@@ -86,55 +97,49 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   // ==========================================
-  // Navbar Scroll Behavior
+  // 5. Navbar Scroll Behavior
   // ==========================================
   const navbar = document.getElementById('navbar');
-  let lastScroll = 0;
-
   window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-    if (currentScroll > 50) {
+    if (!navbar) return;
+    if (window.scrollY > 50) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
-    lastScroll = currentScroll;
   }, { passive: true });
 
   // ==========================================
-  // Mobile Menu
+  // 6. Mobile Menu
   // ==========================================
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   let menuOpen = false;
 
-  mobileMenuBtn.addEventListener('click', () => {
-    menuOpen = !menuOpen;
-    if (menuOpen) {
-      mobileMenu.classList.add('open');
-      mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-5 h-5"></i>';
-    } else {
-      mobileMenu.classList.remove('open');
-      mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-5 h-5"></i>';
-    }
-    lucide.createIcons();
-  });
-
-  document.querySelectorAll('.mobile-nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      menuOpen = false;
-      mobileMenu.classList.remove('open');
-      mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-5 h-5"></i>';
-      lucide.createIcons();
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+      mobileMenuBtn.innerHTML = menuOpen
+        ? '<i class="fa-solid fa-xmark w-5 h-5"></i>'
+        : '<i class="fa-solid fa-bars w-5 h-5"></i>';
     });
-  });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuOpen = false;
+        mobileMenu.classList.remove('open');
+        mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars w-5 h-5"></i>';
+      });
+    });
+  }
 
   // ==========================================
-  // GSAP Animations
+  // 7. GSAP Animations
   // ==========================================
   gsap.registerPlugin(ScrollTrigger);
 
-  // Hero animations
+  // Hero entrance
   gsap.from('.hero-animate', {
     y: 40,
     opacity: 0,
@@ -144,37 +149,19 @@ document.addEventListener('DOMContentLoaded', () => {
     delay: 0.3
   });
 
-  // Section reveals
-  const revealElements = document.querySelectorAll('.offering-card, .process-card, .founder-card, .feature-mini');
-  revealElements.forEach((el, i) => {
-    gsap.from(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      },
+  // Section heading reveals
+  document.querySelectorAll('section h2').forEach(h2 => {
+    gsap.from(h2, {
+      scrollTrigger: { trigger: h2, start: 'top 85%' },
       y: 30,
       opacity: 0,
       duration: 0.8,
-      delay: i * 0.05,
       ease: 'power3.out'
     });
   });
 
-  // Infrastructure stats
-  gsap.from('.infra-stats', {
-    scrollTrigger: {
-      trigger: '.infra-stats',
-      start: 'top 80%'
-    },
-    x: 50,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out'
-  });
-
   // ==========================================
-  // Comparison Toggle
+  // 8. Comparison Toggle
   // ==========================================
   const btnSocial = document.getElementById('btn-social');
   const btnScaleup = document.getElementById('btn-scaleup');
@@ -182,32 +169,44 @@ document.addEventListener('DOMContentLoaded', () => {
   const cardSocial = document.getElementById('card-social');
   const cardScaleup = document.getElementById('card-scaleup');
 
-  btnSocial.addEventListener('click', () => {
-    toggleIndicator.style.left = '4px';
-    btnSocial.classList.add('text-white');
-    btnSocial.classList.remove('text-gray-400');
-    btnScaleup.classList.add('text-gray-400');
-    btnScaleup.classList.remove('text-white');
-    cardSocial.style.opacity = '1';
-    cardSocial.style.filter = 'grayscale(0%)';
-    cardScaleup.style.opacity = '0.5';
-    cardScaleup.style.filter = 'grayscale(50%)';
-  });
+  if (btnSocial && btnScaleup && toggleIndicator && cardSocial && cardScaleup) {
+    function setSocialActive() {
+      toggleIndicator.style.left = '4px';
+      btnSocial.classList.add('text-white');
+      btnSocial.classList.remove('text-gray-400');
+      btnScaleup.classList.add('text-gray-400');
+      btnScaleup.classList.remove('text-white');
+      cardSocial.style.opacity = '1';
+      cardSocial.style.filter = 'grayscale(0%)';
+      cardSocial.style.transform = 'scale(1)';
+      cardScaleup.style.opacity = '0.5';
+      cardScaleup.style.filter = 'grayscale(50%)';
+      cardScaleup.style.transform = 'scale(0.98)';
+    }
 
-  btnScaleup.addEventListener('click', () => {
-    toggleIndicator.style.left = 'calc(50%)';
-    btnScaleup.classList.add('text-white');
-    btnScaleup.classList.remove('text-gray-400');
-    btnSocial.classList.add('text-gray-400');
-    btnSocial.classList.remove('text-white');
-    cardScaleup.style.opacity = '1';
-    cardScaleup.style.filter = 'grayscale(0%)';
-    cardSocial.style.opacity = '0.5';
-    cardSocial.style.filter = 'grayscale(50%)';
-  });
+    function setScaleupActive() {
+      toggleIndicator.style.left = 'calc(50%)';
+      btnScaleup.classList.add('text-white');
+      btnScaleup.classList.remove('text-gray-400');
+      btnSocial.classList.add('text-gray-400');
+      btnSocial.classList.remove('text-white');
+      cardScaleup.style.opacity = '1';
+      cardScaleup.style.filter = 'grayscale(0%)';
+      cardScaleup.style.transform = 'scale(1)';
+      cardSocial.style.opacity = '0.5';
+      cardSocial.style.filter = 'grayscale(50%)';
+      cardSocial.style.transform = 'scale(0.98)';
+    }
+
+    btnSocial.addEventListener('click', setSocialActive);
+    btnScaleup.addEventListener('click', setScaleupActive);
+
+    // Default: ScaleUp active
+    setScaleupActive();
+  }
 
   // ==========================================
-  // Niche Switcher
+  // 9. Niche Switcher
   // ==========================================
   const nicheTabs = document.querySelectorAll('.niche-tab');
   const nichePanels = document.querySelectorAll('.niche-panel');
@@ -215,28 +214,23 @@ document.addEventListener('DOMContentLoaded', () => {
   nicheTabs.forEach(tab => {
     tab.addEventListener('click', () => {
       const target = tab.dataset.niche;
-
       nicheTabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
 
       nichePanels.forEach(panel => {
         if (panel.dataset.panel === target) {
           panel.classList.remove('hidden');
-          setTimeout(() => {
-            panel.classList.add('active');
-          }, 50);
+          requestAnimationFrame(() => panel.classList.add('active'));
         } else {
           panel.classList.remove('active');
-          setTimeout(() => {
-            panel.classList.add('hidden');
-          }, 500);
+          setTimeout(() => panel.classList.add('hidden'), 500);
         }
       });
     });
   });
 
   // ==========================================
-  // ROI Calculator
+  // 10. ROI Calculator
   // ==========================================
   const leadsSlider = document.getElementById('leads-slider');
   const valueSlider = document.getElementById('value-slider');
@@ -247,25 +241,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const annualIncrease = document.getElementById('annual-increase');
 
   function calculateROI() {
+    if (!leadsSlider || !valueSlider) return;
     const leads = parseInt(leadsSlider.value);
     const avgValue = parseInt(valueSlider.value);
     const current = leads * avgValue;
-    const projected = current * 1.4; // 40% improvement
+    const projected = current * 1.4;
     const annual = (projected - current) * 12;
 
-    leadsValue.textContent = leads;
-    valueValue.textContent = avgValue.toLocaleString();
-    currentRevenue.textContent = '$' + current.toLocaleString();
-    projectedRevenue.textContent = '$' + Math.round(projected).toLocaleString();
-    annualIncrease.textContent = '$' + Math.round(annual).toLocaleString();
+    if (leadsValue) leadsValue.textContent = leads;
+    if (valueValue) valueValue.textContent = avgValue.toLocaleString();
+    if (currentRevenue) currentRevenue.textContent = '$' + current.toLocaleString();
+    if (projectedRevenue) projectedRevenue.textContent = '$' + Math.round(projected).toLocaleString();
+    if (annualIncrease) annualIncrease.textContent = '$' + Math.round(annual).toLocaleString();
   }
 
-  leadsSlider.addEventListener('input', calculateROI);
-  valueSlider.addEventListener('input', calculateROI);
+  if (leadsSlider) leadsSlider.addEventListener('input', calculateROI);
+  if (valueSlider) valueSlider.addEventListener('input', calculateROI);
   calculateROI();
 
   // ==========================================
-  // Feature Chips (Discovery Form)
+  // 11. Feature Chips (Discovery Form)
   // ==========================================
   const featureChips = document.querySelectorAll('.feature-chip');
   const selectedPreview = document.getElementById('selected-preview');
@@ -274,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
   featureChips.forEach(chip => {
     chip.addEventListener('click', () => {
       const feature = chip.dataset.feature;
-
       if (selectedFeatures.has(feature)) {
         selectedFeatures.delete(feature);
         chip.classList.remove('active');
@@ -282,12 +276,12 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedFeatures.add(feature);
         chip.classList.add('active');
       }
-
       updatePreview();
     });
   });
 
   function updatePreview() {
+    if (!selectedPreview) return;
     selectedPreview.innerHTML = '';
     selectedFeatures.forEach(feature => {
       const pill = document.createElement('span');
@@ -298,57 +292,58 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // Form Submit
+  // 12. Form Submit
   // ==========================================
   const scopeForm = document.getElementById('scope-form');
   const submitBtn = document.getElementById('submit-btn');
 
-  scopeForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const originalContent = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Sending...</span>';
-    submitBtn.disabled = true;
-
-    setTimeout(() => {
-      submitBtn.innerHTML = '<span class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i>Project Scope Sent!</span>';
-      submitBtn.classList.remove('from-orange', 'to-orange-dim');
-      submitBtn.classList.add('from-green-500', 'to-green-600');
-      lucide.createIcons();
+  if (scopeForm && submitBtn) {
+    scopeForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const originalContent = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<span class="flex items-center justify-center gap-2"><svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Sending...</span>';
+      submitBtn.disabled = true;
 
       setTimeout(() => {
-        submitBtn.innerHTML = originalContent;
-        submitBtn.disabled = false;
-        submitBtn.classList.add('from-orange', 'to-orange-dim');
-        submitBtn.classList.remove('from-green-500', 'to-green-600');
-        scopeForm.reset();
-        selectedFeatures.clear();
-        featureChips.forEach(c => c.classList.remove('active'));
-        updatePreview();
-        lucide.createIcons();
-      }, 3000);
-    }, 2000);
-  });
+        submitBtn.innerHTML = '<span class="flex items-center justify-center gap-2"><i class="fa-solid fa-check w-4 h-4"></i>Project Scope Sent!</span>';
+        submitBtn.classList.remove('from-orange', 'to-orange-dim');
+        submitBtn.classList.add('from-green-500', 'to-green-600');
+
+        setTimeout(() => {
+          submitBtn.innerHTML = originalContent;
+          submitBtn.disabled = false;
+          submitBtn.classList.add('from-orange', 'to-orange-dim');
+          submitBtn.classList.remove('from-green-500', 'to-green-600');
+          scopeForm.reset();
+          selectedFeatures.clear();
+          featureChips.forEach(c => c.classList.remove('active'));
+          updatePreview();
+        }, 3000);
+      }, 2000);
+    });
+  }
 
   // ==========================================
-  // Dynamic Year
+  // 13. Dynamic Year
   // ==========================================
-  document.getElementById('year').textContent = new Date().getFullYear();
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   // ==========================================
-  // Smooth Scroll for Anchor Links
+  // 14. Smooth Scroll for Anchor Links
   // ==========================================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
+      if (target && lenis) {
         lenis.scrollTo(target, { offset: -80 });
       }
     });
   });
 
   // ==========================================
-  // Magnetic Button Effect
+  // 15. Magnetic Button Effect
   // ==========================================
   const magneticBtns = document.querySelectorAll('.magnetic-btn');
   magneticBtns.forEach(btn => {
