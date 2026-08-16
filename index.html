@@ -14,474 +14,280 @@
         extend: {
           colors: {
             obsidian: '#0A0C10',
-            'obsidian-light': '#111318',
+            slate: '#12161F',
             orange: { DEFAULT: '#FF6B00', glow: '#FF5500', dim: '#E53E3E' }
-          },
-          fontFamily: {
-            sans: ['Inter', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
           }
         }
       }
     }
   </script>
 
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <link rel="stylesheet" href="css/styles.css">
 <base target="_blank">
 </head>
-<body class="bg-obsidian text-white antialiased overflow-x-hidden">
+<body>
 
+  <!-- Custom Cursor -->
   <div id="cursor" class="cursor-dot"></div>
   <div id="cursor-follower" class="cursor-follower"></div>
-  <div id="spotlight" class="mouse-spotlight"></div>
 
-  <div class="scroll-progress-container">
-    <div id="scroll-progress" class="scroll-progress-bar"></div>
-  </div>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress"><div id="scroll-progress-bar"></div></div>
 
-  <!-- Navigation -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        <a href="#" class="flex items-center gap-3 group">
-          <img src="images/logo.png" alt="ScaleUp Logo" class="nav-logo" style="height: 40px; width: auto; max-height: 40px; display: block;">
-        </a>
+  <!-- ========== NAVIGATION ========== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <img src="images/logo.png" alt="ScaleUp Logo" class="nav-logo">
+      </a>
 
-        <div class="hidden md:flex items-center gap-8">
-          <a href="#services" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Services</a>
-          <a href="#process" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Process</a>
-          <a href="#work" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Work</a>
-          <a href="#founders" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
-          <a href="#contact" class="magnetic-btn px-6 py-2.5 bg-gradient-to-r from-orange to-orange-dim text-white text-sm font-bold rounded-full hover:shadow-lg hover:shadow-orange/25 transition-all">Start Building</a>
-        </div>
-
-        <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10">
-          <i class="fa-solid fa-bars" class=""></i>
-        </button>
+      <div class="nav-links">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#founders" class="nav-link">About</a>
+        <a href="#contact" class="nav-cta">Start Building</a>
       </div>
+
+      <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
 
-    <div id="mobile-menu" class="md:hidden fixed inset-0 top-20 bg-obsidian/95 backdrop-blur-2xl border-t border-white/5 opacity-0 pointer-events-none transition-opacity duration-300">
-      <div class="flex flex-col items-center justify-center h-full gap-8">
-        <a href="#services" class="mobile-nav-link text-2xl font-bold text-white">Services</a>
-        <a href="#process" class="mobile-nav-link text-2xl font-bold text-white">Process</a>
-        <a href="#work" class="mobile-nav-link text-2xl font-bold text-white">Work</a>
-        <a href="#founders" class="mobile-nav-link text-2xl font-bold text-white">About</a>
-        <a href="#contact" class="mt-4 px-8 py-3 bg-gradient-to-r from-orange to-orange-dim text-white font-bold rounded-full">Start Building</a>
-      </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+      <a href="#services" class="mobile-link">Services</a>
+      <a href="#process" class="mobile-link">Process</a>
+      <a href="#work" class="mobile-link">Work</a>
+      <a href="#founders" class="mobile-link">About</a>
+      <a href="#contact" class="mobile-cta">Start Building</a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section id="hero" class="relative min-h-screen flex items-center overflow-hidden pt-20">
-    <div class="absolute inset-0">
-      <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 64px 64px;"></div>
+  <!-- ========== HERO ========== -->
+  <section id="hero" class="hero">
+    <div class="hero-bg">
       <div class="mesh-blob blob-1"></div>
       <div class="mesh-blob blob-2"></div>
       <div class="mesh-blob blob-3"></div>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 w-full">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-        <div class="space-y-8">
-          <div class="hero-animate reveal inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange/20 bg-orange/5 text-orange text-xs font-semibold tracking-wide uppercase">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-orange"></span>
-            </span>
+    <div class="hero-container">
+      <div class="hero-grid">
+        <!-- Left Content -->
+        <div class="hero-content">
+          <div class="hero-badge reveal">
+            <span class="pulse-dot"></span>
             ScaleUp Digital Agency
           </div>
 
-          <h1 class="hero-animate reveal text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight">
+          <h1 class="hero-title reveal">
             WE BUILD <span class="gradient-text">DIGITAL EXPERIENCES</span> THAT SCALE
           </h1>
 
-          <p class="hero-animate reveal text-base lg:text-lg text-gray-400 max-w-lg leading-relaxed">
+          <p class="hero-subtitle reveal">
             High-converting websites and powerful mobile apps engineered for speed, conversion, and long-term growth. Own your digital infrastructure.
           </p>
 
-          <div class="hero-animate reveal flex flex-wrap gap-4 pt-2">
-            <a href="#contact" class="group inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-orange to-orange-dim text-white font-bold rounded-full hover:shadow-lg hover:shadow-orange/25 transition-all duration-300">
-              Let's Talk
-              <i class="fa-solid fa-arrow-right" class="group-hover:translate-x-1 transition-transform"></i>
+          <div class="hero-buttons reveal">
+            <a href="#contact" class="btn-primary">
+              Let's Talk <i class="fa-solid fa-arrow-right"></i>
             </a>
-            <a href="#work" class="inline-flex items-center gap-2 px-7 py-3.5 border border-white/10 text-white font-semibold rounded-full hover:border-orange/40 hover:bg-orange/5 transition-all duration-300">
-              <i class="fa-solid fa-play" class=""></i>
-              View Our Work
+            <a href="#work" class="btn-secondary">
+              <i class="fa-solid fa-play"></i> View Our Work
             </a>
           </div>
 
-          <div class="hero-animate reveal flex flex-wrap gap-3 pt-4">
-            <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-gray-300">Website Creation</span>
-            <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-gray-300">App Creation</span>
-            <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-gray-300">Tailor-Fit Systems</span>
-            <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-gray-300">Digital Marketing</span>
+          <div class="hero-pills reveal">
+            <span class="pill">Website Creation</span>
+            <span class="pill">App Creation</span>
+            <span class="pill">Tailor-Fit Systems</span>
+            <span class="pill">Digital Marketing</span>
           </div>
 
-          <div class="hero-animate reveal flex items-center gap-6 pt-4">
-            <div class="flex -space-x-2.5">
-              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-orange to-orange-dim border-2 border-obsidian flex items-center justify-center text-[10px] font-bold text-white">RJ</div>
-              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-obsidian flex items-center justify-center text-[10px] font-bold text-white">RS</div>
-              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 border-2 border-obsidian flex items-center justify-center text-[10px] font-bold text-white">+</div>
+          <div class="hero-trust reveal">
+            <div class="trust-avatars">
+              <span class="avatar">RJ</span>
+              <span class="avatar alt">RS</span>
+              <span class="avatar alt2">+</span>
             </div>
-            <div class="text-sm text-gray-500">
-              <span class="text-white font-semibold">120+</span> projects delivered
-            </div>
+            <p><strong>120+</strong> projects delivered</p>
           </div>
 
-          <!-- Lead Developer Showcase -->
-          <div class="hero-animate reveal dev-showcase mt-8">
-            <div class="dev-card">
-              <img src="images/developer.jpg" alt="Lead Developer Coding">
-              <div class="dev-card-info">
-                <p class="text-xs text-orange font-semibold uppercase tracking-wider mb-1">Lead Developer</p>
-                <p class="text-white font-bold text-sm">Building your next digital product</p>
-                <p class="text-gray-500 text-xs mt-1">Clean code. Fast delivery. Zero compromise.</p>
-              </div>
+          <!-- Developer Showcase Card -->
+          <div class="dev-card reveal">
+            <img src="images/developer.jpg" alt="Lead Developer Coding">
+            <div class="dev-card-body">
+              <span class="dev-label">Lead Developer</span>
+              <h4>Building your next digital product</h4>
+              <p>Clean code. Fast delivery. Zero compromise.</p>
             </div>
           </div>
         </div>
 
-        <div class="hero-animate reveal relative flex justify-center lg:justify-end">
-          <div class="relative w-full max-w-xl">
-            <div class="absolute inset-0 bg-gradient-to-tr from-orange/20 to-transparent blur-3xl rounded-full scale-110"></div>
-            <img src="images/hero-laptop.jpg" alt="ScaleUp Digital Website on Laptop" class="relative z-10 w-full h-auto rounded-2xl shadow-2xl shadow-black/50 border border-white/[0.04]">
+        <!-- Right Image -->
+        <div class="hero-visual reveal">
+          <div class="hero-image-wrap">
+            <img src="images/hero-laptop.jpg" alt="ScaleUp Digital Website on Laptop">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Rented vs Owned Comparison -->
-  <section id="comparison" class="relative py-24 lg:py-32 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <p class="text-orange text-sm font-semibold tracking-widest uppercase mb-3">The Reality Check</p>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-          Rented vs. <span class="gradient-text">Owned</span>
-        </h2>
+  <!-- ========== COMPARISON ========== -->
+  <section id="comparison" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">The Reality Check</span>
+        <h2 class="section-title">Rented vs. <span class="gradient-text">Owned</span></h2>
       </div>
 
-      <div class="flex justify-center mb-12">
-        <div class="comparison-toggle relative inline-flex bg-white/[0.03] border border-white/[0.08] rounded-full p-1">
-          <div id="toggle-indicator" class="absolute top-1 left-1 w-[calc(50%-4px)] h-[calc(100%-8px)] bg-gradient-to-r from-orange to-orange-dim rounded-full transition-all duration-500" style="left: calc(50%);"></div>
-          <button id="btn-social" class="relative z-10 px-6 py-2.5 text-sm font-semibold rounded-full transition-colors text-gray-400">Social-Only</button>
-          <button id="btn-scaleup" class="relative z-10 px-6 py-2.5 text-sm font-semibold rounded-full transition-colors text-white">ScaleUp Platform</button>
+      <!-- Toggle -->
+      <div class="toggle-wrap reveal">
+        <div class="toggle-track">
+          <div class="toggle-pill" id="toggle-pill"></div>
+          <button class="toggle-btn active" data-side="social">Social-Only</button>
+          <button class="toggle-btn" data-side="scaleup">ScaleUp Platform</button>
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        <div id="card-social" class="comparison-card reveal glass-card p-8 rounded-3xl border border-white/[0.06] transition-all duration-500">
-          <div class="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center mb-6">
-            <i class="fa-solid fa-triangle-exclamation" class="text-red-400"></i>
+      <!-- Cards -->
+      <div class="comparison-grid">
+        <div class="comp-card" id="card-social" data-side="social">
+          <div class="comp-icon bad">
+            <i class="fa-solid fa-triangle-exclamation"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-4">Social-Only Business</h3>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3 text-gray-400">
-              <i class="fa-solid fa-xmark" class="text-red-400 mt-0.5 shrink-0"></i>
-              <span>Algorithm dependence — reach dies overnight</span>
-            </li>
-            <li class="flex items-start gap-3 text-gray-400">
-              <i class="fa-solid fa-xmark" class="text-red-400 mt-0.5 shrink-0"></i>
-              <span>Zero search visibility on Google</span>
-            </li>
-            <li class="flex items-start gap-3 text-gray-400">
-              <i class="fa-solid fa-xmark" class="text-red-400 mt-0.5 shrink-0"></i>
-              <span>Low trust = low conversion rates</span>
-            </li>
-            <li class="flex items-start gap-3 text-gray-400">
-              <i class="fa-solid fa-xmark" class="text-red-400 mt-0.5 shrink-0"></i>
-              <span>No ownership of customer data</span>
-            </li>
+          <h3>Social-Only Business</h3>
+          <ul>
+            <li><i class="fa-solid fa-xmark"></i> Algorithm dependence — reach dies overnight</li>
+            <li><i class="fa-solid fa-xmark"></i> Zero search visibility on Google</li>
+            <li><i class="fa-solid fa-xmark"></i> Low trust = low conversion rates</li>
+            <li><i class="fa-solid fa-xmark"></i> No ownership of customer data</li>
           </ul>
         </div>
 
-        <div id="card-scaleup" class="comparison-card reveal glass-card p-8 rounded-3xl border border-orange/20 transition-all duration-500">
-          <div class="w-14 h-14 rounded-2xl bg-orange/10 flex items-center justify-center mb-6">
-            <i class="fa-solid fa-circle-check" class="text-orange"></i>
+        <div class="comp-card active" id="card-scaleup" data-side="scaleup">
+          <div class="comp-icon good">
+            <i class="fa-solid fa-circle-check"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-4">ScaleUp Web Platform</h3>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3 text-gray-300">
-              <i class="fa-solid fa-check" class="text-orange mt-0.5 shrink-0"></i>
-              <span>Full brand ownership & control</span>
-            </li>
-            <li class="flex items-start gap-3 text-gray-300">
-              <i class="fa-solid fa-check" class="text-orange mt-0.5 shrink-0"></i>
-              <span>Automated lead funnels 24/7</span>
-            </li>
-            <li class="flex items-start gap-3 text-gray-300">
-              <i class="fa-solid fa-check" class="text-orange mt-0.5 shrink-0"></i>
-              <span>SEO dominance & organic traffic</span>
-            </li>
-            <li class="flex items-start gap-3 text-gray-300">
-              <i class="fa-solid fa-check" class="text-orange mt-0.5 shrink-0"></i>
-              <span>Own every pixel & data point</span>
-            </li>
+          <h3>ScaleUp Web Platform</h3>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Full brand ownership & control</li>
+            <li><i class="fa-solid fa-check"></i> Automated lead funnels 24/7</li>
+            <li><i class="fa-solid fa-check"></i> SEO dominance & organic traffic</li>
+            <li><i class="fa-solid fa-check"></i> Own every pixel & data point</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Core Offerings -->
-  <section id="services" class="relative py-24 lg:py-32">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <p class="text-orange text-sm font-semibold tracking-widest uppercase mb-3">What We Do</p>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-          Core <span class="gradient-text">Offerings</span>
-        </h2>
+  <!-- ========== CORE OFFERINGS ========== -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">Core <span class="gradient-text">Offerings</span></h2>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="offering-card reveal group p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500 hover:-translate-y-2">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-code text-xl text-orange"></i>
+      <div class="offerings-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fa-solid fa-code"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Website Creation</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">SEO-dominant, conversion-optimized builds that turn visitors into customers.</p>
+          <h3>Website Creation</h3>
+          <p>SEO-dominant, conversion-optimized builds that turn visitors into customers.</p>
         </div>
 
-        <div class="offering-card reveal group p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500 hover:-translate-y-2">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-mobile-screen text-xl text-orange"></i>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fa-solid fa-mobile-screen"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">App Creation</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Native & cross-platform mobile + PWA development for iOS and Android.</p>
+          <h3>App Creation</h3>
+          <p>Native & cross-platform mobile + PWA development for iOS and Android.</p>
         </div>
 
-        <div class="offering-card reveal group p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500 hover:-translate-y-2">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-gears text-xl text-orange"></i>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fa-solid fa-layer-group"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Tailor-Fit Systems</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Custom booking, inventory sync, client portals — built for your workflow.</p>
+          <h3>Tailor-Fit Systems</h3>
+          <p>Custom booking, inventory sync, client portals — built for your workflow.</p>
         </div>
 
-        <div class="offering-card reveal group p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500 hover:-translate-y-2">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-chart-line text-xl text-orange"></i>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <i class="fa-solid fa-chart-line"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Digital Marketing</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">SEO, paid acquisition, and CRO that scales with your business goals.</p>
+          <h3>Digital Marketing</h3>
+          <p>SEO, paid acquisition, and CRO that scales with your business goals.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Mobile App Showcase -->
-  <section id="work" class="relative py-24 lg:py-32 overflow-hidden">
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 64px 64px;"></div>
-
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <div class="relative order-2 lg:order-1">
-          <div class="absolute -inset-4 bg-gradient-to-r from-orange/10 to-orange-dim/5 blur-3xl rounded-3xl"></div>
-          <img src="images/mobile-showcase.jpg" alt="ScaleUp Digital Mobile App Showcase" class="relative z-10 w-full h-auto rounded-3xl border border-white/[0.05] shadow-2xl">
-          <div class="absolute -bottom-4 -right-4 lg:bottom-8 lg:-right-8 z-20 px-5 py-3 rounded-2xl bg-[#161616]/90 backdrop-blur-xl border border-white/10 shadow-xl">
-            <p class="text-xs text-gray-400 uppercase tracking-wider">App Store Rating</p>
-            <p class="text-2xl font-bold text-white">4.9<span class="text-orange">/5</span></p>
+  <!-- ========== MOBILE SHOWCASE ========== -->
+  <section id="work" class="section">
+    <div class="container">
+      <div class="showcase-grid">
+        <div class="showcase-visual reveal">
+          <div class="showcase-image-wrap">
+            <img src="images/mobile-showcase.jpg" alt="Mobile App Showcase">
+          </div>
+          <div class="showcase-badge">
+            <span>App Store Rating</span>
+            <p>4.9<span>/5</span></p>
           </div>
         </div>
 
-        <div class="order-1 lg:order-2 space-y-8">
-          <div>
-            <p class="text-orange text-sm font-semibold tracking-widest uppercase mb-3">Mobile Development</p>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
-              Apps That Feel <span class="gradient-text">Native</span>, Scale Like Enterprise
-            </h2>
-          </div>
+        <div class="showcase-content reveal">
+          <span class="section-label">Mobile Development</span>
+          <h2 class="section-title">Apps That Feel <span class="gradient-text">Native</span>, Scale Like Enterprise</h2>
+          <p class="showcase-text">From React Native to custom native builds, we craft mobile experiences with dark-mode-first UI, real-time sync, and conversion-optimized flows.</p>
 
-          <p class="text-gray-400 text-base lg:text-lg leading-relaxed max-w-md">
-            From React Native to custom native builds, we craft mobile experiences with dark-mode-first UI, real-time sync, and conversion-optimized flows.
-          </p>
-
-          <div class="grid sm:grid-cols-2 gap-5">
-            <div class="feature-mini reveal group p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-300">
-              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <i class="fa-solid fa-chart-bar" class="text-orange"></i>
-              </div>
-              <h4 class="text-white font-semibold text-sm mb-1">Custom Dashboards</h4>
-              <p class="text-gray-500 text-xs leading-relaxed">Real-time analytics built for your business metrics.</p>
-            </div>
-
-            <div class="feature-mini reveal group p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-300">
-              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <i class="fa-solid fa-bolt" class="text-orange"></i>
-              </div>
-              <h4 class="text-white font-semibold text-sm mb-1">Real-Time Tracking</h4>
-              <p class="text-gray-500 text-xs leading-relaxed">Live data sync with sub-second update latency.</p>
-            </div>
-
-            <div class="feature-mini reveal group p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-300">
-              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <i class="fa-solid fa-shield-halved" class="text-orange"></i>
-              </div>
-              <h4 class="text-white font-semibold text-sm mb-1">Enterprise Security</h4>
-              <p class="text-gray-500 text-xs leading-relaxed">End-to-end encryption and biometric authentication.</p>
-            </div>
-
-            <div class="feature-mini reveal group p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-300">
-              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange/20 to-orange-dim/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <i class="fa-solid fa-mobile-screen" class="text-orange"></i>
-              </div>
-              <h4 class="text-white font-semibold text-sm mb-1">Seamless UX</h4>
-              <p class="text-gray-500 text-xs leading-relaxed">60fps animations with full gesture support.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Process Section -->
-  <section id="process" class="relative py-24 lg:py-32">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <p class="text-orange text-sm font-semibold tracking-widest uppercase mb-3">Our Process</p>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-          Simple. Clear. <span class="gradient-text">Effective.</span>
-        </h2>
-      </div>
-
-      <div class="relative mb-16 rounded-3xl overflow-hidden border border-white/[0.06]">
-        <img src="images/process-flow.jpg" alt="ScaleUp Digital 5-Step Process" class="w-full h-auto object-cover">
-        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-obsidian to-transparent"></div>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        <div class="process-card reveal group relative p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500">
-          <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gradient-to-br from-orange to-orange-dim flex items-center justify-center text-xs font-bold text-white shadow-lg">1</div>
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange/15 to-transparent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <i class="fa-solid fa-magnifying-glass" class="text-orange"></i>
-          </div>
-          <h3 class="text-white font-bold text-lg mb-2">Discover</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Deep stakeholder interviews to understand your goals and challenges.</p>
-        </div>
-
-        <div class="process-card reveal group relative p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500">
-          <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gradient-to-br from-orange to-orange-dim flex items-center justify-center text-xs font-bold text-white shadow-lg">2</div>
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange/15 to-transparent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <i class="fa-solid fa-clipboard-list" class="text-orange"></i>
-          </div>
-          <h3 class="text-white font-bold text-lg mb-2">Plan</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Tailored strategy, tech stack, and roadmap with clear milestones.</p>
-        </div>
-
-        <div class="process-card reveal group relative p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500">
-          <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gradient-to-br from-orange to-orange-dim flex items-center justify-center text-xs font-bold text-white shadow-lg">3</div>
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange/15 to-transparent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <i class="fa-solid fa-pen-nib" class="text-orange"></i>
-          </div>
-          <h3 class="text-white font-bold text-lg mb-2">Design</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Pixel-perfect, conversion-focused UI/UX with interactive prototypes.</p>
-        </div>
-
-        <div class="process-card reveal group relative p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500">
-          <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gradient-to-br from-orange to-orange-dim flex items-center justify-center text-xs font-bold text-white shadow-lg">4</div>
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange/15 to-transparent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <i class="fa-solid fa-code" class="text-orange"></i>
-          </div>
-          <h3 class="text-white font-bold text-lg mb-2">Develop</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Clean, scalable code with automated testing and CI/CD pipelines.</p>
-        </div>
-
-        <div class="process-card reveal group relative p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-orange/30 transition-all duration-500">
-          <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gradient-to-br from-orange to-orange-dim flex items-center justify-center text-xs font-bold text-white shadow-lg">5</div>
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange/15 to-transparent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <i class="fa-solid fa-rocket" class="text-orange"></i>
-          </div>
-          <h3 class="text-white font-bold text-lg mb-2">Launch</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Deploy, monitor, and optimize with ongoing post-launch support.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Infrastructure Section -->
-  <section id="infrastructure" class="relative min-h-[600px] flex items-center overflow-hidden">
-    <div class="absolute inset-0">
-      <img src="images/server-room.jpg" alt="High-Performance Server Infrastructure" class="absolute inset-0 w-full h-full object-cover">
-      <div class="absolute inset-0 bg-obsidian/80"></div>
-      <div class="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/70 to-transparent"></div>
-    </div>
-
-    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 w-full">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div class="space-y-8">
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange/20 bg-orange/10 text-orange text-xs font-semibold tracking-wide uppercase">
-            <i class="fa-solid fa-server" class=""></i>
-            Infrastructure & Hosting
-          </div>
-
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
-            Backend That <span class="gradient-text">Never Sleeps</span>
-          </h2>
-
-          <p class="text-gray-400 text-base lg:text-lg leading-relaxed max-w-lg">
-            Enterprise-grade cloud infrastructure with auto-scaling, DDoS protection, and global CDN distribution. Your app stays fast, secure, and available.
-          </p>
-
-          <div class="grid grid-cols-2 gap-4 max-w-md">
-            <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-              <i class="fa-solid fa-cloud" class="text-orange"></i>
-              <span class="text-sm text-gray-300 font-medium">Auto-Scaling Cloud</span>
-            </div>
-            <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-              <i class="fa-solid fa-lock" class="text-orange"></i>
-              <span class="text-sm text-gray-300 font-medium">Enterprise Security</span>
-            </div>
-            <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-              <i class="fa-solid fa-gauge-high" class="text-orange"></i>
-              <span class="text-sm text-gray-300 font-medium">Global CDN</span>
-            </div>
-            <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-              <i class="fa-solid fa-server" class="text-orange"></i>
-              <span class="text-sm text-gray-300 font-medium">Dedicated Hosting</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:justify-self-end w-full max-w-md">
-          <div class="infra-stats reveal p-8 rounded-3xl bg-obsidian/60 backdrop-blur-2xl border border-white/[0.08] shadow-2xl">
-            <p class="text-xs text-gray-500 uppercase tracking-widest mb-6 font-semibold">Performance Metrics</p>
-            <div class="grid grid-cols-2 gap-6">
-              <div class="space-y-1">
-                <p class="text-2xl lg:text-3xl font-extrabold text-white">99.99%</p>
-                <p class="text-xs text-gray-500">Uptime SLA</p>
-              </div>
-              <div class="space-y-1">
-                <p class="text-2xl lg:text-3xl font-extrabold text-white">280+</p>
-                <p class="text-xs text-gray-500">Global CDN Nodes</p>
-              </div>
-              <div class="space-y-1">
-                <p class="text-2xl lg:text-3xl font-extrabold text-white">&lt;45ms</p>
-                <p class="text-xs text-gray-500">Avg Response</p>
-              </div>
-              <div class="space-y-1">
-                <p class="text-2xl lg:text-3xl font-extrabold text-white">12</p>
-                <p class="text-xs text-gray-500">Data Centers</p>
+          <div class="showcase-features">
+            <div class="feature-item reveal">
+              <div class="feature-icon"><i class="fa-solid fa-chart-bar"></i></div>
+              <div>
+                <h4>Custom Dashboards</h4>
+                <p>Real-time analytics built for your business metrics.</p>
               </div>
             </div>
-            <div class="mt-8 pt-6 border-t border-white/[0.06]">
-              <div class="flex items-center justify-between text-sm">
-                <span class="text-gray-400">Server Status</span>
-                <span class="flex items-center gap-2 text-emerald-400 font-medium">
-                  <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-                  </span>
-                  All Systems Operational
-                </span>
+            <div class="feature-item reveal">
+              <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+              <div>
+                <h4>Real-Time Tracking</h4>
+                <p>Live data sync with sub-second update latency.</p>
+              </div>
+            </div>
+            <div class="feature-item reveal">
+              <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+              <div>
+                <h4>Enterprise Security</h4>
+                <p>End-to-end encryption and biometric authentication.</p>
+              </div>
+            </div>
+            <div class="feature-item reveal">
+              <div class="feature-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+              <div>
+                <h4>Seamless UX</h4>
+                <p>60fps animations with full gesture support.</p>
               </div>
             </div>
           </div>
@@ -490,168 +296,186 @@
     </div>
   </section>
 
-  <!-- Niche Switcher -->
-  <section id="niches" class="relative py-24 lg:py-32">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <p class="text-orange text-sm font-semibold tracking-widest uppercase mb-3">Industry Solutions</p>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-          Built For Your <span class="gradient-text">Niche</span>
-        </h2>
+  <!-- ========== PROCESS ========== -->
+  <section id="process" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Our Process</span>
+        <h2 class="section-title">Simple. Clear. <span class="gradient-text">Effective.</span></h2>
       </div>
 
-      <div class="flex flex-wrap justify-center gap-3 mb-12">
-        <button class="niche-tab active px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 border" data-niche="ecommerce">E-Commerce & Retail</button>
-        <button class="niche-tab px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 border" data-niche="b2b">B2B & Professional</button>
-        <button class="niche-tab px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 border" data-niche="creative">Creative & Agency</button>
-        <button class="niche-tab px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 border" data-niche="realestate">Real Estate</button>
+      <div class="process-image reveal">
+        <img src="images/process-flow.jpg" alt="5-Step Process">
       </div>
 
-      <div id="niche-content" class="relative min-h-[400px]">
+      <div class="process-grid">
+        <div class="process-card reveal">
+          <span class="process-num">1</span>
+          <div class="process-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>Discover</h3>
+          <p>Deep stakeholder interviews to understand your goals and challenges.</p>
+        </div>
+        <div class="process-card reveal">
+          <span class="process-num">2</span>
+          <div class="process-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+          <h3>Plan</h3>
+          <p>Tailored strategy, tech stack, and roadmap with clear milestones.</p>
+        </div>
+        <div class="process-card reveal">
+          <span class="process-num">3</span>
+          <div class="process-icon"><i class="fa-solid fa-pen-nib"></i></div>
+          <h3>Design</h3>
+          <p>Pixel-perfect, conversion-focused UI/UX with interactive prototypes.</p>
+        </div>
+        <div class="process-card reveal">
+          <span class="process-num">4</span>
+          <div class="process-icon"><i class="fa-solid fa-code"></i></div>
+          <h3>Develop</h3>
+          <p>Clean, scalable code with automated testing and CI/CD pipelines.</p>
+        </div>
+        <div class="process-card reveal">
+          <span class="process-num">5</span>
+          <div class="process-icon"><i class="fa-solid fa-rocket"></i></div>
+          <h3>Launch</h3>
+          <p>Deploy, monitor, and optimize with ongoing post-launch support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INFRASTRUCTURE ========== -->
+  <section id="infrastructure" class="infra-section">
+    <div class="infra-bg">
+      <img src="images/server-room.jpg" alt="Server Infrastructure">
+      <div class="infra-overlay"></div>
+    </div>
+
+    <div class="infra-container">
+      <div class="infra-grid">
+        <div class="infra-content reveal">
+          <div class="infra-badge">
+            <i class="fa-solid fa-server"></i> Infrastructure & Hosting
+          </div>
+          <h2>Backend That <span class="gradient-text">Never Sleeps</span></h2>
+          <p>Enterprise-grade cloud infrastructure with auto-scaling, DDoS protection, and global CDN distribution. Your app stays fast, secure, and available.</p>
+
+          <div class="infra-tags">
+            <span><i class="fa-solid fa-cloud"></i> Auto-Scaling Cloud</span>
+            <span><i class="fa-solid fa-lock"></i> Enterprise Security</span>
+            <span><i class="fa-solid fa-gauge-high"></i> Global CDN</span>
+            <span><i class="fa-solid fa-server"></i> Dedicated Hosting</span>
+          </div>
+        </div>
+
+        <div class="infra-stats reveal">
+          <h4>Performance Metrics</h4>
+          <div class="stats-grid">
+            <div><p class="stat-value">99.99%</p><p class="stat-label">Uptime SLA</p></div>
+            <div><p class="stat-value">280+</p><p class="stat-label">Global CDN Nodes</p></div>
+            <div><p class="stat-value">&lt;45ms</p><p class="stat-label">Avg Response</p></div>
+            <div><p class="stat-value">12</p><p class="stat-label">Data Centers</p></div>
+          </div>
+          <div class="status-bar">
+            <span>Server Status</span>
+            <span class="status-live"><span class="live-dot"></span>All Systems Operational</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NICHE SWITCHER ========== -->
+  <section id="niches" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Industry Solutions</span>
+        <h2 class="section-title">Built For Your <span class="gradient-text">Niche</span></h2>
+      </div>
+
+      <div class="niche-tabs reveal">
+        <button class="niche-tab active" data-niche="ecommerce">E-Commerce & Retail</button>
+        <button class="niche-tab" data-niche="b2b">B2B & Professional</button>
+        <button class="niche-tab" data-niche="creative">Creative & Agency</button>
+        <button class="niche-tab" data-niche="realestate">Real Estate</button>
+      </div>
+
+      <div class="niche-panels">
+        <!-- E-Commerce -->
         <div class="niche-panel active" data-panel="ecommerce">
-          <div class="grid lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-6">
-              <h3 class="text-2xl font-bold text-white">E-Commerce & Retail</h3>
-              <p class="text-gray-400">High-conversion storefronts with inventory sync, abandoned cart recovery, and one-click checkout.</p>
-              <div class="grid sm:grid-cols-3 gap-4">
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">3.2x</p>
-                  <p class="text-xs text-gray-500">Avg Revenue Increase</p>
-                </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">0.8s</p>
-                  <p class="text-xs text-gray-500">Load Time</p>
-                </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">24%</p>
-                  <p class="text-xs text-gray-500">Cart Recovery</p>
-                </div>
+          <div class="niche-layout">
+            <div class="niche-main">
+              <h3>E-Commerce & Retail</h3>
+              <p>High-conversion storefronts with inventory sync, abandoned cart recovery, and one-click checkout.</p>
+              <div class="niche-metrics">
+                <div><p>3.2x</p><span>Avg Revenue Increase</span></div>
+                <div><p>0.8s</p><span>Load Time</span></div>
+                <div><p>24%</p><span>Cart Recovery</span></div>
               </div>
             </div>
-            <div class="space-y-4">
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-cart-shopping" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Custom Checkout Logic</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-box" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Inventory Sync</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-credit-card" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Multi-Gateway Payments</span>
-              </div>
+            <div class="niche-features">
+              <div class="niche-feature"><i class="fa-solid fa-cart-shopping"></i><span>Custom Checkout Logic</span></div>
+              <div class="niche-feature"><i class="fa-solid fa-box"></i><span>Inventory Sync</span></div>
+              <div class="niche-feature"><i class="fa-solid fa-credit-card"></i><span>Multi-Gateway Payments</span></div>
             </div>
           </div>
         </div>
 
-        <div class="niche-panel hidden" data-panel="b2b">
-          <div class="grid lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-6">
-              <h3 class="text-2xl font-bold text-white">B2B & Professional Services</h3>
-              <p class="text-gray-400">Lead generation machines with CRM integration, proposal tools, and client portals.</p>
-              <div class="grid sm:grid-cols-3 gap-4">
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">5x</p>
-                  <p class="text-xs text-gray-500">Lead Volume</p>
-                </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">68%</p>
-                  <p class="text-xs text-gray-500">Qualification Rate</p>
-                </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">2.4x</p>
-                  <p class="text-xs text-gray-500">Pipeline Velocity</p>
-                </div>
+        <!-- B2B -->
+        <div class="niche-panel" data-panel="b2b">
+          <div class="niche-layout">
+            <div class="niche-main">
+              <h3>B2B & Professional Services</h3>
+              <p>Lead generation machines with CRM integration, proposal tools, and client portals.</p>
+              <div class="niche-metrics">
+                <div><p>5x</p><span>Lead Volume</span></div>
+                <div><p>68%</p><span>Qualification Rate</span></div>
+                <div><p>2.4x</p><span>Pipeline Velocity</span></div>
               </div>
             </div>
-            <div class="space-y-4">
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-users" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Client Portals</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-file-lines" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Proposal Automation</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-chart-column" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Analytics Dashboard</span>
-              </div>
+            <div class="niche-features">
+              <div class="niche-feature"><i class="fa-solid fa-users"></i><span>Client Portals</span></div>
+              <div class="niche-feature"><i class="fa-solid fa-file-lines"></i><span>Proposal Automation</span></div>
+              <div class="niche-feature"><i class="fa-solid fa-chart-column"></i><span>Analytics Dashboard</span></div>
             </div>
           </div>
         </div>
 
-        <div class="niche-panel hidden" data-panel="creative">
-          <div class="grid lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-6">
-              <h3 class="text-2xl font-bold text-white">Creative & Agency Portfolios</h3>
-              <p class="text-gray-400">Showcase work with immersive galleries, case study layouts, and instant proposal generation.</p>
-              <div class="grid sm:grid-cols-3 gap-4">
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">4.5x</p>
-                  <p class="text-xs text-gray-500">Time on Site</p>
-                </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">89%</p>
-                  <p class="text-xs text-gray-500">Portfolio Views</p>
-                </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">3.1x</p>
-                  <p class="text-xs text-gray-500">Inquiry Rate</p>
-                </div>
+        <!-- Creative -->
+        <div class="niche-panel" data-panel="creative">
+          <div class="niche-layout">
+            <div class="niche-main">
+              <h3>Creative & Agency Portfolios</h3>
+              <p>Showcase work with immersive galleries, case study layouts, and instant proposal generation.</p>
+              <div class="niche-metrics">
+                <div><p>4.5x</p><span>Time on Site</span></div>
+                <div><p>89%</p><span>Portfolio Views</span></div>
+                <div><p>3.1x</p><span>Inquiry Rate</span></div>
               </div>
             </div>
-            <div class="space-y-4">
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-image" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Immersive Galleries</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-briefcase" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Case Study Builder</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-envelope" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Instant Proposals</span>
-              </div>
+            <div class="niche-features">
+              <div class="niche-feature"><i class="fa-solid fa-image"></i><span>Immersive Galleries</span></div>
+              <div class="niche-feature"><i class="fa-solid fa-briefcase"></i><span>Case Study Builder</span></div>
+              <div class="niche-feature"><i class="fa-solid fa-envelope"></i><span>Instant Proposals</span></div>
             </div>
           </div>
         </div>
 
-        <div class="niche-panel hidden" data-panel="realestate">
-          <div class="grid lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-6">
-              <h3 class="text-2xl font-bold text-white">Real Estate & Bookings</h3>
-              <p class="text-gray-400">Property listings with virtual tours, booking calendars, and mortgage calculators.</p>
-              <div class="grid sm:grid-cols-3 gap-4">
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">6x</p>
-                  <p class="text-xs text-gray-500">Tour Bookings</p>
-                </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">42%</p>
-                  <p class="text-xs text-gray-500">Lead Capture</p>
-                </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <p class="text-2xl font-bold text-orange mb-1">2.8x</p>
-                  <p class="text-xs text-gray-500">Listing Views</p>
-                </div>
+        <!-- Real Estate -->
+        <div class="niche-panel" data-panel="realestate">
+          <div class="niche-layout">
+            <div class="niche-main">
+              <h3>Real Estate & Bookings</h3>
+              <p>Property listings with virtual tours, booking calendars, and mortgage calculators.</p>
+              <div class="niche-metrics">
+                <div><p>6x</p><span>Tour Bookings</span></div>
+                <div><p>42%</p><span>Lead Capture</span></div>
+                <div><p>2.8x</p><span>Listing Views</span></div>
               </div>
             </div>
-            <div class="space-y-4">
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-calendar" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Booking Calendar</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-video" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Virtual Tours</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <i class="fa-solid fa-calculator" class="text-orange"></i>
-                <span class="text-sm text-gray-300">Mortgage Calculator</span>
-              </div>
+            <div class="niche-features">
+              <div class="niche-feature"><i class="fa-solid fa-calendar"></i><span>Booking Calendar</span></div>
+              <div class="niche-feature"><i class="fa-solid fa-video"></i><span>Virtual Tours</span></div>
+              <div class="niche-feature"><i class="fa-solid fa-calculator"></i><span>Mortgage Calculator</span></div>
             </div>
           </div>
         </div>
@@ -659,284 +483,207 @@
     </div>
   </section>
 
-  <!-- ROI Calculator -->
-  <section id="calculator" class="relative py-24 lg:py-32 overflow-hidden">
-    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 64px 64px;"></div>
-
-    <div class="max-w-4xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <p class="text-orange text-sm font-semibold tracking-widest uppercase mb-3">Revenue Projection</p>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-          Calculate Your <span class="gradient-text">ROI</span>
-        </h2>
+  <!-- ========== ROI CALCULATOR ========== -->
+  <section id="calculator" class="section calc-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Revenue Projection</span>
+        <h2 class="section-title">Calculate Your <span class="gradient-text">ROI</span></h2>
       </div>
 
-      <div class="glass-card p-8 lg:p-12 rounded-3xl border border-white/[0.06]">
-        <div class="grid md:grid-cols-2 gap-12 mb-12">
-          <div class="space-y-6">
-            <div class="flex justify-between items-center">
-              <label class="text-sm font-semibold text-gray-300">Monthly Leads</label>
-              <span id="leads-value" class="text-2xl font-bold text-orange">50</span>
+      <div class="calc-card reveal">
+        <div class="calc-sliders">
+          <div class="slider-group">
+            <div class="slider-header">
+              <label>Monthly Leads</label>
+              <span id="leads-display">50</span>
             </div>
-            <input type="range" id="leads-slider" min="10" max="1000" value="50" class="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer accent-orange">
-            <div class="flex justify-between text-xs text-gray-500">
-              <span>10</span>
-              <span>1000</span>
-            </div>
+            <input type="range" id="leads-slider" min="10" max="1000" value="50">
+            <div class="slider-labels"><span>10</span><span>1000</span></div>
           </div>
 
-          <div class="space-y-6">
-            <div class="flex justify-between items-center">
-              <label class="text-sm font-semibold text-gray-300">Avg. Client Value ($)</label>
-              <span id="value-value" class="text-2xl font-bold text-orange">2,000</span>
+          <div class="slider-group">
+            <div class="slider-header">
+              <label>Avg. Client Value ($)</label>
+              <span id="value-display">2,000</span>
             </div>
-            <input type="range" id="value-slider" min="500" max="50000" value="2000" step="500" class="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer accent-orange">
-            <div class="flex justify-between text-xs text-gray-500">
-              <span>$500</span>
-              <span>$50k</span>
-            </div>
+            <input type="range" id="value-slider" min="500" max="50000" value="2000" step="500">
+            <div class="slider-labels"><span>$500</span><span>$50k</span></div>
           </div>
         </div>
 
-        <div class="grid sm:grid-cols-3 gap-6">
-          <div class="text-center p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-            <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Current Monthly</p>
-            <p id="current-revenue" class="text-3xl font-extrabold text-white">$100,000</p>
+        <div class="calc-results">
+          <div class="result-box">
+            <span class="result-label">Current Monthly</span>
+            <span class="result-value" id="current-revenue">$100,000</span>
           </div>
-          <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-orange/10 to-orange-dim/5 border border-orange/20">
-            <p class="text-xs text-orange uppercase tracking-wider mb-2">With ScaleUp</p>
-            <p id="projected-revenue" class="text-3xl font-extrabold text-orange">$140,000</p>
+          <div class="result-box highlight">
+            <span class="result-label">With ScaleUp</span>
+            <span class="result-value" id="projected-revenue">$140,000</span>
           </div>
-          <div class="text-center p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-            <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Annual Increase</p>
-            <p id="annual-increase" class="text-3xl font-extrabold text-white">$480,000</p>
+          <div class="result-box">
+            <span class="result-label">Annual Increase</span>
+            <span class="result-value" id="annual-increase">$480,000</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Founders Section -->
-  <section id="founders" class="relative py-24 lg:py-32">
-    <div class="max-w-5xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <p class="text-orange text-sm font-semibold tracking-widest uppercase mb-3">The Team</p>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-          Meet The <span class="gradient-text">Founders</span>
-        </h2>
+  <!-- ========== FOUNDERS ========== -->
+  <section id="founders" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">The Team</span>
+        <h2 class="section-title">Meet The <span class="gradient-text">Founders</span></h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        <div class="founder-card reveal glass-card p-8 rounded-3xl border border-white/[0.06] hover:border-orange/20 transition-all duration-500 group">
-          <div class="flex items-center gap-6 mb-6">
-            <div class="relative">
-              <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange to-orange-dim flex items-center justify-center text-2xl font-bold text-white shadow-lg shadow-orange/20">
-                RJ
-              </div>
-              <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-green-500 border-2 border-obsidian"></div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-white">Rj Vincent Layante</h3>
-              <p class="text-orange text-sm font-medium">Co-Founder & Technical Lead</p>
-              <p class="text-gray-500 text-xs mt-1">Business Development</p>
+      <div class="founders-grid">
+        <div class="founder-card reveal">
+          <div class="founder-header">
+            <div class="founder-avatar orange">RJ</div>
+            <div class="founder-meta">
+              <h3>Rj Vincent Layante</h3>
+              <p class="founder-role">Co-Founder & Technical Lead</p>
+              <p class="founder-sub">Business Development</p>
             </div>
           </div>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            Full-stack architect with 8+ years building scalable systems for startups and enterprises. Obsessed with clean code, performance, and business outcomes.
-          </p>
-          <div class="flex gap-3">
-            <a href="#" class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-400 hover:text-orange hover:border-orange/30 transition-all">
-              <i class="fa-brands fa-linkedin" class=""></i>
-            </a>
-            <a href="#" class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-400 hover:text-orange hover:border-orange/30 transition-all">
-              <i class="fa-brands fa-facebook" class=""></i>
-            </a>
-            <a href="#" class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-400 hover:text-orange hover:border-orange/30 transition-all">
-              <i class="fa-brands fa-github" class=""></i>
-            </a>
+          <p class="founder-bio">Full-stack architect with 8+ years building scalable systems for startups and enterprises. Obsessed with clean code, performance, and business outcomes.</p>
+          <div class="founder-social">
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-github"></i></a>
           </div>
         </div>
 
-        <div class="founder-card reveal glass-card p-8 rounded-3xl border border-white/[0.06] hover:border-orange/20 transition-all duration-500 group">
-          <div class="flex items-center gap-6 mb-6">
-            <div class="relative">
-              <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-2xl font-bold text-white shadow-lg shadow-purple-500/20">
-                RS
-              </div>
-              <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-green-500 border-2 border-obsidian"></div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-white">Ryan Singh</h3>
-              <p class="text-orange text-sm font-medium">Co-Founder & Creative Director</p>
-              <p class="text-gray-500 text-xs mt-1">Web Developer</p>
+        <div class="founder-card reveal">
+          <div class="founder-header">
+            <div class="founder-avatar purple">RS</div>
+            <div class="founder-meta">
+              <h3>Ryan Singh</h3>
+              <p class="founder-role">Co-Founder & Creative Director</p>
+              <p class="founder-sub">Web Developer</p>
             </div>
           </div>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            Design-driven developer crafting pixel-perfect interfaces. 7+ years turning complex requirements into intuitive, award-winning digital experiences.
-          </p>
-          <div class="flex gap-3">
-            <a href="#" class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-400 hover:text-orange hover:border-orange/30 transition-all">
-              <i class="fa-brands fa-linkedin" class=""></i>
-            </a>
-            <a href="#" class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-400 hover:text-orange hover:border-orange/30 transition-all">
-              <i class="fa-brands fa-facebook" class=""></i>
-            </a>
-            <a href="#" class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-400 hover:text-orange hover:border-orange/30 transition-all">
-              <i class="fa-brands fa-dribbble" class=""></i>
-            </a>
+          <p class="founder-bio">Design-driven developer crafting pixel-perfect interfaces. 7+ years turning complex requirements into intuitive, award-winning digital experiences.</p>
+          <div class="founder-social">
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-dribbble"></i></a>
           </div>
         </div>
       </div>
 
-      <div class="mt-12 text-center">
-        <div class="inline-flex items-center gap-6 px-8 py-4 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-          <div class="text-center">
-            <p class="text-2xl font-bold text-white">15+</p>
-            <p class="text-xs text-gray-500">Years Combined</p>
-          </div>
-          <div class="w-px h-10 bg-white/[0.08]"></div>
-          <div class="text-center">
-            <p class="text-2xl font-bold text-white">120+</p>
-            <p class="text-xs text-gray-500">Clients Delivered</p>
-          </div>
-          <div class="w-px h-10 bg-white/[0.08]"></div>
-          <div class="text-center">
-            <p class="text-2xl font-bold text-white">98%</p>
-            <p class="text-xs text-gray-500">Retention Rate</p>
-          </div>
-        </div>
+      <div class="founder-stats reveal">
+        <div><p>15+</p><span>Years Combined</span></div>
+        <div class="vline"></div>
+        <div><p>120+</p><span>Clients Delivered</span></div>
+        <div class="vline"></div>
+        <div><p>98%</p><span>Retention Rate</span></div>
       </div>
     </div>
   </section>
 
-  <!-- Discovery Form -->
-  <section id="contact" class="relative py-24 lg:py-32">
-    <div class="max-w-3xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <p class="text-orange text-sm font-semibold tracking-widest uppercase mb-3">Start Your Project</p>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-          Project <span class="gradient-text">Scope Builder</span>
-        </h2>
+  <!-- ========== DISCOVERY FORM ========== -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Start Your Project</span>
+        <h2 class="section-title">Project <span class="gradient-text">Scope Builder</span></h2>
       </div>
 
-      <div class="glass-card p-8 lg:p-12 rounded-3xl border border-white/[0.06]">
-        <form id="scope-form" class="space-y-8">
-          <div>
-            <label class="block text-sm font-semibold text-gray-300 mb-4">What do you need?</label>
-            <div class="flex flex-wrap gap-3" id="feature-chips">
-              <button type="button" class="feature-chip px-5 py-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-sm text-gray-400 hover:border-orange/40 hover:text-white transition-all" data-feature="Website Creation">
-                <i class="fa-solid fa-globe" class="inline mr-2"></i>Website Creation
-              </button>
-              <button type="button" class="feature-chip px-5 py-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-sm text-gray-400 hover:border-orange/40 hover:text-white transition-all" data-feature="App Creation">
-                <i class="fa-solid fa-mobile-screen" class="inline mr-2"></i>App Creation
-              </button>
-              <button type="button" class="feature-chip px-5 py-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-sm text-gray-400 hover:border-orange/40 hover:text-white transition-all" data-feature="Custom Systems">
-                <i class="fa-solid fa-microchip" class="inline mr-2"></i>Custom Systems
-              </button>
-              <button type="button" class="feature-chip px-5 py-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-sm text-gray-400 hover:border-orange/40 hover:text-white transition-all" data-feature="SEO & Marketing">
-                <i class="fa-solid fa-chart-line" class="inline mr-2"></i>SEO & Marketing
-              </button>
-              <button type="button" class="feature-chip px-5 py-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-sm text-gray-400 hover:border-orange/40 hover:text-white transition-all" data-feature="UI/UX Design">
-                <i class="fa-solid fa-pen-nib" class="inline mr-2"></i>UI/UX Design
-              </button>
-              <button type="button" class="feature-chip px-5 py-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-sm text-gray-400 hover:border-orange/40 hover:text-white transition-all" data-feature="Cloud Hosting">
-                <i class="fa-solid fa-cloud" class="inline mr-2"></i>Cloud Hosting
-              </button>
-              <button type="button" class="feature-chip px-5 py-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-sm text-gray-400 hover:border-orange/40 hover:text-white transition-all" data-feature="Maintenance">
-                <i class="fa-solid fa-wrench" class="inline mr-2"></i>Maintenance
-              </button>
-              <button type="button" class="feature-chip px-5 py-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-sm text-gray-400 hover:border-orange/40 hover:text-white transition-all" data-feature="Consulting">
-                <i class="fa-solid fa-comment" class="inline mr-2"></i>Consulting
-              </button>
+      <div class="form-card reveal">
+        <form id="scope-form">
+          <div class="form-group">
+            <label>What do you need?</label>
+            <div class="chip-grid" id="chip-grid">
+              <button type="button" class="chip" data-feature="Website Creation"><i class="fa-solid fa-globe"></i> Website Creation</button>
+              <button type="button" class="chip" data-feature="App Creation"><i class="fa-solid fa-mobile-screen"></i> App Creation</button>
+              <button type="button" class="chip" data-feature="Custom Systems"><i class="fa-solid fa-microchip"></i> Custom Systems</button>
+              <button type="button" class="chip" data-feature="SEO & Marketing"><i class="fa-solid fa-chart-line"></i> SEO & Marketing</button>
+              <button type="button" class="chip" data-feature="UI/UX Design"><i class="fa-solid fa-pen-nib"></i> UI/UX Design</button>
+              <button type="button" class="chip" data-feature="Cloud Hosting"><i class="fa-solid fa-cloud"></i> Cloud Hosting</button>
+              <button type="button" class="chip" data-feature="Maintenance"><i class="fa-solid fa-wrench"></i> Maintenance</button>
+              <button type="button" class="chip" data-feature="Consulting"><i class="fa-solid fa-comment"></i> Consulting</button>
             </div>
-            <div id="selected-preview" class="flex flex-wrap gap-2 mt-4 min-h-[32px]"></div>
+            <div class="chip-preview" id="chip-preview"></div>
           </div>
 
-          <div>
-            <label class="block text-sm font-semibold text-gray-300 mb-4">Project Budget</label>
-            <select class="w-full px-5 py-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white focus:border-orange/40 focus:outline-none transition-colors">
-              <option value="" class="bg-obsidian">Select a range...</option>
-              <option value="5k-15k" class="bg-obsidian">$5,000 – $15,000</option>
-              <option value="15k-30k" class="bg-obsidian">$15,000 – $30,000</option>
-              <option value="30k-50k" class="bg-obsidian">$30,000 – $50,000</option>
-              <option value="50k+" class="bg-obsidian">$50,000+</option>
-            </select>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Project Budget</label>
+              <select id="budget-select">
+                <option value="">Select a range...</option>
+                <option value="5k-15k">$5,000 – $15,000</option>
+                <option value="15k-30k">$15,000 – $30,000</option>
+                <option value="30k-50k">$30,000 – $50,000</option>
+                <option value="50k+">$50,000+</option>
+              </select>
+            </div>
           </div>
 
-          <div class="grid sm:grid-cols-2 gap-4">
-            <input type="text" placeholder="Your Name" class="w-full px-5 py-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white placeholder-gray-500 focus:border-orange/40 focus:outline-none transition-colors">
-            <input type="email" placeholder="Email Address" class="w-full px-5 py-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white placeholder-gray-500 focus:border-orange/40 focus:outline-none transition-colors">
+          <div class="form-row two-col">
+            <div class="form-group">
+              <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" placeholder="Email Address" required>
+            </div>
           </div>
 
-          <textarea placeholder="Tell us about your project..." rows="4" class="w-full px-5 py-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white placeholder-gray-500 focus:border-orange/40 focus:outline-none transition-colors resize-none"></textarea>
+          <div class="form-group">
+            <textarea placeholder="Tell us about your project..." rows="4"></textarea>
+          </div>
 
-          <button type="submit" id="submit-btn" class="w-full py-4 bg-gradient-to-r from-orange to-orange-dim text-white font-bold rounded-xl hover:shadow-lg hover:shadow-orange/25 transition-all duration-300 flex items-center justify-center gap-2">
+          <button type="submit" class="submit-btn" id="submit-btn">
             <span>Send Project Scope</span>
-            <i class="fa-solid fa-paper-plane" class=""></i>
+            <i class="fa-solid fa-paper-plane"></i>
           </button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="relative border-t border-white/[0.06]">
-    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange/50 to-transparent"></div>
-
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-      <div class="grid md:grid-cols-4 gap-12 mb-12">
-        <div class="md:col-span-2">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange to-orange-dim flex items-center justify-center shadow-lg shadow-orange/20">
-              <span class="font-bold text-white text-lg">S</span>
-            </div>
-            <span class="font-bold text-xl tracking-tight">ScaleUp<span class="text-orange"> Digital</span></span>
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-glow"></div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="images/logo.png" alt="ScaleUp Logo" class="nav-logo">
           </div>
-          <p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
-            We build websites and apps that convert. Own your digital infrastructure and stop renting your business presence.
-          </p>
-          <div class="flex gap-3">
-            <a href="#" class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-400 hover:text-orange hover:border-orange/30 transition-all">
-              <i class="fa-brands fa-twitter" class=""></i>
-            </a>
-            <a href="#" class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-400 hover:text-orange hover:border-orange/30 transition-all">
-              <i class="fa-brands fa-instagram" class=""></i>
-            </a>
-            <a href="#" class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-400 hover:text-orange hover:border-orange/30 transition-all">
-              <i class="fa-brands fa-linkedin" class=""></i>
-            </a>
-            <a href="#" class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-400 hover:text-orange hover:border-orange/30 transition-all">
-              <i class="fa-brands fa-github" class=""></i>
-            </a>
+          <p>We build websites and apps that convert. Own your digital infrastructure and stop renting your business presence.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-github"></i></a>
           </div>
         </div>
 
-        <div>
-          <h4 class="text-white font-semibold mb-4">Services</h4>
-          <ul class="space-y-3">
-            <li><a href="#" class="text-gray-400 text-sm hover:text-orange transition-colors">Website Creation</a></li>
-            <li><a href="#" class="text-gray-400 text-sm hover:text-orange transition-colors">App Development</a></li>
-            <li><a href="#" class="text-gray-400 text-sm hover:text-orange transition-colors">Custom Systems</a></li>
-            <li><a href="#" class="text-gray-400 text-sm hover:text-orange transition-colors">Digital Marketing</a></li>
-          </ul>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="#services">Website Creation</a>
+          <a href="#services">App Development</a>
+          <a href="#services">Custom Systems</a>
+          <a href="#services">Digital Marketing</a>
         </div>
 
-        <div>
-          <h4 class="text-white font-semibold mb-4">Company</h4>
-          <ul class="space-y-3">
-            <li><a href="#founders" class="text-gray-400 text-sm hover:text-orange transition-colors">About Us</a></li>
-            <li><a href="#process" class="text-gray-400 text-sm hover:text-orange transition-colors">Our Process</a></li>
-            <li><a href="#" class="text-gray-400 text-sm hover:text-orange transition-colors">Careers</a></li>
-            <li><a href="#contact" class="text-gray-400 text-sm hover:text-orange transition-colors">Contact</a></li>
-          </ul>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#founders">About Us</a>
+          <a href="#process">Our Process</a>
+          <a href="#">Careers</a>
+          <a href="#contact">Contact</a>
         </div>
       </div>
 
-      <div class="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p class="text-gray-500 text-sm">&copy; <span id="year"></span> ScaleUp Digital. All rights reserved.</p>
-        <div class="flex gap-6">
-          <a href="#" class="text-gray-500 text-sm hover:text-white transition-colors">Privacy</a>
-          <a href="#" class="text-gray-500 text-sm hover:text-white transition-colors">Terms</a>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> ScaleUp Digital. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
         </div>
       </div>
     </div>
