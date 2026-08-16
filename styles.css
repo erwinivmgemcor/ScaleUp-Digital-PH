@@ -1,0 +1,404 @@
+/* ============================================
+   ScaleUp Digital — Custom Styles
+   ============================================ */
+
+/* CSS Variables */
+:root {
+  --obsidian: #0A0C10;
+  --obsidian-light: #111318;
+  --orange: #FF6B00;
+  --orange-glow: #FF5500;
+  --orange-dim: #E53E3E;
+  --white: #ffffff;
+  --gray-100: #f3f4f6;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+}
+
+/* Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
+  background-color: var(--obsidian);
+  color: var(--white);
+  cursor: none;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(255, 107, 0, 0.3);
+  color: white;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--obsidian);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--orange), var(--orange-dim));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--orange-glow);
+}
+
+/* Custom Cursor */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: difference;
+}
+
+.cursor-follower {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 107, 0, 0.4);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+
+body:hover .cursor-dot,
+body:hover .cursor-follower {
+  opacity: 1;
+}
+
+/* Mouse Spotlight */
+.mouse-spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+body:hover .mouse-spotlight {
+  opacity: 1;
+}
+
+/* Scroll Progress */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, var(--orange), var(--orange-dim));
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* Glassmorphism */
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dim) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Mesh Gradient Blobs */
+.mesh-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: blob-float 10s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--orange);
+  top: -10%;
+  right: -5%;
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  background: var(--orange-dim);
+  bottom: 10%;
+  left: -10%;
+  animation-delay: -3s;
+}
+
+.blob-3 {
+  width: 250px;
+  height: 250px;
+  background: var(--orange-glow);
+  top: 40%;
+  right: 20%;
+  animation-delay: -6s;
+}
+
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+/* Navigation */
+#navbar.scrolled {
+  background: rgba(10, 12, 16, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#navbar.scrolled .h-20 {
+  height: 64px;
+}
+
+/* Comparison Toggle */
+.comparison-toggle {
+  position: relative;
+}
+
+/* Niche Tabs */
+.niche-tab {
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #9ca3af;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.niche-tab.active {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dim));
+  border-color: transparent;
+  color: white;
+}
+
+.niche-tab:not(.active):hover {
+  border-color: rgba(255, 107, 0, 0.3);
+  color: white;
+}
+
+/* Niche Panels */
+.niche-panel {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.niche-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+}
+
+.niche-panel.hidden {
+  display: none;
+}
+
+/* Feature Chips */
+.feature-chip {
+  cursor: pointer;
+  user-select: none;
+}
+
+.feature-chip.active {
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(229, 62, 62, 0.1));
+  border-color: var(--orange);
+  color: white;
+}
+
+/* Range Slider Custom */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dim));
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.4);
+  transition: transform 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dim));
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.4);
+}
+
+/* Form Elements */
+select option {
+  background: var(--obsidian);
+  color: white;
+}
+
+/* Mobile Menu */
+#mobile-menu.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Animation Classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Magnetic Button Effect */
+.magnetic-btn {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Responsive Cursor Hide on Touch */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+  .cursor-dot,
+  .cursor-follower,
+  .mouse-spotlight {
+    display: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ==========================================
+   Nav Logo
+   ========================================== */
+.nav-logo {
+  height: 40px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(1.05);
+}
+
+.nav-logo:hover {
+  transform: scale(1.05);
+  filter: brightness(1.15) drop-shadow(0 0 8px rgba(255, 107, 0, 0.3));
+}
+
+/* ==========================================
+   Developer Photo
+   ========================================== */
+.dev-photo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 107, 0, 0.1);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+  flex-shrink: 0;
+}
+
+.dev-showcase:hover .dev-photo {
+  transform: scale(1.03);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 107, 0, 0.25);
+}
+
+.dev-showcase {
+  max-width: 400px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .nav-logo {
+    height: 32px;
+    max-width: 140px;
+  }
+
+  .dev-photo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .dev-showcase {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-logo {
+    height: 44px;
+  }
+}
