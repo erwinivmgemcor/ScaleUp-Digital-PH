@@ -427,3 +427,40 @@ select option {
     height: 44px;
   }
 }
+
+/* ==========================================
+   Developer Card Layout
+   ========================================== */
+.dev-card {
+  display: flex;
+  flex-direction: column;
+  background: #111418;
+  border: 1px solid #1e2630;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .dev-card {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.dev-card img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.dev-card-info {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+/* Keep old dev-showcase wrapper behavior */
+.dev-showcase {
+  max-width: 100%;
+}
