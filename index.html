@@ -93,7 +93,9 @@
     <!-- Developer Showcase Card -->
     <div class="container dev-section reveal">
       <div class="dev-card">
+      <div class="dev-img-wrap">
         <img src="images/developer.jpg" alt="Lead Developer" class="dev-img">
+      </div>
         <div class="dev-info">
           <span class="tag">Lead Developer</span>
           <h3>Building your next digital product</h3>
@@ -120,13 +122,13 @@
       <div class="comparison-toggle-wrap reveal">
         <div class="comparison-toggle">
           <div class="toggle-pill" id="toggle-pill"></div>
-          <button class="toggle-btn active" id="btn-social" data-side="social">Social-Only</button>
-          <button class="toggle-btn" id="btn-scaleup" data-side="scaleup">ScaleUp Platform</button>
+          <button class="toggle-btn active" id="btn-social" data-target="rented">Social-Only</button>
+          <button class="toggle-btn" id="btn-scaleup" data-target="owned">ScaleUp Platform</button>
         </div>
       </div>
 
       <div class="comparison-grid reveal">
-        <div class="comparison-card" id="card-social" data-side="social">
+        <div class="comparison-card card-rented" id="card-rented">
           <div class="comparison-icon-wrap social-icon">
             <i class="fa-brands fa-facebook-f"></i>
             <i class="fa-brands fa-instagram"></i>
@@ -145,7 +147,7 @@
           </div>
         </div>
 
-        <div class="comparison-card active" id="card-scaleup" data-side="scaleup">
+        <div class="comparison-card card-owned active" id="card-owned">
           <div class="comparison-icon-wrap scaleup-icon">
             <i class="fa-solid fa-rocket"></i>
           </div>
@@ -454,15 +456,15 @@
           <div class="roi-slider-group">
             <label for="leads-slider">Monthly Leads</label>
             <div class="slider-wrap">
-              <input type="range" id="leads-slider" min="10" max="1000" value="150" step="10">
-              <span class="slider-value" id="leads-value">150</span>
+              <input type="range" id="monthlyLeads" min="10" max="1000" value="150" step="10">
+              <span class="slider-value" id="leadsVal">150</span>
             </div>
           </div>
           <div class="roi-slider-group">
             <label for="value-slider">Avg. Deal Value ($)</label>
             <div class="slider-wrap">
-              <input type="range" id="value-slider" min="100" max="10000" value="1200" step="100">
-              <span class="slider-value" id="value-value">$1,200</span>
+              <input type="range" id="avgDealValue" min="100" max="10000" value="1200" step="100">
+              <span class="slider-value" id="dealVal">$1,200</span>
             </div>
           </div>
         </div>
@@ -470,15 +472,15 @@
         <div class="roi-results">
           <div class="roi-result-box">
             <span class="roi-result-label">Current Monthly Revenue</span>
-            <span class="roi-result-value" id="current-revenue">$180,000</span>
+            <span class="roi-result-value" id="currentRevenue">$180,000</span>
           </div>
           <div class="roi-result-box highlight">
             <span class="roi-result-label">Projected with ScaleUp</span>
-            <span class="roi-result-value" id="projected-revenue">$252,000</span>
+            <span class="roi-result-value" id="projectedRevenue">$252,000</span>
           </div>
           <div class="roi-result-box accent">
             <span class="roi-result-label">Annual Increase</span>
-            <span class="roi-result-value" id="annual-increase">$864,000</span>
+            <span class="roi-result-value" id="annualIncrease">$864,000</span>
           </div>
         </div>
       </div>
