@@ -3,207 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ScaleUp Digital — Websites & Apps That Convert</title>
-  <meta name="description" content="High-converting websites and powerful mobile apps engineered for speed, conversion, and long-term growth.">
+  <title>ScaleUp Digital — Build. Launch. Scale.</title>
+  <meta name="description" content="Premium digital products, apps, and systems built to scale your business.">
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            obsidian: '#0A0C10',
-            slate: '#12161F',
-            orange: { DEFAULT: '#FF6B00', glow: '#FF5500', dim: '#E53E3E' }
-          }
-        }
-      }
-    }
-  </script>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- FontAwesome -->
+  <!-- FontAwesome 6.4 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Lenis Smooth Scroll -->
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
 <base target="_blank">
 </head>
 <body>
 
-  <!-- Custom Cursor -->
-  <div id="cursor" class="cursor-dot"></div>
-  <div id="cursor-follower" class="cursor-follower"></div>
-
   <!-- Scroll Progress -->
-  <div class="scroll-progress"><div id="scroll-progress-bar"></div></div>
+  <div class="scroll-progress" id="scroll-progress"></div>
 
-  <!-- ========== NAVIGATION ========== -->
-  <nav id="navbar">
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <header class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#" class="nav-brand">
-        <img src="images/logo.png" alt="ScaleUp Logo" class="nav-logo">
+        <img src="images/logo.png" alt="ScaleUp Logo" class="nav-logo" style="height: 38px; width: auto;">
       </a>
 
-      <div class="nav-links">
+      <nav class="nav-desktop">
+        <a href="#about" class="nav-link">About</a>
         <a href="#services" class="nav-link">Services</a>
         <a href="#process" class="nav-link">Process</a>
-        <a href="#work" class="nav-link">Work</a>
-        <a href="#founders" class="nav-link">About</a>
-        <a href="#contact" class="nav-cta">Start Building</a>
-      </div>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
 
-      <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
-        <i class="fa-solid fa-bars"></i>
+      <a href="#contact" class="btn btn-primary nav-cta">Let's Talk</a>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+        <i class="fa-solid fa-bars" id="toggle-icon"></i>
       </button>
     </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#about" class="mobile-link">About</a>
       <a href="#services" class="mobile-link">Services</a>
       <a href="#process" class="mobile-link">Process</a>
-      <a href="#work" class="mobile-link">Work</a>
-      <a href="#founders" class="mobile-link">About</a>
-      <a href="#contact" class="mobile-cta">Start Building</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="#contact" class="btn btn-primary mobile-cta">Let's Talk</a>
     </div>
-  </nav>
+  </header>
 
-  <!-- ========== HERO ========== -->
-  <section id="hero" class="hero">
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="about">
     <div class="hero-bg">
-      <div class="mesh-blob blob-1"></div>
-      <div class="mesh-blob blob-2"></div>
-      <div class="mesh-blob blob-3"></div>
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
     </div>
 
-    <div class="hero-container">
-      <div class="hero-grid">
-        <!-- Left Content -->
-        <div class="hero-content">
-          <div class="hero-badge reveal">
-            <span class="pulse-dot"></span>
-            ScaleUp Digital Agency
-          </div>
-
-          <h1 class="hero-title reveal">
-            WE BUILD <span class="gradient-text">DIGITAL EXPERIENCES</span> THAT SCALE
-          </h1>
-
-          <p class="hero-subtitle reveal">
-            High-converting websites and powerful mobile apps engineered for speed, conversion, and long-term growth. Own your digital infrastructure.
-          </p>
-
-          <div class="hero-buttons reveal">
-            <a href="#contact" class="btn-primary">
-              Let's Talk <i class="fa-solid fa-arrow-right"></i>
-            </a>
-            <a href="#work" class="btn-secondary">
-              <i class="fa-solid fa-play"></i> View Our Work
-            </a>
-          </div>
-
-          <div class="hero-pills reveal">
-            <span class="pill">Website Creation</span>
-            <span class="pill">App Creation</span>
-            <span class="pill">Tailor-Fit Systems</span>
-            <span class="pill">Digital Marketing</span>
-          </div>
-
-          <div class="hero-trust reveal">
-            <div class="trust-avatars">
-              <span class="avatar">RJ</span>
-              <span class="avatar alt">RS</span>
-              <span class="avatar alt2">+</span>
-            </div>
-            <p><strong>120+</strong> projects delivered</p>
-          </div>
-
-          <!-- Developer Showcase Card -->
-          <div class="dev-card reveal">
-            <img src="images/developer.jpg" alt="Lead Developer Coding">
-            <div class="dev-card-body">
-              <span class="dev-label">Lead Developer</span>
-              <h4>Building your next digital product</h4>
-              <p>Clean code. Fast delivery. Zero compromise.</p>
-            </div>
-          </div>
+    <div class="container hero-content">
+      <div class="hero-text reveal">
+        <span class="hero-tag">Digital Product Studio</span>
+        <h1 class="hero-title">
+          Build. Launch.<br>
+          <span class="gradient-text">Scale.</span>
+        </h1>
+        <p class="hero-subtitle">
+          We craft high-performance websites, mobile apps, and tailor-fit business systems 
+          that turn visitors into customers — and customers into loyal fans.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary btn-lg magnetic-btn">Start Building</a>
+          <a href="#services" class="btn btn-outline btn-lg">View Our Work</a>
         </div>
+      </div>
 
-        <!-- Right Image -->
-        <div class="hero-visual reveal">
-          <div class="hero-image-wrap">
-            <img src="images/hero-laptop.jpg" alt="ScaleUp Digital Website on Laptop">
+      <div class="hero-visual reveal">
+        <div class="hero-image-wrap">
+          <img src="images/hero-laptop.jpg" alt="Digital product showcase on laptop" class="hero-image">
+          <div class="hero-image-glow"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Developer Showcase Card -->
+    <div class="container dev-section reveal">
+      <div class="dev-card">
+        <img src="images/developer.jpg" alt="Lead Developer" class="dev-img">
+        <div class="dev-info">
+          <span class="tag">Lead Developer</span>
+          <h3>Building your next digital product</h3>
+          <p>Clean code. Fast delivery. Zero compromise. Our engineering team ships production-grade software using modern stacks that scale with your growth.</p>
+          <div class="dev-meta">
+            <span class="dev-stat"><i class="fa-solid fa-check-circle"></i> React &amp; Node.js</span>
+            <span class="dev-stat"><i class="fa-solid fa-check-circle"></i> Cloud-Native</span>
+            <span class="dev-stat"><i class="fa-solid fa-check-circle"></i> 99.9% Uptime</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== COMPARISON ========== -->
-  <section id="comparison" class="section">
+  <!-- ==================== COMPARISON (RENTED VS OWNED) ==================== -->
+  <section class="section comparison-section" id="comparison">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">The Reality Check</span>
+        <span class="section-tag">The Platform Difference</span>
         <h2 class="section-title">Rented vs. <span class="gradient-text">Owned</span></h2>
+        <p class="section-subtitle">Social media pages are borrowed land. Your platform is an asset that compounds in value.</p>
       </div>
 
-      <!-- Toggle -->
-      <div class="toggle-wrap reveal">
-        <div class="toggle-track">
+      <div class="comparison-toggle-wrap reveal">
+        <div class="comparison-toggle">
           <div class="toggle-pill" id="toggle-pill"></div>
-          <button class="toggle-btn active" data-side="social">Social-Only</button>
-          <button class="toggle-btn" data-side="scaleup">ScaleUp Platform</button>
+          <button class="toggle-btn active" id="btn-social" data-side="social">Social-Only</button>
+          <button class="toggle-btn" id="btn-scaleup" data-side="scaleup">ScaleUp Platform</button>
         </div>
       </div>
 
-      <!-- Cards -->
-      <div class="comparison-grid">
-        <div class="comp-card" id="card-social" data-side="social">
-          <div class="comp-icon bad">
-            <i class="fa-solid fa-triangle-exclamation"></i>
+      <div class="comparison-grid reveal">
+        <div class="comparison-card" id="card-social" data-side="social">
+          <div class="comparison-icon-wrap social-icon">
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-tiktok"></i>
           </div>
-          <h3>Social-Only Business</h3>
-          <ul>
-            <li><i class="fa-solid fa-xmark"></i> Algorithm dependence — reach dies overnight</li>
-            <li><i class="fa-solid fa-xmark"></i> Zero search visibility on Google</li>
-            <li><i class="fa-solid fa-xmark"></i> Low trust = low conversion rates</li>
-            <li><i class="fa-solid fa-xmark"></i> No ownership of customer data</li>
+          <h3 class="comparison-card-title">Social-Only Presence</h3>
+          <ul class="comparison-list">
+            <li class="comparison-item bad"><i class="fa-solid fa-xmark"></i> No ownership of audience data</li>
+            <li class="comparison-item bad"><i class="fa-solid fa-xmark"></i> Algorithm changes kill reach overnight</li>
+            <li class="comparison-item bad"><i class="fa-solid fa-xmark"></i> Limited branding &amp; customization</li>
+            <li class="comparison-item bad"><i class="fa-solid fa-xmark"></i> No direct conversion funnel</li>
+            <li class="comparison-item bad"><i class="fa-solid fa-xmark"></i> Competes for attention in noisy feeds</li>
           </ul>
+          <div class="comparison-footer">
+            <span class="comparison-label">Rented Land</span>
+          </div>
         </div>
 
-        <div class="comp-card active" id="card-scaleup" data-side="scaleup">
-          <div class="comp-icon good">
-            <i class="fa-solid fa-circle-check"></i>
+        <div class="comparison-card active" id="card-scaleup" data-side="scaleup">
+          <div class="comparison-icon-wrap scaleup-icon">
+            <i class="fa-solid fa-rocket"></i>
           </div>
-          <h3>ScaleUp Web Platform</h3>
-          <ul>
-            <li><i class="fa-solid fa-check"></i> Full brand ownership & control</li>
-            <li><i class="fa-solid fa-check"></i> Automated lead funnels 24/7</li>
-            <li><i class="fa-solid fa-check"></i> SEO dominance & organic traffic</li>
-            <li><i class="fa-solid fa-check"></i> Own every pixel & data point</li>
+          <h3 class="comparison-card-title">ScaleUp Platform</h3>
+          <ul class="comparison-list">
+            <li class="comparison-item good"><i class="fa-solid fa-check"></i> You own every customer relationship</li>
+            <li class="comparison-item good"><i class="fa-solid fa-check"></i> Algorithm-proof, evergreen asset</li>
+            <li class="comparison-item good"><i class="fa-solid fa-check"></i> Full brand control &amp; white-label</li>
+            <li class="comparison-item good"><i class="fa-solid fa-check"></i> Built-in funnels &amp; automations</li>
+            <li class="comparison-item good"><i class="fa-solid fa-check"></i> SEO &amp; content that compounds</li>
           </ul>
+          <div class="comparison-footer">
+            <span class="comparison-label active-label">Owned Asset</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== CORE OFFERINGS ========== -->
-  <section id="services" class="section">
+  <!-- ==================== CORE OFFERINGS ==================== -->
+  <section class="section offerings-section" id="services">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">What We Do</span>
+        <span class="section-tag">What We Do</span>
         <h2 class="section-title">Core <span class="gradient-text">Offerings</span></h2>
+        <p class="section-subtitle">End-to-end digital solutions engineered for performance, scalability, and conversion.</p>
       </div>
 
       <div class="offerings-grid">
@@ -211,271 +179,260 @@
           <div class="service-icon">
             <i class="fa-solid fa-code"></i>
           </div>
-          <h3>Website Creation</h3>
-          <p>SEO-dominant, conversion-optimized builds that turn visitors into customers.</p>
+          <h3 class="service-title">Website Creation</h3>
+          <p class="service-desc">High-converting, SEO-optimized websites built with modern frameworks. From landing pages to complex portals, we design for speed and results.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Responsive &amp; mobile-first</li>
+            <li><i class="fa-solid fa-check"></i> Core Web Vitals optimized</li>
+            <li><i class="fa-solid fa-check"></i> CMS integration ready</li>
+          </ul>
         </div>
 
         <div class="service-card reveal">
           <div class="service-icon">
             <i class="fa-solid fa-mobile-screen"></i>
           </div>
-          <h3>App Creation</h3>
-          <p>Native & cross-platform mobile + PWA development for iOS and Android.</p>
+          <h3 class="service-title">App Creation</h3>
+          <p class="service-desc">Native and cross-platform mobile applications that users love. iOS, Android, and progressive web apps with seamless UX.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> React Native / Flutter</li>
+            <li><i class="fa-solid fa-check"></i> Push notifications &amp; offline mode</li>
+            <li><i class="fa-solid fa-check"></i> App Store deployment</li>
+          </ul>
         </div>
 
         <div class="service-card reveal">
           <div class="service-icon">
             <i class="fa-solid fa-layer-group"></i>
           </div>
-          <h3>Tailor-Fit Systems</h3>
-          <p>Custom booking, inventory sync, client portals — built for your workflow.</p>
+          <h3 class="service-title">Tailor-Fit Systems</h3>
+          <p class="service-desc">Custom business systems, dashboards, and internal tools built around your exact workflow. No bloat, no workarounds.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> CRM &amp; ERP integrations</li>
+            <li><i class="fa-solid fa-check"></i> Automated workflows</li>
+            <li><i class="fa-solid fa-check"></i> Role-based access control</li>
+          </ul>
         </div>
 
         <div class="service-card reveal">
           <div class="service-icon">
             <i class="fa-solid fa-chart-line"></i>
           </div>
-          <h3>Digital Marketing</h3>
-          <p>SEO, paid acquisition, and CRO that scales with your business goals.</p>
+          <h3 class="service-title">Digital Marketing</h3>
+          <p class="service-desc">Data-driven growth strategies that fill your pipeline. SEO, paid media, content strategy, and conversion rate optimization.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> SEO &amp; content strategy</li>
+            <li><i class="fa-solid fa-check"></i> Paid acquisition (PPC, social)</li>
+            <li><i class="fa-solid fa-check"></i> Analytics &amp; attribution</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== MOBILE SHOWCASE ========== -->
-  <section id="work" class="section">
+  <!-- ==================== MOBILE SHOWCASE ==================== -->
+  <section class="section mobile-section">
     <div class="container">
-      <div class="showcase-grid">
-        <div class="showcase-visual reveal">
-          <div class="showcase-image-wrap">
-            <img src="images/mobile-showcase.jpg" alt="Mobile App Showcase">
-          </div>
-          <div class="showcase-badge">
-            <span>App Store Rating</span>
-            <p>4.9<span>/5</span></p>
+      <div class="mobile-grid reveal">
+        <div class="mobile-text">
+          <span class="section-tag">Mobile First</span>
+          <h2 class="section-title">Designed for <span class="gradient-text">Every Screen</span></h2>
+          <p class="section-subtitle">Over 60% of traffic is mobile. Every pixel we craft responds beautifully from 4-inch phones to 4K desktops.</p>
+          <div class="mobile-stats">
+            <div class="mobile-stat">
+              <span class="mobile-stat-number">100%</span>
+              <span class="mobile-stat-label">Responsive</span>
+            </div>
+            <div class="mobile-stat">
+              <span class="mobile-stat-number">&lt;2s</span>
+              <span class="mobile-stat-label">Load Time</span>
+            </div>
+            <div class="mobile-stat">
+              <span class="mobile-stat-number">60+</span>
+              <span class="mobile-stat-label">FPS Animations</span>
+            </div>
           </div>
         </div>
-
-        <div class="showcase-content reveal">
-          <span class="section-label">Mobile Development</span>
-          <h2 class="section-title">Apps That Feel <span class="gradient-text">Native</span>, Scale Like Enterprise</h2>
-          <p class="showcase-text">From React Native to custom native builds, we craft mobile experiences with dark-mode-first UI, real-time sync, and conversion-optimized flows.</p>
-
-          <div class="showcase-features">
-            <div class="feature-item reveal">
-              <div class="feature-icon"><i class="fa-solid fa-chart-bar"></i></div>
-              <div>
-                <h4>Custom Dashboards</h4>
-                <p>Real-time analytics built for your business metrics.</p>
-              </div>
-            </div>
-            <div class="feature-item reveal">
-              <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
-              <div>
-                <h4>Real-Time Tracking</h4>
-                <p>Live data sync with sub-second update latency.</p>
-              </div>
-            </div>
-            <div class="feature-item reveal">
-              <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-              <div>
-                <h4>Enterprise Security</h4>
-                <p>End-to-end encryption and biometric authentication.</p>
-              </div>
-            </div>
-            <div class="feature-item reveal">
-              <div class="feature-icon"><i class="fa-solid fa-mobile-screen"></i></div>
-              <div>
-                <h4>Seamless UX</h4>
-                <p>60fps animations with full gesture support.</p>
-              </div>
-            </div>
+        <div class="mobile-visual">
+          <div class="mobile-image-wrap">
+            <img src="images/mobile-showcase.jpg" alt="Mobile responsive design showcase" class="mobile-image">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== PROCESS ========== -->
-  <section id="process" class="section">
+  <!-- ==================== PROCESS ==================== -->
+  <section class="section process-section" id="process">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Our Process</span>
-        <h2 class="section-title">Simple. Clear. <span class="gradient-text">Effective.</span></h2>
-      </div>
-
-      <div class="process-image reveal">
-        <img src="images/process-flow.jpg" alt="5-Step Process">
+        <span class="section-tag">How We Work</span>
+        <h2 class="section-title">Our <span class="gradient-text">Process</span></h2>
+        <p class="section-subtitle">A battle-tested workflow that takes you from concept to launch without surprises.</p>
       </div>
 
       <div class="process-grid">
         <div class="process-card reveal">
-          <span class="process-num">1</span>
+          <div class="process-number">01</div>
           <div class="process-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-          <h3>Discover</h3>
-          <p>Deep stakeholder interviews to understand your goals and challenges.</p>
+          <h3 class="process-title">Discovery</h3>
+          <p class="process-desc">Deep-dive into your business, audience, and goals. We map the terrain before we build.</p>
         </div>
+
         <div class="process-card reveal">
-          <span class="process-num">2</span>
-          <div class="process-icon"><i class="fa-solid fa-clipboard-list"></i></div>
-          <h3>Plan</h3>
-          <p>Tailored strategy, tech stack, and roadmap with clear milestones.</p>
+          <div class="process-number">02</div>
+          <div class="process-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+          <h3 class="process-title">Design</h3>
+          <p class="process-desc">Wireframes to high-fidelity prototypes. Every interaction is intentional, every pixel purposeful.</p>
         </div>
+
         <div class="process-card reveal">
-          <span class="process-num">3</span>
-          <div class="process-icon"><i class="fa-solid fa-pen-nib"></i></div>
-          <h3>Design</h3>
-          <p>Pixel-perfect, conversion-focused UI/UX with interactive prototypes.</p>
-        </div>
-        <div class="process-card reveal">
-          <span class="process-num">4</span>
+          <div class="process-number">03</div>
           <div class="process-icon"><i class="fa-solid fa-code"></i></div>
-          <h3>Develop</h3>
-          <p>Clean, scalable code with automated testing and CI/CD pipelines.</p>
+          <h3 class="process-title">Development</h3>
+          <p class="process-desc">Clean, scalable code with modern architectures. CI/CD pipelines, automated testing, zero debt.</p>
         </div>
+
         <div class="process-card reveal">
-          <span class="process-num">5</span>
+          <div class="process-number">04</div>
           <div class="process-icon"><i class="fa-solid fa-rocket"></i></div>
-          <h3>Launch</h3>
-          <p>Deploy, monitor, and optimize with ongoing post-launch support.</p>
+          <h3 class="process-title">Launch &amp; Scale</h3>
+          <p class="process-desc">Production deployment, performance monitoring, and continuous optimization. We ship, then we scale.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== INFRASTRUCTURE ========== -->
-  <section id="infrastructure" class="infra-section">
-    <div class="infra-bg">
-      <img src="images/server-room.jpg" alt="Server Infrastructure">
-      <div class="infra-overlay"></div>
-    </div>
-
-    <div class="infra-container">
-      <div class="infra-grid">
-        <div class="infra-content reveal">
-          <div class="infra-badge">
-            <i class="fa-solid fa-server"></i> Infrastructure & Hosting
-          </div>
-          <h2>Backend That <span class="gradient-text">Never Sleeps</span></h2>
-          <p>Enterprise-grade cloud infrastructure with auto-scaling, DDoS protection, and global CDN distribution. Your app stays fast, secure, and available.</p>
-
-          <div class="infra-tags">
-            <span><i class="fa-solid fa-cloud"></i> Auto-Scaling Cloud</span>
-            <span><i class="fa-solid fa-lock"></i> Enterprise Security</span>
-            <span><i class="fa-solid fa-gauge-high"></i> Global CDN</span>
-            <span><i class="fa-solid fa-server"></i> Dedicated Hosting</span>
+  <!-- ==================== INFRASTRUCTURE ==================== -->
+  <section class="section infra-section">
+    <div class="container">
+      <div class="infra-grid reveal">
+        <div class="infra-visual">
+          <div class="infra-image-wrap">
+            <img src="images/server-room.jpg" alt="Cloud infrastructure" class="infra-image">
           </div>
         </div>
-
-        <div class="infra-stats reveal">
-          <h4>Performance Metrics</h4>
-          <div class="stats-grid">
-            <div><p class="stat-value">99.99%</p><p class="stat-label">Uptime SLA</p></div>
-            <div><p class="stat-value">280+</p><p class="stat-label">Global CDN Nodes</p></div>
-            <div><p class="stat-value">&lt;45ms</p><p class="stat-label">Avg Response</p></div>
-            <div><p class="stat-value">12</p><p class="stat-label">Data Centers</p></div>
-          </div>
-          <div class="status-bar">
-            <span>Server Status</span>
-            <span class="status-live"><span class="live-dot"></span>All Systems Operational</span>
+        <div class="infra-text">
+          <span class="section-tag">Infrastructure</span>
+          <h2 class="section-title">Enterprise-Grade <span class="gradient-text">Reliability</span></h2>
+          <p class="section-subtitle">Your product runs on battle-tested cloud infrastructure with auto-scaling, global CDN, and military-grade security.</p>
+          <div class="infra-features">
+            <div class="infra-feature">
+              <i class="fa-solid fa-shield-halved"></i>
+              <div>
+                <h4>SSL &amp; DDoS Protection</h4>
+                <p>Enterprise security out of the box</p>
+              </div>
+            </div>
+            <div class="infra-feature">
+              <i class="fa-solid fa-bolt"></i>
+              <div>
+                <h4>Global CDN</h4>
+                <p>Sub-100ms load times worldwide</p>
+              </div>
+            </div>
+            <div class="infra-feature">
+              <i class="fa-solid fa-arrows-rotate"></i>
+              <div>
+                <h4>Auto-Scaling</h4>
+                <p>Handles traffic spikes without breaking</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== NICHE SWITCHER ========== -->
-  <section id="niches" class="section">
+  <!-- ==================== NICHE SWITCHER ==================== -->
+  <section class="section niche-section">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Industry Solutions</span>
-        <h2 class="section-title">Built For Your <span class="gradient-text">Niche</span></h2>
+        <span class="section-tag">Industry Solutions</span>
+        <h2 class="section-title">Built for <span class="gradient-text">Your Niche</span></h2>
+        <p class="section-subtitle">Specialized blueprints tailored to the unique demands of your industry.</p>
       </div>
 
       <div class="niche-tabs reveal">
-        <button class="niche-tab active" data-niche="ecommerce">E-Commerce & Retail</button>
-        <button class="niche-tab" data-niche="b2b">B2B & Professional</button>
-        <button class="niche-tab" data-niche="creative">Creative & Agency</button>
+        <button class="niche-tab active" data-niche="ecommerce">E-Commerce</button>
+        <button class="niche-tab" data-niche="healthcare">Healthcare</button>
         <button class="niche-tab" data-niche="realestate">Real Estate</button>
+        <button class="niche-tab" data-niche="saas">SaaS</button>
       </div>
 
       <div class="niche-panels">
-        <!-- E-Commerce -->
         <div class="niche-panel active" data-panel="ecommerce">
-          <div class="niche-layout">
-            <div class="niche-main">
-              <h3>E-Commerce & Retail</h3>
-              <p>High-conversion storefronts with inventory sync, abandoned cart recovery, and one-click checkout.</p>
-              <div class="niche-metrics">
-                <div><p>3.2x</p><span>Avg Revenue Increase</span></div>
-                <div><p>0.8s</p><span>Load Time</span></div>
-                <div><p>24%</p><span>Cart Recovery</span></div>
-              </div>
+          <div class="niche-panel-grid">
+            <div class="niche-panel-text">
+              <h3>E-Commerce Powerhouse</h3>
+              <p>High-conversion storefronts with seamless checkout, inventory sync, and abandoned-cart recovery. Built for scale.</p>
+              <ul class="niche-list">
+                <li><i class="fa-solid fa-check"></i> Multi-currency &amp; tax automation</li>
+                <li><i class="fa-solid fa-check"></i> Payment gateway integrations</li>
+                <li><i class="fa-solid fa-check"></i> Real-time inventory management</li>
+              </ul>
             </div>
-            <div class="niche-features">
-              <div class="niche-feature"><i class="fa-solid fa-cart-shopping"></i><span>Custom Checkout Logic</span></div>
-              <div class="niche-feature"><i class="fa-solid fa-box"></i><span>Inventory Sync</span></div>
-              <div class="niche-feature"><i class="fa-solid fa-credit-card"></i><span>Multi-Gateway Payments</span></div>
+            <div class="niche-panel-visual">
+              <div class="niche-panel-img-wrap">
+                <img src="images/process-flow.jpg" alt="E-commerce process flow" class="niche-panel-img">
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- B2B -->
-        <div class="niche-panel" data-panel="b2b">
-          <div class="niche-layout">
-            <div class="niche-main">
-              <h3>B2B & Professional Services</h3>
-              <p>Lead generation machines with CRM integration, proposal tools, and client portals.</p>
-              <div class="niche-metrics">
-                <div><p>5x</p><span>Lead Volume</span></div>
-                <div><p>68%</p><span>Qualification Rate</span></div>
-                <div><p>2.4x</p><span>Pipeline Velocity</span></div>
-              </div>
+        <div class="niche-panel" data-panel="healthcare">
+          <div class="niche-panel-grid">
+            <div class="niche-panel-text">
+              <h3>Healthcare Digital Suite</h3>
+              <p>HIPAA-compliant patient portals, appointment systems, and telehealth integrations that build trust and streamline care.</p>
+              <ul class="niche-list">
+                <li><i class="fa-solid fa-check"></i> HIPAA-compliant architecture</li>
+                <li><i class="fa-solid fa-check"></i> Secure patient portals</li>
+                <li><i class="fa-solid fa-check"></i> EHR integration ready</li>
+              </ul>
             </div>
-            <div class="niche-features">
-              <div class="niche-feature"><i class="fa-solid fa-users"></i><span>Client Portals</span></div>
-              <div class="niche-feature"><i class="fa-solid fa-file-lines"></i><span>Proposal Automation</span></div>
-              <div class="niche-feature"><i class="fa-solid fa-chart-column"></i><span>Analytics Dashboard</span></div>
+            <div class="niche-panel-visual">
+              <div class="niche-panel-img-wrap">
+                <img src="images/process-flow.jpg" alt="Healthcare workflow" class="niche-panel-img">
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Creative -->
-        <div class="niche-panel" data-panel="creative">
-          <div class="niche-layout">
-            <div class="niche-main">
-              <h3>Creative & Agency Portfolios</h3>
-              <p>Showcase work with immersive galleries, case study layouts, and instant proposal generation.</p>
-              <div class="niche-metrics">
-                <div><p>4.5x</p><span>Time on Site</span></div>
-                <div><p>89%</p><span>Portfolio Views</span></div>
-                <div><p>3.1x</p><span>Inquiry Rate</span></div>
-              </div>
-            </div>
-            <div class="niche-features">
-              <div class="niche-feature"><i class="fa-solid fa-image"></i><span>Immersive Galleries</span></div>
-              <div class="niche-feature"><i class="fa-solid fa-briefcase"></i><span>Case Study Builder</span></div>
-              <div class="niche-feature"><i class="fa-solid fa-envelope"></i><span>Instant Proposals</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Real Estate -->
         <div class="niche-panel" data-panel="realestate">
-          <div class="niche-layout">
-            <div class="niche-main">
-              <h3>Real Estate & Bookings</h3>
-              <p>Property listings with virtual tours, booking calendars, and mortgage calculators.</p>
-              <div class="niche-metrics">
-                <div><p>6x</p><span>Tour Bookings</span></div>
-                <div><p>42%</p><span>Lead Capture</span></div>
-                <div><p>2.8x</p><span>Listing Views</span></div>
+          <div class="niche-panel-grid">
+            <div class="niche-panel-text">
+              <h3>Real Estate Platform</h3>
+              <p>Property listing engines with MLS integration, virtual tours, and lead capture funnels designed for agents and brokers.</p>
+              <ul class="niche-list">
+                <li><i class="fa-solid fa-check"></i> MLS &amp; listing syndication</li>
+                <li><i class="fa-solid fa-check"></i> 3D tour integrations</li>
+                <li><i class="fa-solid fa-check"></i> Lead scoring &amp; CRM sync</li>
+              </ul>
+            </div>
+            <div class="niche-panel-visual">
+              <div class="niche-panel-img-wrap">
+                <img src="images/process-flow.jpg" alt="Real estate platform" class="niche-panel-img">
               </div>
             </div>
-            <div class="niche-features">
-              <div class="niche-feature"><i class="fa-solid fa-calendar"></i><span>Booking Calendar</span></div>
-              <div class="niche-feature"><i class="fa-solid fa-video"></i><span>Virtual Tours</span></div>
-              <div class="niche-feature"><i class="fa-solid fa-calculator"></i><span>Mortgage Calculator</span></div>
+          </div>
+        </div>
+
+        <div class="niche-panel" data-panel="saas">
+          <div class="niche-panel-grid">
+            <div class="niche-panel-text">
+              <h3>SaaS Launchpad</h3>
+              <p>Multi-tenant architectures with subscription billing, admin dashboards, and role-based access. From MVP to Series A.</p>
+              <ul class="niche-list">
+                <li><i class="fa-solid fa-check"></i> Stripe &amp; Paddle billing</li>
+                <li><i class="fa-solid fa-check"></i> Multi-tenant data isolation</li>
+                <li><i class="fa-solid fa-check"></i> Admin &amp; analytics dashboards</li>
+              </ul>
+            </div>
+            <div class="niche-panel-visual">
+              <div class="niche-panel-img-wrap">
+                <img src="images/process-flow.jpg" alt="SaaS architecture" class="niche-panel-img">
+              </div>
             </div>
           </div>
         </div>
@@ -483,212 +440,195 @@
     </div>
   </section>
 
-  <!-- ========== ROI CALCULATOR ========== -->
-  <section id="calculator" class="section calc-section">
+  <!-- ==================== ROI CALCULATOR ==================== -->
+  <section class="section roi-section">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Revenue Projection</span>
+        <span class="section-tag">Revenue Impact</span>
         <h2 class="section-title">Calculate Your <span class="gradient-text">ROI</span></h2>
+        <p class="section-subtitle">See the revenue impact of owning your digital platform versus renting audience attention.</p>
       </div>
 
-      <div class="calc-card reveal">
-        <div class="calc-sliders">
-          <div class="slider-group">
-            <div class="slider-header">
-              <label>Monthly Leads</label>
-              <span id="leads-display">50</span>
+      <div class="roi-card reveal">
+        <div class="roi-sliders">
+          <div class="roi-slider-group">
+            <label for="leads-slider">Monthly Leads</label>
+            <div class="slider-wrap">
+              <input type="range" id="leads-slider" min="10" max="1000" value="150" step="10">
+              <span class="slider-value" id="leads-value">150</span>
             </div>
-            <input type="range" id="leads-slider" min="10" max="1000" value="50">
-            <div class="slider-labels"><span>10</span><span>1000</span></div>
           </div>
-
-          <div class="slider-group">
-            <div class="slider-header">
-              <label>Avg. Client Value ($)</label>
-              <span id="value-display">2,000</span>
+          <div class="roi-slider-group">
+            <label for="value-slider">Avg. Deal Value ($)</label>
+            <div class="slider-wrap">
+              <input type="range" id="value-slider" min="100" max="10000" value="1200" step="100">
+              <span class="slider-value" id="value-value">$1,200</span>
             </div>
-            <input type="range" id="value-slider" min="500" max="50000" value="2000" step="500">
-            <div class="slider-labels"><span>$500</span><span>$50k</span></div>
           </div>
         </div>
 
-        <div class="calc-results">
-          <div class="result-box">
-            <span class="result-label">Current Monthly</span>
-            <span class="result-value" id="current-revenue">$100,000</span>
+        <div class="roi-results">
+          <div class="roi-result-box">
+            <span class="roi-result-label">Current Monthly Revenue</span>
+            <span class="roi-result-value" id="current-revenue">$180,000</span>
           </div>
-          <div class="result-box highlight">
-            <span class="result-label">With ScaleUp</span>
-            <span class="result-value" id="projected-revenue">$140,000</span>
+          <div class="roi-result-box highlight">
+            <span class="roi-result-label">Projected with ScaleUp</span>
+            <span class="roi-result-value" id="projected-revenue">$252,000</span>
           </div>
-          <div class="result-box">
-            <span class="result-label">Annual Increase</span>
-            <span class="result-value" id="annual-increase">$480,000</span>
+          <div class="roi-result-box accent">
+            <span class="roi-result-label">Annual Increase</span>
+            <span class="roi-result-value" id="annual-increase">$864,000</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== FOUNDERS ========== -->
-  <section id="founders" class="section">
+  <!-- ==================== FOUNDERS ==================== -->
+  <section class="section founders-section">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">The Team</span>
-        <h2 class="section-title">Meet The <span class="gradient-text">Founders</span></h2>
+        <span class="section-tag">The Team</span>
+        <h2 class="section-title">Meet the <span class="gradient-text">Founders</span></h2>
+        <p class="section-subtitle">Engineers and operators who have shipped products for startups and Fortune 500s alike.</p>
       </div>
 
       <div class="founders-grid">
         <div class="founder-card reveal">
-          <div class="founder-header">
-            <div class="founder-avatar orange">RJ</div>
-            <div class="founder-meta">
-              <h3>Rj Vincent Layante</h3>
-              <p class="founder-role">Co-Founder & Technical Lead</p>
-              <p class="founder-sub">Business Development</p>
+          <div class="founder-avatar">
+            <div class="founder-avatar-placeholder">
+              <i class="fa-solid fa-user"></i>
             </div>
           </div>
-          <p class="founder-bio">Full-stack architect with 8+ years building scalable systems for startups and enterprises. Obsessed with clean code, performance, and business outcomes.</p>
+          <h3 class="founder-name">RJ Layante</h3>
+          <span class="founder-role">Co-Founder &amp; CTO</span>
+          <p class="founder-bio">Full-stack architect with 10+ years building scalable systems. Obsessed with clean code, fast load times, and products that just work.</p>
           <div class="founder-social">
-            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
           </div>
         </div>
 
         <div class="founder-card reveal">
-          <div class="founder-header">
-            <div class="founder-avatar purple">RS</div>
-            <div class="founder-meta">
-              <h3>Ryan Singh</h3>
-              <p class="founder-role">Co-Founder & Creative Director</p>
-              <p class="founder-sub">Web Developer</p>
+          <div class="founder-avatar">
+            <div class="founder-avatar-placeholder">
+              <i class="fa-solid fa-user"></i>
             </div>
           </div>
-          <p class="founder-bio">Design-driven developer crafting pixel-perfect interfaces. 7+ years turning complex requirements into intuitive, award-winning digital experiences.</p>
+          <h3 class="founder-name">Ryan Singh</h3>
+          <span class="founder-role">Co-Founder &amp; CEO</span>
+          <p class="founder-bio">Product strategist and growth operator. Bridges the gap between engineering excellence and business outcomes that move the needle.</p>
           <div class="founder-social">
-            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-dribbble"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
           </div>
         </div>
-      </div>
-
-      <div class="founder-stats reveal">
-        <div><p>15+</p><span>Years Combined</span></div>
-        <div class="vline"></div>
-        <div><p>120+</p><span>Clients Delivered</span></div>
-        <div class="vline"></div>
-        <div><p>98%</p><span>Retention Rate</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ========== DISCOVERY FORM ========== -->
-  <section id="contact" class="section">
+  <!-- ==================== DISCOVERY FORM ==================== -->
+  <section class="section form-section" id="contact">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Start Your Project</span>
-        <h2 class="section-title">Project <span class="gradient-text">Scope Builder</span></h2>
+        <span class="section-tag">Start a Project</span>
+        <h2 class="section-title">Let's Build <span class="gradient-text">Together</span></h2>
+        <p class="section-subtitle">Tell us what you're building. We'll respond within 24 hours with a clear scope and timeline.</p>
       </div>
 
       <div class="form-card reveal">
-        <form id="scope-form">
-          <div class="form-group">
-            <label>What do you need?</label>
-            <div class="chip-grid" id="chip-grid">
-              <button type="button" class="chip" data-feature="Website Creation"><i class="fa-solid fa-globe"></i> Website Creation</button>
-              <button type="button" class="chip" data-feature="App Creation"><i class="fa-solid fa-mobile-screen"></i> App Creation</button>
-              <button type="button" class="chip" data-feature="Custom Systems"><i class="fa-solid fa-microchip"></i> Custom Systems</button>
-              <button type="button" class="chip" data-feature="SEO & Marketing"><i class="fa-solid fa-chart-line"></i> SEO & Marketing</button>
-              <button type="button" class="chip" data-feature="UI/UX Design"><i class="fa-solid fa-pen-nib"></i> UI/UX Design</button>
-              <button type="button" class="chip" data-feature="Cloud Hosting"><i class="fa-solid fa-cloud"></i> Cloud Hosting</button>
-              <button type="button" class="chip" data-feature="Maintenance"><i class="fa-solid fa-wrench"></i> Maintenance</button>
-              <button type="button" class="chip" data-feature="Consulting"><i class="fa-solid fa-comment"></i> Consulting</button>
-            </div>
-            <div class="chip-preview" id="chip-preview"></div>
-          </div>
-
+        <form id="scope-form" class="discovery-form">
           <div class="form-row">
             <div class="form-group">
-              <label>Project Budget</label>
-              <select id="budget-select">
-                <option value="">Select a range...</option>
-                <option value="5k-15k">$5,000 – $15,000</option>
-                <option value="15k-30k">$15,000 – $30,000</option>
-                <option value="30k-50k">$30,000 – $50,000</option>
-                <option value="50k+">$50,000+</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row two-col">
-            <div class="form-group">
-              <input type="text" placeholder="Your Name" required>
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
             </div>
             <div class="form-group">
-              <input type="email" placeholder="Email Address" required>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@company.com" required>
             </div>
           </div>
 
           <div class="form-group">
-            <textarea placeholder="Tell us about your project..." rows="4"></textarea>
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Company name">
           </div>
 
-          <button type="submit" class="submit-btn" id="submit-btn">
-            <span>Send Project Scope</span>
-            <i class="fa-solid fa-paper-plane"></i>
+          <div class="form-group">
+            <label for="budget">Budget Range</label>
+            <select id="budget" name="budget" required>
+              <option value="" disabled selected>Select a range</option>
+              <option value="5k-15k">$5,000 – $15,000</option>
+              <option value="15k-50k">$15,000 – $50,000</option>
+              <option value="50k-100k">$50,000 – $100,000</option>
+              <option value="100k+">$100,000+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>What do you need?</label>
+            <div class="feature-chips" id="feature-chips">
+              <button type="button" class="feature-chip" data-feature="Website"><i class="fa-solid fa-globe"></i> Website</button>
+              <button type="button" class="feature-chip" data-feature="Mobile App"><i class="fa-solid fa-mobile-screen"></i> Mobile App</button>
+              <button type="button" class="feature-chip" data-feature="Custom System"><i class="fa-solid fa-layer-group"></i> Custom System</button>
+              <button type="button" class="feature-chip" data-feature="Marketing"><i class="fa-solid fa-bullhorn"></i> Marketing</button>
+              <button type="button" class="feature-chip" data-feature="Branding"><i class="fa-solid fa-palette"></i> Branding</button>
+              <button type="button" class="feature-chip" data-feature="Consulting"><i class="fa-solid fa-comments"></i> Consulting</button>
+            </div>
+            <div class="selected-preview" id="selected-preview"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Project Details</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us about your goals, timeline, and any specific requirements..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-full" id="submit-btn">
+            <span class="btn-text">Send Project Scope</span>
           </button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- ========== FOOTER ========== -->
+  <!-- ==================== FOOTER ==================== -->
   <footer class="footer">
-    <div class="footer-glow"></div>
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">
-            <img src="images/logo.png" alt="ScaleUp Logo" class="nav-logo">
-          </div>
-          <p>We build websites and apps that convert. Own your digital infrastructure and stop renting your business presence.</p>
-          <div class="footer-social">
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="#"><i class="fa-brands fa-github"></i></a>
-          </div>
+          <img src="images/logo.png" alt="ScaleUp Logo" class="footer-logo" style="height: 32px; width: auto;">
+          <p>We build digital products that scale. From first line of code to millionth user, we're your technical partner.</p>
         </div>
-
-        <div class="footer-col">
-          <h4>Services</h4>
-          <a href="#services">Website Creation</a>
-          <a href="#services">App Development</a>
-          <a href="#services">Custom Systems</a>
-          <a href="#services">Digital Marketing</a>
-        </div>
-
-        <div class="footer-col">
+        <div class="footer-links">
           <h4>Company</h4>
-          <a href="#founders">About Us</a>
-          <a href="#process">Our Process</a>
-          <a href="#">Careers</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
           <a href="#contact">Contact</a>
         </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <a href="#services">Websites</a>
+          <a href="#services">Mobile Apps</a>
+          <a href="#services">Custom Systems</a>
+          <a href="#services">Marketing</a>
+        </div>
+        <div class="footer-links">
+          <h4>Connect</h4>
+          <a href="#">LinkedIn</a>
+          <a href="#">GitHub</a>
+          <a href="#">Twitter / X</a>
+          <a href="mailto:hello@scaleup.digital">hello@scaleup.digital</a>
+        </div>
       </div>
-
       <div class="footer-bottom">
         <p>&copy; <span id="year"></span> ScaleUp Digital. All rights reserved.</p>
-        <div class="footer-legal">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-        </div>
       </div>
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <!-- Scripts -->
+  <script src="script.js"></script>
 </body>
 </html>
