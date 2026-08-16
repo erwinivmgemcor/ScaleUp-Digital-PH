@@ -129,14 +129,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // ==========================================
   // 6. Intersection Observer — Scroll Reveals
   // ==========================================
-  const revealObserver = new IntersectionObserver(function(entries) {
+  var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
         entry.target.classList.add('animate-in');
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
   document.querySelectorAll('.reveal').forEach(function(el) {
     revealObserver.observe(el);
@@ -145,49 +146,51 @@ document.addEventListener('DOMContentLoaded', function() {
   // ==========================================
   // 7. Comparison Toggle
   // ==========================================
-  const btnSocial = document.getElementById('btn-social');
-  const btnScaleup = document.getElementById('btn-scaleup');
+  const toggleBtns = document.querySelectorAll('.toggle-btn');
+  const rentedCard = document.querySelector('.card-rented');
+  const ownedCard = document.querySelector('.card-owned');
   const togglePill = document.getElementById('toggle-pill');
-  const cardSocial = document.getElementById('card-social');
-  const cardScaleup = document.getElementById('card-scaleup');
 
-  function setSocialActive() {
-    if (btnSocial) btnSocial.classList.add('active');
-    if (btnScaleup) btnScaleup.classList.remove('active');
-    if (togglePill) togglePill.classList.remove('right');
-    if (cardSocial) {
-      cardSocial.classList.remove('dimmed');
-      cardSocial.classList.add('active');
-    }
-    if (cardScaleup) {
-      cardScaleup.classList.remove('active');
-      cardScaleup.classList.add('dimmed');
-    }
-  }
+  toggleBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      toggleBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
 
-  function setScaleupActive() {
-    if (btnScaleup) btnScaleup.classList.add('active');
-    if (btnSocial) btnSocial.classList.remove('active');
-    if (togglePill) togglePill.classList.add('right');
-    if (cardScaleup) {
-      cardScaleup.classList.remove('dimmed');
-      cardScaleup.classList.add('active');
-    }
-    if (cardSocial) {
-      cardSocial.classList.remove('active');
-      cardSocial.classList.add('dimmed');
-    }
-  }
+      var mode = btn.dataset.target;
+      if (mode === 'rented') {
+        if (rentedCard) {
+          rentedCard.classList.add('highlight');
+          rentedCard.classList.remove('dimmed');
+        }
+        if (ownedCard) {
+          ownedCard.classList.remove('highlight');
+          ownedCard.classList.add('dimmed');
+        }
+        if (togglePill) togglePill.classList.remove('right');
+      } else {
+        if (ownedCard) {
+          ownedCard.classList.add('highlight');
+          ownedCard.classList.remove('dimmed');
+        }
+        if (rentedCard) {
+          rentedCard.classList.remove('highlight');
+          rentedCard.classList.add('dimmed');
+        }
+        if (togglePill) togglePill.classList.add('right');
+      }
+    });
+  });
 
-  if (btnSocial) {
-    btnSocial.addEventListener('click', setSocialActive);
+  // Default: owned (ScaleUp) active
+  if (ownedCard) {
+    ownedCard.classList.add('highlight');
+    ownedCard.classList.remove('dimmed');
   }
-  if (btnScaleup) {
-    btnScaleup.addEventListener('click', setScaleupActive);
+  if (rentedCard) {
+    rentedCard.classList.remove('highlight');
+    rentedCard.classList.add('dimmed');
   }
-
-  // Default: ScaleUp active
-  setScaleupActive();
+  if (togglePill) togglePill.classList.add('right');
 
   // ==========================================
   // 8. Niche Switcher
@@ -206,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
       nichePanels.forEach(function(panel) {
         if (panel.dataset.panel === target) {
           panel.classList.remove('hidden');
+          // Force reflow
           void panel.offsetWidth;
           panel.classList.add('active');
         } else {
@@ -223,35 +227,33 @@ document.addEventListener('DOMContentLoaded', function() {
   // ==========================================
   // 9. ROI Calculator
   // ==========================================
-  const leadsSlider = document.getElementById('leads-slider');
-  const valueSlider = document.getElementById('value-slider');
-  const leadsValue = document.getElementById('leads-value');
-  const valueValue = document.getElementById('value-value');
-  const currentRevenue = document.getElementById('current-revenue');
-  const projectedRevenue = document.getElementById('projected-revenue');
-  const annualIncrease = document.getElementById('annual-increase');
-
-  function formatCurrency(num) {
-    return '$' + num.toLocaleString();
-  }
+  const leadsInput = document.getElementById('monthlyLeads');
+  const dealInput = document.getElementById('avgDealValue');
+  const currentRev = document.getElementById('currentRevenue');
+  const projectedRev = document.getElementById('projectedRevenue');
+  const annualIncrease = document.getElementById('annualIncrease');
 
   function calculateROI() {
-    if (!leadsSlider || !valueSlider) return;
-    const leads = parseInt(leadsSlider.value) || 0;
-    const avgValue = parseInt(valueSlider.value) || 0;
-    const current = leads * avgValue;
-    const projected = current * 1.4;
-    const annual = (projected - current) * 12;
+    var leads = parseFloat(leadsInput.value) || 0;
+    var deal = parseFloat(dealInput.value) || 0;
 
-    if (leadsValue) leadsValue.textContent = leads;
-    if (valueValue) valueValue.textContent = formatCurrency(avgValue);
-    if (currentRevenue) currentRevenue.textContent = formatCurrency(current);
-    if (projectedRevenue) projectedRevenue.textContent = formatCurrency(Math.round(projected));
-    if (annualIncrease) annualIncrease.textContent = formatCurrency(Math.round(annual));
+    // Formula: Current = Leads * Deal
+    // ScaleUp Lift = +40% conversion lift
+    var current = leads * deal;
+    var projected = current * 1.4;
+    var yearlyDiff = (projected - current) * 12;
+
+    var leadsVal = document.getElementById('leadsVal');
+    var dealVal = document.getElementById('dealVal');
+    if (leadsVal) leadsVal.textContent = leads.toLocaleString();
+    if (dealVal) dealVal.textContent = '$' + deal.toLocaleString();
+    if (currentRev) currentRev.textContent = '$' + Math.round(current).toLocaleString();
+    if (projectedRev) projectedRev.textContent = '$' + Math.round(projected).toLocaleString();
+    if (annualIncrease) annualIncrease.textContent = '$' + Math.round(yearlyDiff).toLocaleString();
   }
 
-  if (leadsSlider) leadsSlider.addEventListener('input', calculateROI);
-  if (valueSlider) valueSlider.addEventListener('input', calculateROI);
+  if (leadsInput) leadsInput.addEventListener('input', calculateROI);
+  if (dealInput) dealInput.addEventListener('input', calculateROI);
   calculateROI();
 
   // ==========================================
