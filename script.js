@@ -1,14 +1,136 @@
 /* ============================================
    ScaleUp Digital — Production Scripts
+   Clean, error-free, fully functional.
    ============================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
 
   // ==========================================
-  // 1. INTERSECTION OBSERVER — Scroll Reveals
+  // 1. Custom Cursor
   // ==========================================
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  const cursorDot = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursor-ring');
+  const isTouch = window.matchMedia('(hover: none)').matches;
+
+  if (cursorDot && cursorRing && !isTouch) {
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+    let rafId = null;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top = ringY + 'px';
+      rafId = requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    const interactiveEls = document.querySelectorAll('a, button, input, textarea, select, .feature-chip, .toggle-btn, .niche-tab, .service-card, .process-card, .founder-card');
+    interactiveEls.forEach(function(el) {
+      el.addEventListener('mouseenter', function() {
+        cursorDot.style.width = '12px';
+        cursorDot.style.height = '12px';
+        cursorRing.style.width = '50px';
+        cursorRing.style.height = '50px';
+        cursorRing.style.borderColor = 'rgba(255, 107, 0, 0.6)';
+      });
+      el.addEventListener('mouseleave', function() {
+        cursorDot.style.width = '8px';
+        cursorDot.style.height = '8px';
+        cursorRing.style.width = '36px';
+        cursorRing.style.height = '36px';
+        cursorRing.style.borderColor = 'rgba(255, 107, 0, 0.35)';
+      });
+    });
+  }
+
+  // ==========================================
+  // 2. Scroll Progress Bar
+  // ==========================================
+  const scrollProgress = document.getElementById('scroll-progress');
+  if (scrollProgress) {
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollProgress.style.width = progress + '%';
+    }, { passive: true });
+  }
+
+  // ==========================================
+  // 3. Navbar Scroll Effect
+  // ==========================================
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
+
+  // ==========================================
+  // 4. Mobile Menu Toggle
+  // ==========================================
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const toggleIcon = document.getElementById('toggle-icon');
+
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener('click', function() {
+      const isOpen = mobileMenu.classList.contains('open');
+      if (isOpen) {
+        mobileMenu.classList.remove('open');
+        if (toggleIcon) toggleIcon.className = 'fa-solid fa-bars';
+      } else {
+        mobileMenu.classList.add('open');
+        if (toggleIcon) toggleIcon.className = 'fa-solid fa-xmark';
+      }
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        if (toggleIcon) toggleIcon.className = 'fa-solid fa-bars';
+      });
+    });
+  }
+
+  // ==========================================
+  // 5. Smooth Scroll for Anchor Links
+  // ==========================================
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // ==========================================
+  // 6. Intersection Observer — Scroll Reveals
+  // ==========================================
+  const revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('animate-in');
         revealObserver.unobserve(entry.target);
@@ -16,242 +138,134 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  // ==========================================
-  // 2. LENIS SMOOTH SCROLL
-  // ==========================================
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
-  // Sync with GSAP ScrollTrigger
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
-
-  // ==========================================
-  // 3. SMOOTH SCROLL FOR ALL ANCHOR LINKS
-  // ==========================================
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        lenis.scrollTo(target, { offset: -80 });
-      }
-      // Close mobile menu if open
-      const mobileMenu = document.getElementById('mobile-menu');
-      if (mobileMenu && mobileMenu.classList.contains('open')) {
-        mobileMenu.classList.remove('open');
-        document.getElementById('menu-toggle').innerHTML = '<i class="fa-solid fa-bars"></i>';
-      }
-    });
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
   });
 
   // ==========================================
-  // 4. CUSTOM CURSOR
+  // 7. Comparison Toggle
   // ==========================================
-  const cursor = document.getElementById('cursor');
-  const follower = document.getElementById('cursor-follower');
-  if (cursor && follower && window.matchMedia('(hover: hover)').matches) {
-    let mx = 0, my = 0, fx = 0, fy = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + 'px';
-      cursor.style.top = my + 'px';
-    });
-
-    function animateFollower() {
-      fx += (mx - fx) * 0.12;
-      fy += (my - fy) * 0.12;
-      follower.style.left = fx + 'px';
-      follower.style.top = fy + 'px';
-      requestAnimationFrame(animateFollower);
-    }
-    animateFollower();
-
-    document.querySelectorAll('a, button, input, textarea, select, .chip, .toggle-btn').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.width = '12px'; cursor.style.height = '12px';
-        follower.style.width = '48px'; follower.style.height = '48px';
-        follower.style.borderColor = 'rgba(255,107,0,0.6)';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.width = '8px'; cursor.style.height = '8px';
-        follower.style.width = '32px'; follower.style.height = '32px';
-        follower.style.borderColor = 'rgba(255,107,0,0.4)';
-      });
-    });
-  }
-
-  // ==========================================
-  // 5. SCROLL PROGRESS BAR
-  // ==========================================
-  const progressBar = document.getElementById('scroll-progress-bar');
-  if (progressBar) {
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      progressBar.style.width = (scrollTop / docHeight * 100) + '%';
-    }, { passive: true });
-  }
-
-  // ==========================================
-  // 6. NAVBAR SCROLL BEHAVIOR
-  // ==========================================
-  const navbar = document.getElementById('navbar');
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
-  }
-
-  // ==========================================
-  // 7. MOBILE MENU TOGGLE
-  // ==========================================
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.toggle('open');
-      menuToggle.innerHTML = isOpen
-        ? '<i class="fa-solid fa-xmark"></i>'
-        : '<i class="fa-solid fa-bars"></i>';
-    });
-  }
-
-  // ==========================================
-  // 8. GSAP HERO ENTRANCE
-  // ==========================================
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.from('.hero-content > .reveal', {
-    y: 50,
-    opacity: 0,
-    duration: 1,
-    stagger: 0.12,
-    ease: 'power3.out',
-    delay: 0.2
-  });
-
-  gsap.from('.hero-visual', {
-    x: 60,
-    opacity: 0,
-    duration: 1.2,
-    ease: 'power3.out',
-    delay: 0.4
-  });
-
-  // ==========================================
-  // 9. COMPARISON TOGGLE
-  // ==========================================
+  const btnSocial = document.getElementById('btn-social');
+  const btnScaleup = document.getElementById('btn-scaleup');
   const togglePill = document.getElementById('toggle-pill');
-  const toggleBtns = document.querySelectorAll('.toggle-btn');
   const cardSocial = document.getElementById('card-social');
   const cardScaleup = document.getElementById('card-scaleup');
 
-  if (togglePill && toggleBtns.length && cardSocial && cardScaleup) {
-    function activateSocial() {
-      togglePill.classList.remove('right');
-      toggleBtns.forEach(b => b.classList.toggle('active', b.dataset.side === 'social'));
+  function setSocialActive() {
+    if (btnSocial) btnSocial.classList.add('active');
+    if (btnScaleup) btnScaleup.classList.remove('active');
+    if (togglePill) togglePill.classList.remove('right');
+    if (cardSocial) {
       cardSocial.classList.remove('dimmed');
       cardSocial.classList.add('active');
-      cardScaleup.classList.add('dimmed');
+    }
+    if (cardScaleup) {
       cardScaleup.classList.remove('active');
+      cardScaleup.classList.add('dimmed');
     }
-    function activateScaleup() {
-      togglePill.classList.add('right');
-      toggleBtns.forEach(b => b.classList.toggle('active', b.dataset.side === 'scaleup'));
-      cardScaleup.classList.remove('dimmed');
-      cardScaleup.classList.add('active');
-      cardSocial.classList.add('dimmed');
-      cardSocial.classList.remove('active');
-    }
-
-    toggleBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (btn.dataset.side === 'social') activateSocial();
-        else activateScaleup();
-      });
-    });
-
-    // Default: ScaleUp active
-    activateScaleup();
   }
 
+  function setScaleupActive() {
+    if (btnScaleup) btnScaleup.classList.add('active');
+    if (btnSocial) btnSocial.classList.remove('active');
+    if (togglePill) togglePill.classList.add('right');
+    if (cardScaleup) {
+      cardScaleup.classList.remove('dimmed');
+      cardScaleup.classList.add('active');
+    }
+    if (cardSocial) {
+      cardSocial.classList.remove('active');
+      cardSocial.classList.add('dimmed');
+    }
+  }
+
+  if (btnSocial) {
+    btnSocial.addEventListener('click', setSocialActive);
+  }
+  if (btnScaleup) {
+    btnScaleup.addEventListener('click', setScaleupActive);
+  }
+
+  // Default: ScaleUp active
+  setScaleupActive();
+
   // ==========================================
-  // 10. NICHE SWITCHER
+  // 8. Niche Switcher
   // ==========================================
   const nicheTabs = document.querySelectorAll('.niche-tab');
   const nichePanels = document.querySelectorAll('.niche-panel');
 
-  nicheTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
+  nicheTabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
       const target = tab.dataset.niche;
-      nicheTabs.forEach(t => t.classList.remove('active'));
+      if (!target) return;
+
+      nicheTabs.forEach(function(t) { t.classList.remove('active'); });
       tab.classList.add('active');
 
-      nichePanels.forEach(panel => {
+      nichePanels.forEach(function(panel) {
         if (panel.dataset.panel === target) {
           panel.classList.remove('hidden');
-          requestAnimationFrame(() => panel.classList.add('active'));
+          void panel.offsetWidth;
+          panel.classList.add('active');
         } else {
           panel.classList.remove('active');
-          setTimeout(() => panel.classList.add('hidden'), 500);
+          setTimeout(function() {
+            if (!panel.classList.contains('active')) {
+              panel.classList.add('hidden');
+            }
+          }, 500);
         }
       });
     });
   });
 
   // ==========================================
-  // 11. ROI CALCULATOR
+  // 9. ROI Calculator
   // ==========================================
   const leadsSlider = document.getElementById('leads-slider');
   const valueSlider = document.getElementById('value-slider');
-  const leadsDisplay = document.getElementById('leads-display');
-  const valueDisplay = document.getElementById('value-display');
-  const currentRev = document.getElementById('current-revenue');
-  const projectedRev = document.getElementById('projected-revenue');
-  const annualInc = document.getElementById('annual-increase');
+  const leadsValue = document.getElementById('leads-value');
+  const valueValue = document.getElementById('value-value');
+  const currentRevenue = document.getElementById('current-revenue');
+  const projectedRevenue = document.getElementById('projected-revenue');
+  const annualIncrease = document.getElementById('annual-increase');
 
-  function updateROI() {
-    if (!leadsSlider || !valueSlider) return;
-    const leads = parseInt(leadsSlider.value);
-    const val = parseInt(valueSlider.value);
-    const current = leads * val;
-    const projected = Math.round(current * 1.4);
-    const annual = (projected - current) * 12;
-
-    if (leadsDisplay) leadsDisplay.textContent = leads;
-    if (valueDisplay) valueDisplay.textContent = val.toLocaleString();
-    if (currentRev) currentRev.textContent = '$' + current.toLocaleString();
-    if (projectedRev) projectedRev.textContent = '$' + projected.toLocaleString();
-    if (annualInc) annualInc.textContent = '$' + annual.toLocaleString();
+  function formatCurrency(num) {
+    return '$' + num.toLocaleString();
   }
 
-  if (leadsSlider) leadsSlider.addEventListener('input', updateROI);
-  if (valueSlider) valueSlider.addEventListener('input', updateROI);
-  updateROI();
+  function calculateROI() {
+    if (!leadsSlider || !valueSlider) return;
+    const leads = parseInt(leadsSlider.value) || 0;
+    const avgValue = parseInt(valueSlider.value) || 0;
+    const current = leads * avgValue;
+    const projected = current * 1.4;
+    const annual = (projected - current) * 12;
+
+    if (leadsValue) leadsValue.textContent = leads;
+    if (valueValue) valueValue.textContent = formatCurrency(avgValue);
+    if (currentRevenue) currentRevenue.textContent = formatCurrency(current);
+    if (projectedRevenue) projectedRevenue.textContent = formatCurrency(Math.round(projected));
+    if (annualIncrease) annualIncrease.textContent = formatCurrency(Math.round(annual));
+  }
+
+  if (leadsSlider) leadsSlider.addEventListener('input', calculateROI);
+  if (valueSlider) valueSlider.addEventListener('input', calculateROI);
+  calculateROI();
 
   // ==========================================
-  // 12. FEATURE CHIPS (Discovery Form)
+  // 10. Feature Chips (Discovery Form)
   // ==========================================
-  const chips = document.querySelectorAll('.chip');
-  const chipPreview = document.getElementById('chip-preview');
+  const featureChips = document.querySelectorAll('.feature-chip');
+  const selectedPreview = document.getElementById('selected-preview');
   const selectedFeatures = new Set();
 
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
+  featureChips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
       const feature = chip.dataset.feature;
+      if (!feature) return;
+
       if (selectedFeatures.has(feature)) {
         selectedFeatures.delete(feature);
         chip.classList.remove('active');
@@ -259,66 +273,77 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedFeatures.add(feature);
         chip.classList.add('active');
       }
-      renderPreview();
+      updatePreview();
     });
   });
 
-  function renderPreview() {
-    if (!chipPreview) return;
-    chipPreview.innerHTML = '';
-    selectedFeatures.forEach(f => {
-      const span = document.createElement('span');
-      span.textContent = f;
-      chipPreview.appendChild(span);
+  function updatePreview() {
+    if (!selectedPreview) return;
+    selectedPreview.innerHTML = '';
+    selectedFeatures.forEach(function(feature) {
+      const pill = document.createElement('span');
+      pill.className = 'selected-pill';
+      pill.textContent = feature;
+      selectedPreview.appendChild(pill);
     });
   }
 
   // ==========================================
-  // 13. FORM SUBMIT
+  // 11. Form Submit Simulation
   // ==========================================
   const scopeForm = document.getElementById('scope-form');
   const submitBtn = document.getElementById('submit-btn');
 
   if (scopeForm && submitBtn) {
-    scopeForm.addEventListener('submit', (e) => {
+    scopeForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      const original = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span class="flex items-center gap-2 justify-center"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>Sending...</span>';
+      const btnText = submitBtn.querySelector('.btn-text');
+      const originalText = btnText ? btnText.textContent : 'Send Project Scope';
+
       submitBtn.disabled = true;
+      if (btnText) btnText.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
 
-      setTimeout(() => {
-        submitBtn.classList.add('success');
-        submitBtn.innerHTML = '<span class="flex items-center gap-2 justify-center"><i class="fa-solid fa-check"></i> Project Scope Sent!</span>';
+      setTimeout(function() {
+        if (btnText) btnText.innerHTML = '<i class="fa-solid fa-check"></i> Project Scope Sent!';
+        submitBtn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+        submitBtn.style.boxShadow = '0 4px 20px rgba(34, 197, 94, 0.3)';
 
-        setTimeout(() => {
-          submitBtn.classList.remove('success');
-          submitBtn.innerHTML = original;
+        setTimeout(function() {
           submitBtn.disabled = false;
+          if (btnText) btnText.textContent = originalText;
+          submitBtn.style.background = '';
+          submitBtn.style.boxShadow = '';
           scopeForm.reset();
           selectedFeatures.clear();
-          chips.forEach(c => c.classList.remove('active'));
-          renderPreview();
-        }, 3000);
-      }, 2000);
+          featureChips.forEach(function(c) { c.classList.remove('active'); });
+          updatePreview();
+        }, 2500);
+      }, 1800);
     });
   }
 
   // ==========================================
-  // 14. DYNAMIC YEAR
+  // 12. Dynamic Year
   // ==========================================
   const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
 
   // ==========================================
-  // 15. MAGNETIC BUTTONS
+  // 13. Magnetic Button Effect
   // ==========================================
-  document.querySelectorAll('.btn-primary, .nav-cta').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
+  const magneticBtns = document.querySelectorAll('.magnetic-btn');
+  magneticBtns.forEach(function(btn) {
+    btn.addEventListener('mousemove', function(e) {
       const rect = btn.getBoundingClientRect();
-      btn.style.transform = `translate(${(e.clientX - rect.left - rect.width/2) * 0.15}px, ${(e.clientY - rect.top - rect.height/2) * 0.15}px)`;
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = 'translate(' + (x * 0.2) + 'px, ' + (y * 0.2) + 'px)';
     });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = 'translate(0,0)';
+    btn.addEventListener('mouseleave', function() {
+      btn.style.transform = 'translate(0, 0)';
     });
   });
-});
+
+}); // End DOMContentLoaded
