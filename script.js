@@ -246,10 +246,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var leadsVal = document.getElementById('leadsVal');
     var dealVal = document.getElementById('dealVal');
     if (leadsVal) leadsVal.textContent = leads.toLocaleString();
-    if (dealVal) dealVal.textContent = '$' + deal.toLocaleString();
-    if (currentRev) currentRev.textContent = '$' + Math.round(current).toLocaleString();
-    if (projectedRev) projectedRev.textContent = '$' + Math.round(projected).toLocaleString();
-    if (annualIncrease) annualIncrease.textContent = '$' + Math.round(yearlyDiff).toLocaleString();
+    if (dealVal) dealVal.textContent = '₱' + deal.toLocaleString();
+    if (currentRev) currentRev.textContent = '₱' + Math.round(current).toLocaleString();
+    if (projectedRev) projectedRev.textContent = '₱' + Math.round(projected).toLocaleString();
+    if (annualIncrease) annualIncrease.textContent = '₱' + Math.round(yearlyDiff).toLocaleString();
   }
 
   if (leadsInput) leadsInput.addEventListener('input', calculateROI);
