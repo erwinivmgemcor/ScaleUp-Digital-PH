@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScaleUp Digital — Build. Launch. Scale.</title>
+  <meta name="description" content="Premium digital products, apps, and systems built to scale your business. Websites, mobile apps, custom systems and growth marketing engineered in the Philippines.">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ScaleUp Digital — Build. Launch. Scale.">
+  <meta property="og:description" content="High-performance websites, mobile apps, and tailor-fit business systems that turn visitors into customers.">
+  <meta property="og:image" content="./images/hero-laptop.jpg">
+  <meta name="theme-color" content="#0a0a0f">
+
+  <!-- FontAwesome 6.4 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="./images/logo.png">
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <img src="./images/logo.png" alt="ScaleUp" class="preloader-logo">
+      <div class="preloader-bar"><span id="preloader-fill"></span></div>
+      <span class="preloader-pct" id="preloader-pct">0%</span>
+    </div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#top" class="nav-brand" data-scroll>
+        <img src="./images/logo.png" alt="ScaleUp Logo" class="nav-logo">
+        <span class="nav-wordmark">ScaleUp<em>Digital</em></span>
+      </a>
+
+      <nav class="nav-desktop">
+        <a href="#about" class="nav-link" data-scroll>About</a>
+        <a href="#services" class="nav-link" data-scroll>Services</a>
+        <a href="#work" class="nav-link" data-scroll>Work</a>
+        <a href="#process" class="nav-link" data-scroll>Process</a>
+        <a href="#contact" class="nav-link" data-scroll>Contact</a>
+      </nav>
+
+      <a href="#contact" class="btn btn-primary nav-cta magnetic-btn" data-scroll><span>Let's Talk</span></a>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#about" class="mobile-link" data-scroll>About</a>
+      <a href="#services" class="mobile-link" data-scroll>Services</a>
+      <a href="#work" class="mobile-link" data-scroll>Work</a>
+      <a href="#process" class="mobile-link" data-scroll>Process</a>
+      <a href="#contact" class="mobile-link" data-scroll>Contact</a>
+      <a href="#contact" class="btn btn-primary mobile-cta" data-scroll><span>Let's Talk</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="about">
+    <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-bg" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <div class="container hero-content">
+      <div class="hero-text">
+        <span class="hero-tag reveal-hero"><span class="pulse-dot"></span>Digital Product Studio — Philippines</span>
+        <h1 class="hero-title">
+          <span class="line"><span>Build.</span></span>
+          <span class="line"><span>Launch.</span></span>
+          <span class="line"><span class="gradient-text">Scale.</span></span>
+        </h1>
+        <p class="hero-subtitle reveal-hero">
+          We craft high-performance websites, mobile apps, and tailor-fit business systems
+          that turn visitors into customers — and customers into loyal fans.
+        </p>
+        <div class="hero-actions reveal-hero">
+          <a href="#contact" class="btn btn-primary btn-lg magnetic-btn" data-scroll><span>Start Building <i class="fa-solid fa-arrow-right"></i></span></a>
+          <a href="#work" class="btn btn-outline btn-lg magnetic-btn" data-scroll><span>View Our Work</span></a>
+        </div>
+        <div class="hero-stats reveal-hero">
+          <div class="hstat"><strong data-counter="40" data-suffix="+">0</strong><span>Projects Shipped</span></div>
+          <div class="hstat"><strong data-counter="98" data-suffix="%">0</strong><span>Client Satisfaction</span></div>
+          <div class="hstat"><strong data-counter="5" data-suffix=" yrs">0</strong><span>Building Products</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal-hero">
+        <div class="hero-image-wrap" data-tilt>
+          <img src="./images/hero-laptop.jpg" alt="Digital product showcase on laptop" class="hero-image" fetchpriority="high">
+          <div class="hero-image-glow"></div>
+          <div class="float-chip chip-1"><i class="fa-solid fa-bolt"></i> 99 Lighthouse Score</div>
+          <div class="float-chip chip-2"><i class="fa-solid fa-rocket"></i> Shipped in 6 weeks</div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#services" class="scroll-indicator" data-scroll aria-label="Scroll down">
+      <span class="mouse"><span class="wheel"></span></span>
+      <span class="scroll-text">Scroll</span>
+    </a>
+  </section>
+
+  <!-- ==================== MARQUEE ==================== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marquee-track">
+      <span>React</span><i class="fa-solid fa-star-of-life"></i>
+      <span>Node.js</span><i class="fa-solid fa-star-of-life"></i>
+      <span>Flutter</span><i class="fa-solid fa-star-of-life"></i>
+      <span>Next.js</span><i class="fa-solid fa-star-of-life"></i>
+      <span>AWS</span><i class="fa-solid fa-star-of-life"></i>
+      <span>TypeScript</span><i class="fa-solid fa-star-of-life"></i>
+      <span>PostgreSQL</span><i class="fa-solid fa-star-of-life"></i>
+      <span>React Native</span><i class="fa-solid fa-star-of-life"></i>
+      <span>Docker</span><i class="fa-solid fa-star-of-life"></i>
+      <span>Figma</span><i class="fa-solid fa-star-of-life"></i>
+    </div>
+  </div>
+
+  <!-- ==================== DEVELOPER CARD ==================== -->
+  <section class="section dev-section">
+    <div class="container reveal">
+      <div class="dev-card" data-tilt-soft>
+        <div class="developer-image-container">
+          <img src="./images/developer.jpg" alt="Lead Developer" class="dev-img" loading="lazy">
+        </div>
+        <div class="dev-info">
+          <span class="tag">Lead Developer</span>
+          <h3>Building your next digital product</h3>
+          <p>Clean code. Fast delivery. Zero compromise. Our engineering team ships production-grade software using modern stacks that scale with your growth.</p>
+          <div class="dev-meta">
+            <span class="dev-stat"><i class="fa-solid fa-check-circle"></i> React &amp; Node.js</span>
+            <span class="dev-stat"><i class="fa-solid fa-check-circle"></i> Cloud-Native</span>
+            <span class="dev-stat"><i class="fa-solid fa-check-circle"></i> 99.9% Uptime</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== COMPARISON ==================== -->
+  <section class="section comparison-section" id="comparison">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">The Platform Difference</span>
+        <h2 class="section-title">Rented vs. <span class="gradient-text">Owned</span></h2>
+        <p class="section-subtitle">Social media pages are borrowed land. Your platform is an asset that compounds in value.</p>
+      </div>
+
+      <div class="comparison-grid">
+        <div class="comparison-card card-rented reveal">
+          <div class="comparison-icon-wrap social-icon">
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-tiktok"></i>
+          </div>
+          <h3 class="comparison-card-title">Social-Only Presence</h3>
+          <ul class="comparison-list">
+            <li class="comparison-item bad"><i class="fa-solid fa-xmark"></i> No ownership of audience data</li>
+            <li class="comparison-item bad"><i class="fa-solid fa-xmark"></i> Algorithm changes kill reach overnight</li>
+            <li class="comparison-item bad"><i class="fa-solid fa-xmark"></i> Limited branding &amp; customization</li>
+            <li class="comparison-item bad"><i class="fa-solid fa-xmark"></i> No direct conversion funnel</li>
+            <li class="comparison-item bad"><i class="fa-solid fa-xmark"></i> Competes for attention in noisy feeds</li>
+          </ul>
+          <div class="comparison-footer"><span class="comparison-label">Rented Land</span></div>
+        </div>
+
+        <div class="comparison-card card-owned reveal">
+          <div class="card-shine"></div>
+          <div class="comparison-icon-wrap scaleup-icon"><i class="fa-solid fa-rocket"></i></div>
+          <h3 class="comparison-card-title">ScaleUp Platform</h3>
+          <ul class="comparison-list">
+            <li class="comparison-item good"><i class="fa-solid fa-check"></i> You own every customer relationship</li>
+            <li class="comparison-item good"><i class="fa-solid fa-check"></i> Algorithm-proof, evergreen asset</li>
+            <li class="comparison-item good"><i class="fa-solid fa-check"></i> Full brand control &amp; white-label</li>
+            <li class="comparison-item good"><i class="fa-solid fa-check"></i> Built-in funnels &amp; automations</li>
+            <li class="comparison-item good"><i class="fa-solid fa-check"></i> SEO &amp; content that compounds</li>
+          </ul>
+          <div class="comparison-footer"><span class="comparison-label active-label">Owned Asset</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICES ==================== -->
+  <section class="section offerings-section" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">What We Do</span>
+        <h2 class="section-title">Core <span class="gradient-text">Offerings</span></h2>
+        <p class="section-subtitle">End-to-end digital solutions engineered for performance, scalability, and conversion.</p>
+      </div>
+
+      <div class="offerings-grid stagger-group">
+        <div class="service-card glow-card">
+          <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+          <h3 class="service-title">Website Creation</h3>
+          <p class="service-desc">High-converting, SEO-optimized websites built with modern frameworks. From landing pages to complex portals, we design for speed and results.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Responsive &amp; mobile-first</li>
+            <li><i class="fa-solid fa-check"></i> Core Web Vitals optimized</li>
+            <li><i class="fa-solid fa-check"></i> CMS integration ready</li>
+          </ul>
+          <span class="service-num">01</span>
+        </div>
+
+        <div class="service-card glow-card">
+          <div class="service-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h3 class="service-title">App Creation</h3>
+          <p class="service-desc">Native and cross-platform mobile applications that users love. iOS, Android, and progressive web apps with seamless UX.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> React Native / Flutter</li>
+            <li><i class="fa-solid fa-check"></i> Push notifications &amp; offline mode</li>
+            <li><i class="fa-solid fa-check"></i> App Store deployment</li>
+          </ul>
+          <span class="service-num">02</span>
+        </div>
+
+        <div class="service-card glow-card">
+          <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
+          <h3 class="service-title">Tailor-Fit Systems</h3>
+          <p class="service-desc">Custom business systems, dashboards, and internal tools built around your exact workflow. No bloat, no workarounds.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> CRM &amp; ERP integrations</li>
+            <li><i class="fa-solid fa-check"></i> Automated workflows</li>
+            <li><i class="fa-solid fa-check"></i> Role-based access control</li>
+          </ul>
+          <span class="service-num">03</span>
+        </div>
+
+        <div class="service-card glow-card">
+          <div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div>
+          <h3 class="service-title">Digital Marketing</h3>
+          <p class="service-desc">Data-driven growth strategies that fill your pipeline. SEO, paid media, content strategy, and conversion rate optimization.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> SEO &amp; content strategy</li>
+            <li><i class="fa-solid fa-check"></i> Paid acquisition (PPC, social)</li>
+            <li><i class="fa-solid fa-check"></i> Analytics &amp; attribution</li>
+          </ul>
+          <span class="service-num">04</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WORK / PORTFOLIO ==================== -->
+  <section class="section work-section" id="work">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Selected Work</span>
+        <h2 class="section-title">Products We're <span class="gradient-text">Proud Of</span></h2>
+        <p class="section-subtitle">A snapshot of platforms we've designed, engineered, and scaled for real businesses.</p>
+      </div>
+
+      <div class="work-grid stagger-group">
+        <article class="work-card" data-tilt-soft>
+          <div class="work-media"><img src="./images/mobile-showcase.jpg" alt="Client finance dashboard mobile app" loading="lazy"></div>
+          <div class="work-body">
+            <div class="work-tags"><span>Mobile App</span><span>FinTech</span></div>
+            <h3>Client Finance Dashboard</h3>
+            <p>Real-time portfolio tracking with instant breakdowns and goal monitoring across devices.</p>
+            <a href="projects.html" class="work-link">Case study <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="work-card" data-tilt-soft>
+          <div class="work-media"><img src="./images/process-flow.jpg" alt="Operations workflow system" loading="lazy"></div>
+          <div class="work-body">
+            <div class="work-tags"><span>Custom System</span><span>Logistics</span></div>
+            <h3>OpsFlow Automation Suite</h3>
+            <p>End-to-end workflow automation that cut manual processing time by 70% for a logistics team.</p>
+            <a href="projects.html" class="work-link">Case study <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="work-card" data-tilt-soft>
+          <div class="work-media"><img src="./images/server-room.jpg" alt="Cloud infrastructure" loading="lazy"></div>
+          <div class="work-body">
+            <div class="work-tags"><span>Infrastructure</span><span>SaaS</span></div>
+            <h3>Cloud Migration &amp; Scaling</h3>
+            <p>Zero-downtime migration to auto-scaling cloud infrastructure serving 100k+ monthly users.</p>
+            <a href="projects.html" class="work-link">Case study <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <div class="work-more reveal">
+        <a href="projects.html" class="btn btn-outline btn-lg magnetic-btn"><span>View All Projects <i class="fa-solid fa-arrow-right"></i></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MOBILE FIRST ==================== -->
+  <section class="section mobile-section">
+    <div class="container mobile-grid">
+      <div class="mobile-text reveal">
+        <span class="section-tag">Mobile First</span>
+        <h2 class="section-title">Designed for <span class="gradient-text">Every Screen</span></h2>
+        <p class="section-subtitle">Over 60% of traffic is mobile. Every pixel we craft responds beautifully from 4-inch phones to 4K desktops.</p>
+        <div class="mobile-stats">
+          <div class="mstat"><strong><span data-counter="100">0</span>%</strong><span>Responsive</span></div>
+          <div class="mstat"><strong>&lt;<span data-counter="2">0</span>s</strong><span>Load Time</span></div>
+          <div class="mstat"><strong><span data-counter="60">0</span>+</strong><span>FPS Animations</span></div>
+        </div>
+      </div>
+      <div class="mobile-visual reveal" data-tilt-soft>
+        <img src="./images/mobile-showcase.jpg" alt="ScaleUp mobile apps" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROCESS ==================== -->
+  <section class="section process-section" id="process">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">How We Work</span>
+        <h2 class="section-title">Our <span class="gradient-text">Process</span></h2>
+        <p class="section-subtitle">A battle-tested workflow that takes you from concept to launch without surprises.</p>
+      </div>
+
+      <div class="process-track">
+        <div class="process-line"><span id="process-line-fill"></span></div>
+        <div class="process-steps stagger-group">
+          <div class="process-step">
+            <div class="process-dot">01</div>
+            <h3 class="process-title">Discovery</h3>
+            <p>We map your goals, users, and technical requirements into a clear, scoped roadmap.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-dot">02</div>
+            <h3 class="process-title">Design</h3>
+            <p>Wireframes to pixel-perfect UI, validated with prototypes before a single line of code.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-dot">03</div>
+            <h3 class="process-title">Development</h3>
+            <p>Agile sprints with weekly demos. Clean, tested, documented code you fully own.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-dot">04</div>
+            <h3 class="process-title">Launch &amp; Scale</h3>
+            <p>Deployment, monitoring, and iteration — we grow the product as your business grows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== INFRASTRUCTURE ==================== -->
+  <section class="section infra-section">
+    <div class="container infra-grid">
+      <div class="infra-visual reveal" data-tilt-soft>
+        <img src="./images/server-room.jpg" alt="Enterprise cloud infrastructure" loading="lazy">
+      </div>
+      <div class="infra-text reveal">
+        <span class="section-tag">Infrastructure</span>
+        <h2 class="section-title">Enterprise-Grade <span class="gradient-text">Reliability</span></h2>
+        <p class="section-subtitle">Your product runs on battle-tested cloud infrastructure with auto-scaling, global CDN, and military-grade security.</p>
+        <ul class="infra-list">
+          <li><i class="fa-solid fa-shield-halved"></i> SSL, WAF &amp; DDoS protection on every deployment</li>
+          <li><i class="fa-solid fa-globe"></i> Global edge CDN for sub-second loads anywhere</li>
+          <li><i class="fa-solid fa-rotate"></i> Automated backups &amp; disaster recovery</li>
+          <li><i class="fa-solid fa-chart-line"></i> 24/7 uptime monitoring &amp; alerting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NICHE ==================== -->
+  <section class="section niche-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Industry Solutions</span>
+        <h2 class="section-title">Built for <span class="gradient-text">Your Niche</span></h2>
+        <p class="section-subtitle">Specialized blueprints tailored to the unique demands of your industry.</p>
+      </div>
+
+      <div class="niche-tabs reveal" role="tablist">
+        <button class="niche-tab active" data-niche="ecommerce" role="tab">E-Commerce</button>
+        <button class="niche-tab" data-niche="healthcare" role="tab">Healthcare</button>
+        <button class="niche-tab" data-niche="realestate" role="tab">Real Estate</button>
+        <button class="niche-tab" data-niche="saas" role="tab">SaaS</button>
+      </div>
+
+      <div class="niche-panels reveal">
+        <div class="niche-panel active" id="niche-ecommerce">
+          <h3>E-Commerce Powerhouse</h3>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Multi-currency &amp; tax automation</li>
+            <li><i class="fa-solid fa-check"></i> Payment gateway integrations</li>
+            <li><i class="fa-solid fa-check"></i> Real-time inventory management</li>
+          </ul>
+        </div>
+        <div class="niche-panel" id="niche-healthcare">
+          <h3>Healthcare Digital Suite</h3>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> HIPAA-compliant architecture</li>
+            <li><i class="fa-solid fa-check"></i> Secure patient portals</li>
+            <li><i class="fa-solid fa-check"></i> EHR integration ready</li>
+          </ul>
+        </div>
+        <div class="niche-panel" id="niche-realestate">
+          <h3>Real Estate Platform</h3>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> MLS &amp; listing syndication</li>
+            <li><i class="fa-solid fa-check"></i> 3D tour integrations</li>
+            <li><i class="fa-solid fa-check"></i> Lead scoring &amp; CRM sync</li>
+          </ul>
+        </div>
+        <div class="niche-panel" id="niche-saas">
+          <h3>SaaS Launchpad</h3>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Stripe &amp; Paddle billing</li>
+            <li><i class="fa-solid fa-check"></i> Multi-tenant data isolation</li>
+            <li><i class="fa-solid fa-check"></i> Admin &amp; analytics dashboards</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ROI CALCULATOR ==================== -->
+  <section class="section roi-section" id="roi">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Revenue Impact</span>
+        <h2 class="section-title">Calculate Your <span class="gradient-text">ROI</span></h2>
+        <p class="section-subtitle">See the revenue impact of owning your digital platform versus renting audience attention.</p>
+      </div>
+
+      <div class="roi-card reveal">
+        <div class="roi-controls">
+          <div class="roi-slider-group">
+            <div class="roi-label-row"><label for="leads">Monthly Leads</label><span class="roi-value" id="leadsValue">150</span></div>
+            <input type="range" id="leads" min="10" max="1000" value="150" step="10">
+          </div>
+          <div class="roi-slider-group">
+            <div class="roi-label-row"><label for="deal">Avg. Deal Value (₱)</label><span class="roi-value" id="dealValue">₱1,200</span></div>
+            <input type="range" id="deal" min="500" max="50000" value="1200" step="100">
+          </div>
+        </div>
+        <div class="roi-results">
+          <div class="roi-result-box">
+            <span class="roi-result-label">Current Monthly Revenue</span>
+            <span class="roi-result-value" id="currentRevenue">₱180,000</span>
+          </div>
+          <div class="roi-result-box">
+            <span class="roi-result-label">Projected with ScaleUp</span>
+            <span class="roi-result-value" id="projectedRevenue">₱252,000</span>
+          </div>
+          <div class="roi-result-box accent">
+            <span class="roi-result-label">Annual Increase</span>
+            <span class="roi-result-value" id="annualIncrease">₱864,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section class="section testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Client Love</span>
+        <h2 class="section-title">What Partners <span class="gradient-text">Say</span></h2>
+        <p class="section-subtitle">Real feedback from founders and teams we've built with.</p>
+      </div>
+    </div>
+    <div class="ticker-wrap reveal">
+      <div class="ticker-track" id="ticker-track">
+        <figure class="testimonial-card">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <blockquote>ScaleUp rebuilt our store and conversions jumped 43% in the first month. Hindi lang basta gumanda ang site — mas maraming bumibili. They think like owners, hindi lang vendors.</blockquote>
+          <figcaption><span class="t-avatar" style="--av:#ff6a00">M</span><div><strong>Miguel Tan</strong><span>Founder, UrbanMart PH</span></div></figcaption>
+        </figure>
+        <figure class="testimonial-card">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <blockquote>Our booking app shipped ahead of schedule and just works. Sobrang smooth ng weekly demos, laging kaming updated. Sulit na sulit!</blockquote>
+          <figcaption><span class="t-avatar" style="--av:#7c3aed">A</span><div><strong>Andrea Cruz</strong><span>COO, CarePoint Clinics</span></div></figcaption>
+        </figure>
+        <figure class="testimonial-card">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <blockquote>They replaced three spreadsheets and a legacy tool with one clean system. Nakakatipid kami ng ~20 hours a week sa ops. Ang laking bagay, promise.</blockquote>
+          <figcaption><span class="t-avatar" style="--av:#0ea5e9">J</span><div><strong>Joseph Reyes</strong><span>Director, FastHaul Logistics</span></div></figcaption>
+        </figure>
+        <figure class="testimonial-card">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <blockquote>From SEO to the new site, everything compounds now. Organic leads tripled nang walang dagdag na ad spend. Solid talaga!</blockquote>
+          <figcaption><span class="t-avatar" style="--av:#10b981">K</span><div><strong>Katrina Lim</strong><span>CEO, Vista Realty Group</span></div></figcaption>
+        </figure>
+        <figure class="testimonial-card">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <blockquote>Best decision namin na mag-invest sa sariling platform. Hindi na kami umaasa sa algorithm ng social media — sa amin na talaga ang customers namin.</blockquote>
+          <figcaption><span class="t-avatar" style="--av:#e5484d">P</span><div><strong>Paolo Mendoza</strong><span>Owner, Brew &amp; Bean Café</span></div></figcaption>
+        </figure>
+        <figure class="testimonial-card">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <blockquote>Akala ko mahal magpa-website. Turns out mas mahal pala 'yung nawawalang sales sa luma naming site. Bawi agad in 3 months!</blockquote>
+          <figcaption><span class="t-avatar" style="--av:#f59e0b">G</span><div><strong>Grace Villanueva</strong><span>Owner, GV Boutique</span></div></figcaption>
+        </figure>
+        <figure class="testimonial-card">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <blockquote>Very hands-on ang team. From design hanggang launch, guided kami every step of the way. Parang may in-house dev team na kami.</blockquote>
+          <figcaption><span class="t-avatar" style="--av:#6366f1">M</span><div><strong>Mark Dela Peña</strong><span>GM, PrimeFit Gym</span></div></figcaption>
+        </figure>
+        <figure class="testimonial-card">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <blockquote>Mabilis, malinis, at professional. Ang custom system nila ang nagpa-scale ng clinic namin from 1 branch to 5. Highly recommended!</blockquote>
+          <figcaption><span class="t-avatar" style="--av:#ec4899">J</span><div><strong>Jenny Ramos</strong><span>CEO, Ramos Dental Care</span></div></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOUNDERS ==================== -->
+  <section class="section founders-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">The Team</span>
+        <h2 class="section-title">Meet the <span class="gradient-text">Founders</span></h2>
+        <p class="section-subtitle">Engineers and operators who have shipped products for startups and Fortune 500s alike.</p>
+      </div>
+
+      <div class="founders-grid stagger-group">
+        <div class="founder-card glow-card">
+          <div class="founder-image-wrapper founder-initials" aria-label="RJ Layante"><span>RJ</span></div>
+          <div class="founder-info">
+            <h3>RJ Layante</h3>
+            <p class="founder-role">Co-Founder &amp; CEO</p>
+            <p class="founder-bio">Product strategist and growth operator. Bridges the gap between engineering excellence and business outcomes that move the needle.</p>
+            <div class="founder-socials">
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="founder-card glow-card">
+          <div class="founder-image-wrapper">
+            <img src="./images/erwin_photo.jpeg" alt="Erwin Sister" class="founder-img" loading="lazy">
+          </div>
+          <div class="founder-info">
+            <h3>Erwin Sister</h3>
+            <p class="founder-role">Co-Founder &amp; CTO</p>
+            <p class="founder-bio">Full-stack architect with 10+ years building scalable systems. Obsessed with clean code, fast load times, and products that just work.</p>
+            <div class="founder-socials">
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section class="section faq-section" id="faq">
+    <div class="container faq-container">
+      <div class="section-header reveal">
+        <span class="section-tag">Good to Know</span>
+        <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+      </div>
+
+      <div class="faq-list stagger-group">
+        <details class="faq-item">
+          <summary>How long does a typical project take?<i class="fa-solid fa-plus"></i></summary>
+          <div class="faq-answer"><p>Landing pages ship in 2–3 weeks, full websites in 4–8 weeks, and apps or custom systems in 8–16 weeks depending on scope. You get a detailed timeline after the discovery call — and we stick to it.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>How much does a project cost?<i class="fa-solid fa-plus"></i></summary>
+          <div class="faq-answer"><p>Every build is scoped individually. Landing pages typically start at ₱5,000, full websites at ₱15,000, mobile apps at ₱50,000, and custom systems at ₱80,000. You receive a fixed, itemized quote before we start — no surprise invoices, at may flexible payment terms pa for local businesses.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Do I own the code and the product?<i class="fa-solid fa-plus"></i></summary>
+          <div class="faq-answer"><p>Yes — 100%. All source code, designs, and infrastructure accounts are transferred to you at handover. No lock-in, no licensing fees, no hostage situations.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>What happens after launch?<i class="fa-solid fa-plus"></i></summary>
+          <div class="faq-answer"><p>Every project includes a 30-day post-launch support window. After that, most clients move to a monthly care plan covering updates, monitoring, backups, and small improvements.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Can you work with our existing team or tools?<i class="fa-solid fa-plus"></i></summary>
+          <div class="faq-answer"><p>Absolutely. We regularly integrate with in-house devs, designers, and existing stacks — from legacy PHP systems to modern cloud setups. We adapt to your workflow, not the other way around.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section class="section form-section" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Start a Project</span>
+        <h2 class="section-title">Let's Build <span class="gradient-text">Together</span></h2>
+        <p class="section-subtitle">Tell us where you want to go. We'll map the fastest route to get there.</p>
+      </div>
+
+      <form class="contact-form reveal" id="contact-form" novalidate>
+        <div class="form-row">
+          <div class="form-field">
+            <input type="text" id="name" name="name" placeholder=" " required>
+            <label for="name">Your Name</label>
+          </div>
+          <div class="form-field">
+            <input type="email" id="email" name="email" placeholder=" " required>
+            <label for="email">Email Address</label>
+          </div>
+        </div>
+
+        <div class="form-field select-field">
+          <select id="budget" name="budget" required>
+            <option value="" disabled selected>Select a range</option>
+            <option>₱5,000 – ₱10,000</option>
+            <option>₱10,000 – ₱25,000</option>
+            <option>₱25,000 – ₱50,000</option>
+            <option>₱50,000 – ₱100,000</option>
+            <option>₱100,000+</option>
+          </select>
+          <label for="budget" class="select-label">Project Budget</label>
+        </div>
+
+        <div class="form-chips">
+          <span class="chips-label">What do you need?</span>
+          <div class="chips">
+            <button type="button" class="chip"><i class="fa-solid fa-globe"></i> Website</button>
+            <button type="button" class="chip"><i class="fa-solid fa-mobile-screen"></i> Mobile App</button>
+            <button type="button" class="chip"><i class="fa-solid fa-layer-group"></i> Custom System</button>
+            <button type="button" class="chip"><i class="fa-solid fa-bullhorn"></i> Marketing</button>
+            <button type="button" class="chip"><i class="fa-solid fa-palette"></i> Branding</button>
+            <button type="button" class="chip"><i class="fa-solid fa-tag"></i> Consulting</button>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <textarea id="details" name="details" rows="4" placeholder=" "></textarea>
+          <label for="details">Project Details</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block magnetic-btn" id="submit-btn">
+          <span>Send Project Scope <i class="fa-solid fa-paper-plane"></i></span>
+        </button>
+        <p class="form-note">We reply within 24 hours — usually much faster.</p>
+      </form>
+
+      <div class="form-success" id="form-success" hidden>
+        <div class="success-check"><i class="fa-solid fa-check"></i></div>
+        <h3>Scope received!</h3>
+        <p>Thanks for reaching out. We'll get back to you within 24 hours with next steps.</p>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="./images/logo.png" alt="ScaleUp Logo" class="footer-logo">
+          <p>We build digital products that scale. From first line of code to millionth user, we're your technical partner.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="#about" data-scroll>About</a>
+          <a href="#services" data-scroll>Services</a>
+          <a href="#work" data-scroll>Work</a>
+          <a href="#process" data-scroll>Process</a>
+          <a href="#contact" data-scroll>Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <a href="#services" data-scroll>Websites</a>
+          <a href="#services" data-scroll>Mobile Apps</a>
+          <a href="#services" data-scroll>Custom Systems</a>
+          <a href="#services" data-scroll>Marketing</a>
+        </div>
+        <div class="footer-links">
+          <h4>Connect</h4>
+          <a href="#">LinkedIn</a>
+          <a href="#">GitHub</a>
+          <a href="#">Twitter / X</a>
+          <a href="mailto:hello@scaleup.digital">hello@scaleup.digital</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 ScaleUp Digital. All rights reserved.</p>
+        <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

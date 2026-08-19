@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Projects — ScaleUp Digital</title>
+  <meta name="description" content="Case studies and previous projects by ScaleUp Digital — websites, apps, and custom systems built for Filipino businesses.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="./images/logo.png">
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <img src="./images/logo.png" alt="ScaleUp" class="preloader-logo">
+      <div class="preloader-bar"><span id="preloader-fill"></span></div>
+      <span class="preloader-pct" id="preloader-pct">0%</span>
+    </div>
+  </div>
+
+  <div class="scroll-progress" id="scroll-progress"></div>
+  <div class="cursor-dot" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <header class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="./images/logo.png" alt="ScaleUp Logo" class="nav-logo">
+        <span class="nav-wordmark">ScaleUp<em>Digital</em></span>
+      </a>
+
+      <nav class="nav-desktop">
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="index.html#work" class="nav-link">Work</a>
+        <a href="projects.html" class="nav-link active">Projects</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <a href="index.html#contact" class="btn btn-primary nav-cta magnetic-btn"><span>Let's Talk</span></a>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="index.html#about" class="mobile-link">About</a>
+      <a href="index.html#services" class="mobile-link">Services</a>
+      <a href="index.html#work" class="mobile-link">Work</a>
+      <a href="projects.html" class="mobile-link">Projects</a>
+      <a href="index.html#contact" class="mobile-link">Contact</a>
+      <a href="index.html#contact" class="btn btn-primary mobile-cta"><span>Let's Talk</span></a>
+    </div>
+  </header>
+
+  <main>
+
+  <!-- ==================== PAGE HERO ==================== -->
+  <section class="page-hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="container">
+      <span class="hero-tag reveal-hero"><span class="pulse-dot"></span>Case Studies</span>
+      <h1 class="hero-title page-title">
+        <span class="line"><span>Projects na</span></span>
+        <span class="line"><span class="gradient-text">Pinagmalasakit.</span></span>
+      </h1>
+      <p class="hero-subtitle reveal-hero">
+        Real products for real Filipino businesses — from ₱5k landing pages to full-scale systems.
+        Every project below shipped on time, on budget, and still running today.
+      </p>
+
+      <div class="project-filters reveal-hero" id="project-filters">
+        <button class="filter-chip active" data-filter="all">All Projects</button>
+        <button class="filter-chip" data-filter="website">Websites</button>
+        <button class="filter-chip" data-filter="app">Mobile Apps</button>
+        <button class="filter-chip" data-filter="system">Custom Systems</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECT GRID ==================== -->
+  <section class="section projects-section">
+    <div class="container">
+      <div class="projects-grid" id="projects-grid">
+
+        <article class="project-card glow-card" data-cat="website">
+          <div class="project-media"><img src="./images/hero-laptop.jpg" alt="UrbanMart PH e-commerce website" loading="lazy"></div>
+          <div class="project-body">
+            <div class="work-tags"><span>Website</span><span>E-Commerce</span></div>
+            <h3>UrbanMart PH Online Store</h3>
+            <p>Full e-commerce rebuild with GCash/Maya checkout, real-time inventory, and SEO-first architecture.</p>
+            <div class="project-results">
+              <span><i class="fa-solid fa-arrow-trend-up"></i> +43% conversions</span>
+              <span><i class="fa-solid fa-clock"></i> 5 weeks</span>
+            </div>
+            <div class="project-tech">Next.js · Node.js · PayMongo</div>
+          </div>
+        </article>
+
+        <article class="project-card glow-card" data-cat="app">
+          <div class="project-media"><img src="./images/mobile-showcase.jpg" alt="Finance dashboard mobile app" loading="lazy"></div>
+          <div class="project-body">
+            <div class="work-tags"><span>Mobile App</span><span>FinTech</span></div>
+            <h3>Client Finance Dashboard</h3>
+            <p>Cross-platform portfolio tracker with live charts, goal monitoring, and push alerts for market moves.</p>
+            <div class="project-results">
+              <span><i class="fa-solid fa-download"></i> 12k+ downloads</span>
+              <span><i class="fa-solid fa-clock"></i> 10 weeks</span>
+            </div>
+            <div class="project-tech">Flutter · Firebase · REST API</div>
+          </div>
+        </article>
+
+        <article class="project-card glow-card" data-cat="system">
+          <div class="project-media"><img src="./images/process-flow.jpg" alt="OpsFlow automation suite" loading="lazy"></div>
+          <div class="project-body">
+            <div class="work-tags"><span>Custom System</span><span>Logistics</span></div>
+            <h3>OpsFlow Automation Suite</h3>
+            <p>Booking, dispatch, and billing in one dashboard — replaced three spreadsheets and a legacy tool.</p>
+            <div class="project-results">
+              <span><i class="fa-solid fa-gauge-high"></i> −70% manual work</span>
+              <span><i class="fa-solid fa-clock"></i> 12 weeks</span>
+            </div>
+            <div class="project-tech">React · Node.js · PostgreSQL</div>
+          </div>
+        </article>
+
+        <article class="project-card glow-card" data-cat="system">
+          <div class="project-media"><img src="./images/server-room.jpg" alt="Cloud migration infrastructure" loading="lazy"></div>
+          <div class="project-body">
+            <div class="work-tags"><span>Infrastructure</span><span>SaaS</span></div>
+            <h3>Cloud Migration &amp; Scaling</h3>
+            <p>Zero-downtime migration to auto-scaling cloud with global CDN, monitoring, and disaster recovery.</p>
+            <div class="project-results">
+              <span><i class="fa-solid fa-server"></i> 100k+ monthly users</span>
+              <span><i class="fa-solid fa-clock"></i> 6 weeks</span>
+            </div>
+            <div class="project-tech">AWS · Docker · CloudFront</div>
+          </div>
+        </article>
+
+        <article class="project-card glow-card" data-cat="app">
+          <div class="project-media project-placeholder"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="project-body">
+            <div class="work-tags"><span>Mobile App</span><span>Healthcare</span></div>
+            <h3>CarePoint Booking App</h3>
+            <p>Patient booking, reminders, and queue management for a multi-branch dental clinic group.</p>
+            <div class="project-results">
+              <span><i class="fa-solid fa-building"></i> 5 branches onboard</span>
+              <span><i class="fa-solid fa-clock"></i> 8 weeks</span>
+            </div>
+            <div class="project-tech">React Native · Node.js · SMS API</div>
+          </div>
+        </article>
+
+        <article class="project-card glow-card" data-cat="website">
+          <div class="project-media project-placeholder alt"><i class="fa-solid fa-house-laptop"></i></div>
+          <div class="project-body">
+            <div class="work-tags"><span>Website</span><span>Real Estate</span></div>
+            <h3>Vista Realty Listings Portal</h3>
+            <p>Searchable property listings with 3D tour embeds, lead scoring, and agent CRM sync.</p>
+            <div class="project-results">
+              <span><i class="fa-solid fa-users"></i> 3× organic leads</span>
+              <span><i class="fa-solid fa-clock"></i> 6 weeks</span>
+            </div>
+            <div class="project-tech">Next.js · Supabase · Mapbox</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="section cta-section">
+    <div class="container">
+      <div class="cta-card reveal">
+        <h2>Gusto mo rin ng <span class="gradient-text">ganitong results?</span></h2>
+        <p>Tell us about your project — libre ang consultation, walang commitment.</p>
+        <a href="index.html#contact" class="btn btn-primary btn-lg magnetic-btn"><span>Start Your Project <i class="fa-solid fa-arrow-right"></i></span></a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="./images/logo.png" alt="ScaleUp Logo" class="footer-logo">
+          <p>We build digital products that scale. From first line of code to millionth user, we're your technical partner.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="index.html#about">About</a>
+          <a href="index.html#services">Services</a>
+          <a href="projects.html">Projects</a>
+          <a href="index.html#process">Process</a>
+          <a href="index.html#contact">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <a href="index.html#services">Websites</a>
+          <a href="index.html#services">Mobile Apps</a>
+          <a href="index.html#services">Custom Systems</a>
+          <a href="index.html#services">Marketing</a>
+        </div>
+        <div class="footer-links">
+          <h4>Connect</h4>
+          <a href="#">LinkedIn</a>
+          <a href="#">GitHub</a>
+          <a href="#">Twitter / X</a>
+          <a href="mailto:hello@scaleup.digital">hello@scaleup.digital</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 ScaleUp Digital. All rights reserved.</p>
+        <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // Entrance animation for project cards (no scroll dependency)
+    (function () {
+      const cards = document.querySelectorAll('.project-card');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (typeof gsap !== 'undefined' && !reduced) {
+        gsap.from(cards, { opacity: 0, y: 40, duration: 0.8, ease: 'power3.out', stagger: 0.1, delay: 0.4, clearProps: 'opacity,transform' });
+      }
+
+      // Project filtering
+      document.querySelectorAll('.filter-chip').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('.filter-chip').forEach((c) => c.classList.remove('active'));
+          chip.classList.add('active');
+          const f = chip.dataset.filter;
+          cards.forEach((card) => {
+            const show = f === 'all' || card.dataset.cat === f;
+            card.style.opacity = '1';
+            card.style.transform = 'none';
+            if (show) {
+              card.style.display = '';
+              if (typeof gsap !== 'undefined' && !reduced) {
+                gsap.fromTo(card, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', clearProps: 'opacity,transform' });
+              }
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
